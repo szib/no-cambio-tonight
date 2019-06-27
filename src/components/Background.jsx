@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 import backgroundImage from '../assets/images/landing_page_bg.jpg';
 
@@ -14,12 +14,10 @@ const style = {
   backgroundSize: 'cover',
   backgroundPosition: 'center center',
   backgroundImage: `url(${backgroundImage})`
-}
+};
 
 const Background = () => {
-  return (
-    <div style={style}></div>
-  )
-}
+  return <div style={style}></div>;
+};
 
-export default Background
+export default Background;

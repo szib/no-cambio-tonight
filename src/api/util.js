@@ -8,17 +8,14 @@ export const processResponse = resp =>
     .then(convertToCamelCase)
     .catch(err => new Promise(err)); // network error
 
-export const addStandardHeaders = (options) => {
-  const newOptions = options 
-    ? Object.assign({}, options)
-    : {};
-  
+export const addStandardHeaders = options => {
+  const newOptions = options ? Object.assign({}, options) : {};
+
   const headers = {
     'Content-Type': 'application/json',
-    Authorization: `Bearer ${localStorage.token}`,
+    Authorization: `Bearer ${localStorage.token}`
   };
 
   newOptions.headers = headers;
   return newOptions;
 };
-

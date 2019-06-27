@@ -1,7 +1,9 @@
 import { combineReducers } from 'redux';
 
-const dummyReducer = () => {};
+import profile from './profileReducer';
 
-const reducer = combineReducers(dummyReducer);
+const reducer = combineReducers({
+  profile
+});
 
 export default reducer;
