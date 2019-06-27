@@ -8,21 +8,17 @@ export function fetchProfile() {
     return fetch("http://localhost:3030/api/v1/profile", {
       headers: { Authorization: `Bearer ${localStorage.token}` }
     })
-      .then(handleErrors)
       .then(res => res.json())
       .then(convertToCamelCase)
       .then(json => {
-        dispatch(fetchProfileSuccess(json));
+        if (json.error) {
+          dispatch(fetchProfileFailure(json));
+        } else {
+          dispatch(fetchProfileSuccess(json));
+        }
         return json;
       })
-      .catch(error => dispatch(fetchProfileFailure(error)));
+      .catch(error => {
+        dispatch(fetchProfileFailure({error: error.message}))});
   }
-}
-
-// Handle HTTP errors since fetch won't.
-function handleErrors(response) {
-  if (!response.ok) {
-    throw Error(response.statusText);
-  }
-  return response;
 }
