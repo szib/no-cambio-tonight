@@ -19,8 +19,8 @@ function App() {
         <Route path='/signup' component={SignUpPage} />
         <Route path='/signin' component={SignInPage} />
         <Route path='/profile' component={ProfilePage} />
-        <Route path='/games' component={EventsPage} />
-        <Route path='/events' component={GamesPage} />
+        <Route path='/events' component={EventsPage} />
+        <Route path='/games' component={GamesPage} />
         <Route path='/logout' component={LogoutPage} />
       </Switch>
       <Route exact path='/' component={LandingPage} />
