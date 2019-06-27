@@ -8,6 +8,9 @@ import SignUpPage from './containers/SignUpPage'
 import SignInPage from './containers/SignInPage'
 import LandingPage from './containers/LandingPage';
 import ProfilePage from './containers/ProfilePage';
+import EventsPage from './containers/EventsPage';
+import GamesPage from './containers/GamesPage';
+import LogoutPage from './containers/LogoutPage';
 
 function App() {
   return (
@@ -16,11 +19,11 @@ function App() {
         <Route path='/signup' component={SignUpPage} />
         <Route path='/signin' component={SignInPage} />
         <Route path='/profile' component={ProfilePage} />
-        {/* <Route exact path="/events" render={() => <div>Events</div>} />
-        <Route path="/events/:id" render={(props) => <div>Event: {props.match.params.id}</div>} />
-        <Route path="/games" render={() => <div>Games</div>} /> */}
+        <Route path='/games' component={EventsPage} />
+        <Route path='/events' component={GamesPage} />
+        <Route path='/logout' component={LogoutPage} />
       </Switch>
-      <Route exact path="/" component={LandingPage} />
+      <Route exact path='/' component={LandingPage} />
     </Router>
   );
 }
