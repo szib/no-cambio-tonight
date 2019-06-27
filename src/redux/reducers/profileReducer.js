@@ -1,5 +1,8 @@
-import { FETCH_PROFILE_BEGIN, FETCH_PROFILE_SUCCESS, FETCH_PROFILE_FAILURE } from '../actions/profileActions'
-
+import {
+  FETCH_PROFILE_BEGIN,
+  FETCH_PROFILE_SUCCESS,
+  FETCH_PROFILE_FAILURE
+} from '../actions/profileActions';
 
 const initialState = {
   data: {
@@ -12,9 +15,9 @@ const initialState = {
   },
   loading: false,
   error: null
-}
+};
 
-const profileReducer = (state=initialState, action) => {
+const profileReducer = (state = initialState, action) => {
   switch (action.type) {
     case FETCH_PROFILE_BEGIN:
       return {
@@ -42,4 +45,4 @@ const profileReducer = (state=initialState, action) => {
   }
 };
 
-export default profileReducer
+export default profileReducer;

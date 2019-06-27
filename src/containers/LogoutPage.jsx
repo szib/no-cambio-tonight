@@ -1,12 +1,10 @@
-import React from 'react'
+import React from 'react';
 
-import { Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router-dom';
 
 const LogoutPage = () => {
-  localStorage.removeItem('token')
-  return (
-    <Redirect to='/' />
-  )
-}
+  localStorage.removeItem('token');
+  return <Redirect to="/" />;
+};
 
-export default LogoutPage
+export default LogoutPage;
