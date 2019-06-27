@@ -1,58 +1,57 @@
-import React, { Component } from 'react'
-import { Menu } from 'semantic-ui-react'
-import { Link } from 'react-router-dom'
+import React, { Component } from 'react';
+import { Menu } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
 
 export default class MenuExampleBasic extends Component {
-  state = {}
+  state = {};
 
-  handleItemClick = (e, { name }) => this.setState({ activeItem: name })
+  handleItemClick = (e, { name }) => this.setState({ activeItem: name });
 
   render() {
-    const { activeItem } = this.state
+    const { activeItem } = this.state;
 
     return (
       <Menu>
         <Menu.Item
-          name='profile'
+          name="profile"
           active={activeItem === 'profile'}
           onClick={this.handleItemClick}
           as={Link}
-          to='/profile'
+          to="/profile"
         >
           Profile
         </Menu.Item>
 
         <Menu.Item
-          name='games'
+          name="games"
           active={activeItem === 'games'}
           onClick={this.handleItemClick}
           as={Link}
-          to='/games'
+          to="/games"
         >
           Games
         </Menu.Item>
 
         <Menu.Item
-          name='events'
+          name="events"
           active={activeItem === 'events'}
           onClick={this.handleItemClick}
           as={Link}
-          to='/events'
+          to="/events"
         >
           Events
         </Menu.Item>
 
         <Menu.Item
-          name='logout'
+          name="logout"
           active={activeItem === 'logout'}
           onClick={this.handleItemClick}
           as={Link}
-          to='/logout'
+          to="/logout"
         >
           Logout
         </Menu.Item>
-
       </Menu>
-    )
+    );
   }
 }

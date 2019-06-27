@@ -1,11 +1,15 @@
 import convertToCamelCase from 'lodash-humps';
 
-import { fetchProfileBegin, fetchProfileSuccess, fetchProfileFailure } from '../redux/actions/profileActions'
+import {
+  fetchProfileBegin,
+  fetchProfileSuccess,
+  fetchProfileFailure
+} from '../redux/actions/profileActions';
 
 export function fetchProfile() {
   return function action(dispatch) {
     dispatch(fetchProfileBegin());
-    return fetch("http://localhost:3030/api/v1/profile", {
+    return fetch('http://localhost:3030/api/v1/profile', {
       headers: { Authorization: `Bearer ${localStorage.token}` }
     })
       .then(res => res.json())
@@ -19,6 +23,7 @@ export function fetchProfile() {
         return json;
       })
       .catch(error => {
-        dispatch(fetchProfileFailure({error: error.message}))});
-  }
+        dispatch(fetchProfileFailure({ error: error.message }));
+      });
+  };
 }
