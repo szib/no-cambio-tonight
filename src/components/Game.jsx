@@ -1,21 +1,36 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 
-import { addGameToMyGameLibray } from '../api/games';
+import {
+  addGameToMyGameLibray,
+  removeGameFromMyGameLibray
+} from '../redux/thunk/myGames';
 
 import { List, Rating, Image, Grid, Button } from 'semantic-ui-react';
 
 const Game = props => {
+  const dispatch = useDispatch();
   const [isButtonLoading, setIsButtonLoading] = useState(false);
 
-  const addGame = bgaId => {
+  const addGame = game => {
+    console.log('game', game);
     setIsButtonLoading(true);
-    console.log('bgaId', bgaId);
-    addGameToMyGameLibray(bgaId).then(data => {
+    dispatch(addGameToMyGameLibray(game.bgaId)).then(() => {
       setIsButtonLoading(false);
     });
   };
 
-  const { game } = props;
+  const removeGame = gamePieceId => {
+    console.log('gamePieceId', gamePieceId);
+    setIsButtonLoading(true);
+    dispatch(removeGameFromMyGameLibray(gamePieceId)).then(() => {
+      setIsButtonLoading(false);
+    });
+  };
+
+  const { game, gamePieceId } = props;
+
+  console.log('props', props);
   return (
     <List.Item>
       <Grid>
@@ -54,14 +69,27 @@ const Game = props => {
             </List.Description>
           )}
 
-          <List.Description>
-            <Button
-              loading={isButtonLoading}
-              onClick={() => addGame(game.bgaId)}
-            >
-              Add to my game library
-            </Button>
-          </List.Description>
+          {props.gamePieceId ? (
+            <List.Description>
+              <Button
+                primary
+                loading={isButtonLoading}
+                onClick={() => removeGame(gamePieceId)}
+              >
+                Remove from my library
+              </Button>
+            </List.Description>
+          ) : (
+            <List.Description>
+              <Button
+                primary
+                loading={isButtonLoading}
+                onClick={() => addGame(game)}
+              >
+                Add to my game library
+              </Button>
+            </List.Description>
+          )}
         </Grid.Column>
       </Grid>
     </List.Item>

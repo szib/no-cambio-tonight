@@ -5,11 +5,13 @@ import GameList from '../components/GameList';
 import { Header, Container, Input, Form, Segment } from 'semantic-ui-react';
 
 import { searchGamesByName } from '../api/games';
+import useMyGames from '../hooks/useMyGames';
 
 const GamesPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [games, setGames] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  // const [myGames] = useMyGames(localStorage.getItem('token'));
 
   const onSubmitHandler = event => {
     if (searchTerm) {
@@ -21,7 +23,6 @@ const GamesPage = () => {
     }
   };
 
-  console.log('games', games.length === 0);
   return (
     <Container>
       <Segment>
@@ -36,7 +37,7 @@ const GamesPage = () => {
           />
         </Form>
       </Segment>
-      {games.length !== 0 && <GameList games={games}></GameList>}
+      {games.length !== 0 && <GameList data={games}></GameList>}
     </Container>
   );
 };

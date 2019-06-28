@@ -10,23 +10,3 @@ export const searchGamesByName = name =>
     .then(resp => resp.json())
     .then(convertToCamelCase)
     .catch(err => console.error('API error:', err));
-
-export const addGameToMyGameLibray = bgaId => {
-  return fetch(`${BASE_URL}/mygames`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${localStorage.token}`
-    },
-    body: JSON.stringify({
-      bga_id: bgaId
-    })
-  })
-    .then(resp => resp.json())
-    .then(convertToCamelCase)
-    .then(d => {
-      console.table(d);
-      return d;
-    })
-    .catch(err => console.error('API error:', err));
-};

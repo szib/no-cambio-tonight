@@ -8,7 +8,7 @@ import SignUpPage from './containers/SignUpPage';
 import SignInPage from './containers/SignInPage';
 import LandingPage from './containers/LandingPage';
 import ProfilePage from './containers/ProfilePage';
-import EventsPage from './containers/EventsPage';
+// import EventsPage from './containers/EventsPage';
 import GamesPage from './containers/GamesPage';
 import LogoutPage from './containers/LogoutPage';
 import Menu from './components/Menu';
@@ -42,10 +42,10 @@ function App() {
           path="/profile"
           render={routerProps => <ProfilePage {...routerProps} />}
         />
-        <Route
+        {/* <Route
           path="/events"
           render={routerProps => <EventsPage {...routerProps} />}
-        />
+        /> */}
         <Route
           path="/games"
           render={routerProps => <GamesPage {...routerProps} />}

@@ -5,22 +5,14 @@ import { Segment, List } from 'semantic-ui-react';
 import Game from '../components/Game';
 
 const GameList = props => {
-  const myGamesBgaIds = useSelector(state =>
-    state.myGames.data.map(game => game.bgaId)
-  );
-  const { games } = props;
+  const { data } = props;
 
   return (
     <Segment>
       <List divided relaxed selection>
-        {games.map(game => {
-          return (
-            <Game
-              key={game.bgaId}
-              isInMyLibrary={myGamesBgaIds.includes(game.bgaId)}
-              game={game}
-            />
-          );
+        {data.map(gameObj => {
+          const { game } = gameObj;
+          return <Game key={game.bgaId} game={game} gamePieceId={gameObj.id} />;
         })}
       </List>
     </Segment>

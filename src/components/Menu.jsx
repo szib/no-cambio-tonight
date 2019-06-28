@@ -31,7 +31,7 @@ const Menubar = props => {
         Games
       </Menu.Item>
 
-      <Menu.Item
+      {/* <Menu.Item
         name="events"
         active={activeItem === 'events'}
         onClick={() => setActiveItem('events')}
@@ -39,7 +39,7 @@ const Menubar = props => {
         to="/events"
       >
         Events
-      </Menu.Item>
+      </Menu.Item> */}
       <Menu.Item
         name="logout"
         active={activeItem === 'logout'}

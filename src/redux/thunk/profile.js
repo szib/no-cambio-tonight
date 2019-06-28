@@ -4,7 +4,7 @@ import {
   fetchProfileBegin,
   fetchProfileSuccess,
   fetchProfileFailure
-} from '../redux/actions/profileActions';
+} from '../actions/profileActions';
 
 export function fetchProfile() {
   return function action(dispatch) {

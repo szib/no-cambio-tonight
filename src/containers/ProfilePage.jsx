@@ -1,24 +1,17 @@
 import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
 
 import { Header, Container, Segment } from 'semantic-ui-react';
 
 import GameList from '../components/GameList';
 
-import { fetchProfile } from '../api/profile';
-import { fetchMyGames } from '../api/myGames';
+import useProfile from '../hooks/useProfile';
+import useMyGames from '../hooks/useMyGames';
 
 const ProfilePage = props => {
-  const dispatch = useDispatch();
-  const profile = useSelector(state => state.profile);
-  const myGames = useSelector(state => state.myGames);
+  const [profile] = useProfile(localStorage.getItem('token'));
+  const [myGames] = useMyGames(localStorage.getItem('token'));
 
   const { firstName, lastName, username, memberSince, email } = profile.data;
-
-  useEffect(() => {
-    dispatch(fetchProfile());
-    dispatch(fetchMyGames());
-  }, [dispatch]);
 
   return (
     <Container>
@@ -41,7 +34,7 @@ const ProfilePage = props => {
       {myGames.loading ? (
         <Header as="h1">Loading...</Header>
       ) : (
-        <GameList games={myGames.data}></GameList>
+        <GameList data={myGames.data}></GameList>
       )}
     </Container>
   );
