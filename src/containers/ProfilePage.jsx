@@ -1,38 +1,56 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { Header, Container } from 'semantic-ui-react';
+import { Header, Container, Segment, List } from 'semantic-ui-react';
+
+import Game from '../components/Game';
 
 import { fetchProfile } from '../api/profile';
+import { fetchMyGames } from '../api/myGames';
 
 const ProfilePage = props => {
   const dispatch = useDispatch();
   const profile = useSelector(state => state.profile);
+  const myGames = useSelector(state => state.myGames);
 
-  // eslint-disable-next-line no-unused-vars
-  const { error, loading, data } = profile;
-  const { firstName, lastName, username, memberSince, email } = data;
+  const { firstName, lastName, username, memberSince, email } = profile.data;
 
   useEffect(() => {
     dispatch(fetchProfile());
+    dispatch(fetchMyGames());
   }, [dispatch]);
 
+  console.table(myGames);
   return (
     <Container>
-      {loading ? (
-        <Header as="h1">Loading...</Header>
-      ) : (
-        <>
-          <Header as="h1">
-            {firstName} {lastName}
-          </Header>
-          <ul>
-            <li>{email}</li>
-            <li>{memberSince}</li>
-            <li>{username}</li>
-          </ul>
-        </>
-      )}
+      <Segment>
+        {profile.loading ? (
+          <Header as="h1">Loading...</Header>
+        ) : (
+          <>
+            <Header as="h1">
+              {firstName} {lastName}
+            </Header>
+            <ul>
+              <li>{email}</li>
+              <li>{memberSince}</li>
+              <li>{username}</li>
+            </ul>
+          </>
+        )}
+      </Segment>
+
+      <Segment>
+        {myGames.loading ? (
+          <Header as="h1">Loading...</Header>
+        ) : (
+          <List divided relaxed selection>
+            {myGames.data.map(game => (
+              <Game key={game.bgaId} game={game} />
+            ))}
+          </List>
+        )}
+      </Segment>
     </Container>
   );
 };
