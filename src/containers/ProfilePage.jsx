@@ -1,37 +1,40 @@
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React from 'react';
 
-import { Header, Container } from 'semantic-ui-react';
+import { Header, Container, Segment } from 'semantic-ui-react';
 
-import { fetchProfile } from '../api/profile';
+import GameList from '../components/GameList';
+
+import useProfile from '../hooks/useProfile';
+import useMyGames from '../hooks/useMyGames';
 
 const ProfilePage = props => {
-  const dispatch = useDispatch();
-  const profile = useSelector(state => state.profile);
+  const [profile] = useProfile(localStorage.getItem('token'));
+  const [myGames] = useMyGames(localStorage.getItem('token'));
 
-  // eslint-disable-next-line no-unused-vars
-  const { error, loading, data } = profile;
-  const { firstName, lastName, username, memberSince, email } = data;
-
-  useEffect(() => {
-    dispatch(fetchProfile());
-  }, [dispatch]);
+  const { firstName, lastName, username, memberSince, email } = profile.data;
 
   return (
     <Container>
-      {loading ? (
+      <Segment>
+        {profile.loading ? (
+          <Header as="h1">Loading...</Header>
+        ) : (
+          <>
+            <Header as="h1">
+              {firstName} {lastName}
+            </Header>
+            <ul>
+              <li>{email}</li>
+              <li>{memberSince}</li>
+              <li>{username}</li>
+            </ul>
+          </>
+        )}
+      </Segment>
+      {myGames.loading ? (
         <Header as="h1">Loading...</Header>
       ) : (
-        <>
-          <Header as="h1">
-            {firstName} {lastName}
-          </Header>
-          <ul>
-            <li>{email}</li>
-            <li>{memberSince}</li>
-            <li>{username}</li>
-          </ul>
-        </>
+        <GameList data={myGames.data}></GameList>
       )}
     </Container>
   );
