@@ -1,8 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import Menu from '../components/Menu';
-
 import { Header, Container } from 'semantic-ui-react';
 
 import { fetchProfile } from '../api/profile';
@@ -11,6 +9,7 @@ const ProfilePage = props => {
   const dispatch = useDispatch();
   const profile = useSelector(state => state.profile);
 
+  // eslint-disable-next-line no-unused-vars
   const { error, loading, data } = profile;
   const { firstName, lastName, username, memberSince, email } = data;
 
@@ -20,7 +19,6 @@ const ProfilePage = props => {
 
   return (
     <Container>
-      <Menu></Menu>
       {loading ? (
         <Header as="h1">Loading...</Header>
       ) : (

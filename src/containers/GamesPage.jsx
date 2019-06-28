@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 
-import Menu from '../components/Menu';
 import Game from '../components/Game';
 
 import { Header, Container, Input, Form, List } from 'semantic-ui-react';
@@ -24,7 +23,6 @@ const GamesPage = () => {
 
   return (
     <Container>
-      <Menu></Menu>
       <Header as="h1">Games</Header>
       <Form onSubmit={onSubmitHandler}>
         <Input

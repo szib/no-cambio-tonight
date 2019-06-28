@@ -11,19 +11,46 @@ import ProfilePage from './containers/ProfilePage';
 import EventsPage from './containers/EventsPage';
 import GamesPage from './containers/GamesPage';
 import LogoutPage from './containers/LogoutPage';
+import Menu from './components/Menu';
 
 function App() {
   return (
     <Router>
+      <Menu></Menu>
       <Switch>
-        <Route path="/signup" component={SignUpPage} />
-        <Route path="/signin" component={SignInPage} />
-        <Route path="/profile" component={ProfilePage} />
-        <Route path="/events" component={EventsPage} />
-        <Route path="/games" component={GamesPage} />
-        <Route path="/logout" component={LogoutPage} />
+        <Route
+          exact
+          path="/signup"
+          render={routerProps => <SignUpPage {...routerProps} />}
+        />
+        <Route
+          exact
+          path="/signin"
+          render={routerProps => <SignInPage {...routerProps} />}
+        />
+        <Route
+          exact
+          path="/logout"
+          render={routerProps => <LogoutPage {...routerProps} />}
+        />
+        <Route
+          exact
+          path="/"
+          render={routerProps => <LandingPage {...routerProps} />}
+        />
+        <Route
+          path="/profile"
+          render={routerProps => <ProfilePage {...routerProps} />}
+        />
+        <Route
+          path="/events"
+          render={routerProps => <EventsPage {...routerProps} />}
+        />
+        <Route
+          path="/games"
+          render={routerProps => <GamesPage {...routerProps} />}
+        />
       </Switch>
-      <Route exact path="/" component={LandingPage} />
     </Router>
   );
 }
