@@ -9,28 +9,25 @@ import {
 import { List, Rating, Image, Grid, Button } from 'semantic-ui-react';
 
 const Game = props => {
+  const { game, gamePieceId, removeHandler } = props;
   const dispatch = useDispatch();
   const [isButtonLoading, setIsButtonLoading] = useState(false);
 
   const addGame = game => {
-    console.log('game', game);
     setIsButtonLoading(true);
     dispatch(addGameToMyGameLibray(game.bgaId)).then(() => {
+      removeHandler(game.bgaId);
       setIsButtonLoading(false);
     });
   };
 
   const removeGame = gamePieceId => {
-    console.log('gamePieceId', gamePieceId);
     setIsButtonLoading(true);
     dispatch(removeGameFromMyGameLibray(gamePieceId)).then(() => {
       setIsButtonLoading(false);
     });
   };
 
-  const { game, gamePieceId } = props;
-
-  console.log('props', props);
   return (
     <List.Item>
       <Grid>

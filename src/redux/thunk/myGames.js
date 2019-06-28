@@ -46,12 +46,8 @@ export function addGameToMyGameLibray(bgaId) {
       .then(convertToCamelCase)
       .then(json => {
         if (!json.error) {
-          dispatch(addGameToMyGames(json.game));
+          dispatch(addGameToMyGames(json));
         }
-      })
-      .then(d => {
-        console.table(d);
-        return d;
       })
       .catch(err => console.error('API error:', err));
   };
@@ -72,10 +68,6 @@ export function removeGameFromMyGameLibray(gamePieceId) {
         if (!json.error) {
           dispatch(removeGameFromMyGames(gamePieceId));
         }
-      })
-      .then(d => {
-        console.table(d);
-        return d;
       })
       .catch(err => console.error('API error:', err));
   };
