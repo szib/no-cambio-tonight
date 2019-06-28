@@ -1,29 +1,31 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 
-import Menu from '../components/Menu'
-import { Header, Container, Input, Form } from 'semantic-ui-react'
+import Menu from '../components/Menu';
+import Game from '../components/Game';
 
-import { searchGamesByName } from '../api/games'
+import { Header, Container, Input, Form, List } from 'semantic-ui-react';
+
+import { searchGamesByName } from '../api/games';
 
 const GamesPage = () => {
-  const [searchTerm, setSearchTerm] = useState('')
-  const [games, setGames] = useState([])
+  const [searchTerm, setSearchTerm] = useState('');
+  const [games, setGames] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  const onSubmitHandler = (event) => {
+  const onSubmitHandler = event => {
     if (searchTerm) {
-      setIsLoading(true)
+      setIsLoading(true);
 
       searchGamesByName(searchTerm)
         .then(setGames)
-        .then(() => setIsLoading(false))
+        .then(() => setIsLoading(false));
     }
-  }
+  };
 
   return (
     <Container>
       <Menu></Menu>
-      <Header as="h1" >Games</Header>
+      <Header as="h1">Games</Header>
       <Form onSubmit={onSubmitHandler}>
         <Input
           loading={isLoading}
@@ -33,12 +35,11 @@ const GamesPage = () => {
           onChange={e => setSearchTerm(e.target.value)}
         />
       </Form>
-      {
-        games.map(game => {
-          console.log(game)
-          return <Header key={game.bga_id}>{game.name}</Header>
-        })
-      }
+      <List divided relaxed selection>
+        {games.map(game => (
+          <Game key={game.bgaId} game={game} />
+        ))}
+      </List>
     </Container>
   );
 };
