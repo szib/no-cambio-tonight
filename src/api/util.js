@@ -19,3 +19,8 @@ export const addStandardHeaders = options => {
   newOptions.headers = headers;
   return newOptions;
 };
+
+export const handleApiError = error => {
+  console.error('API error:', error);
+  return { error: error.message };
+};

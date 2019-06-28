@@ -1,4 +1,4 @@
-import { BASE_URL } from './util';
+import { BASE_URL, handleApiError } from './util';
 
 const SIGNIN_URL = `${BASE_URL}/signin`;
 const VALIDATE_URL = `${BASE_URL}/validate`;
@@ -10,11 +10,11 @@ export const signin = (username, password) =>
     body: JSON.stringify({ username, password })
   })
     .then(resp => resp.json())
-    .catch(err => console.error('API error:', err));
+    .catch(handleApiError);
 
 export const validate = () =>
   fetch(VALIDATE_URL, {
     headers: { Authorization: `Bearer ${localStorage.token}` }
   })
     .then(resp => resp.json())
-    .catch(err => console.error('API error:', err));
+    .catch(handleApiError);
