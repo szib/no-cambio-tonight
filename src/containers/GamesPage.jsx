@@ -1,15 +1,8 @@
 import React, { useState } from 'react';
 
-import Game from '../components/Game';
+import GameList from '../components/GameList';
 
-import {
-  Header,
-  Container,
-  Input,
-  Form,
-  List,
-  Segment
-} from 'semantic-ui-react';
+import { Header, Container, Input, Form, Segment } from 'semantic-ui-react';
 
 import { searchGamesByName } from '../api/games';
 
@@ -43,15 +36,7 @@ const GamesPage = () => {
           />
         </Form>
       </Segment>
-      {games.length !== 0 && (
-        <Segment>
-          <List divided relaxed selection>
-            {games.map(game => (
-              <Game key={game.bgaId} game={game} />
-            ))}
-          </List>
-        </Segment>
-      )}
+      {games.length !== 0 && <GameList games={games}></GameList>}
     </Container>
   );
 };

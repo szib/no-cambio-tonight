@@ -15,7 +15,6 @@ export function fetchMyGames() {
       .then(res => res.json())
       .then(convertToCamelCase)
       .then(json => {
-        console.table('myGames', json);
         if (json.error) {
           dispatch(fetchMyGamesFailure(json));
         } else {
