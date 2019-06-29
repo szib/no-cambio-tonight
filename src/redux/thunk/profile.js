@@ -6,7 +6,7 @@ import {
   fetchProfileFailure
 } from '../actions/profileActions';
 
-export function fetchProfile() {
+export function asyncFetchProfile() {
   return function action(dispatch) {
     dispatch(fetchProfileBegin());
     return fetch('http://localhost:3030/api/v1/profile', {

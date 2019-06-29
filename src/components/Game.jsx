@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import {
-  addGameToMyGameLibray,
-  removeGameFromMyGameLibray
+  asyncAddGameToMyGameLibray,
+  asyncRemoveGameFromMyGameLibray
 } from '../redux/thunk/myGames';
 
 import { List, Rating, Image, Grid, Button } from 'semantic-ui-react';
@@ -15,7 +15,7 @@ const Game = props => {
 
   const addGame = game => {
     setIsButtonLoading(true);
-    dispatch(addGameToMyGameLibray(game.bgaId)).then(() => {
+    dispatch(asyncAddGameToMyGameLibray(game.bgaId)).then(() => {
       removeHandler(game.bgaId);
       setIsButtonLoading(false);
     });
@@ -23,7 +23,7 @@ const Game = props => {
 
   const removeGame = gamePieceId => {
     setIsButtonLoading(true);
-    dispatch(removeGameFromMyGameLibray(gamePieceId)).then(() => {
+    dispatch(asyncRemoveGameFromMyGameLibray(gamePieceId)).then(() => {
       setIsButtonLoading(false);
     });
   };

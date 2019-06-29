@@ -8,7 +8,7 @@ import {
   removeGameFromMyGames
 } from '../actions/myGamesActions';
 
-export function fetchMyGames() {
+export function aSyncFetchMyGames() {
   return function action(dispatch) {
     dispatch(fetchMyGamesBegin());
     return fetch('http://localhost:3030/api/v1/mygames', {
@@ -20,6 +20,7 @@ export function fetchMyGames() {
         if (json.error) {
           dispatch(fetchMyGamesFailure(json));
         } else {
+          console.log('json', json);
           dispatch(fetchMyGamesSuccess(json));
         }
         return json;
@@ -30,7 +31,7 @@ export function fetchMyGames() {
   };
 }
 
-export function addGameToMyGameLibray(bgaId) {
+export function asyncAddGameToMyGameLibray(bgaId) {
   return function action(dispatch) {
     return fetch(`http://localhost:3030/api/v1/mygames`, {
       method: 'POST',
@@ -53,7 +54,7 @@ export function addGameToMyGameLibray(bgaId) {
   };
 }
 
-export function removeGameFromMyGameLibray(gamePieceId) {
+export function asyncRemoveGameFromMyGameLibray(gamePieceId) {
   return function action(dispatch) {
     return fetch(`http://localhost:3030/api/v1/mygames/${gamePieceId}`, {
       method: 'DELETE',
