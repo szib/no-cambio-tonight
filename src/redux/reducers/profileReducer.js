@@ -4,15 +4,17 @@ import {
   FETCH_PROFILE_FAILURE
 } from '../actions/profileActions';
 
+const initialUser = {
+  username: '',
+  firstName: '',
+  lastName: '',
+  email: '',
+  memberSince: '',
+  gender: 0
+};
+
 const initialState = {
-  data: {
-    username: '',
-    firstName: '',
-    lastName: '',
-    email: '',
-    memberSince: '',
-    gender: 0
-  },
+  user: initialUser,
   loading: false,
   error: null
 };
@@ -30,7 +32,7 @@ const profileReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        data: action.payload.data
+        user: action.payload.user
       };
 
     case FETCH_PROFILE_FAILURE:
@@ -38,7 +40,7 @@ const profileReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         error: action.payload.error,
-        data: {}
+        user: {}
       };
     default:
       return state;

@@ -16,9 +16,9 @@ export function asyncFetchProfile() {
       .then(convertToCamelCase)
       .then(json => {
         if (json.error) {
-          dispatch(fetchProfileFailure(json));
+          dispatch(fetchProfileFailure(json.error));
         } else {
-          dispatch(fetchProfileSuccess(json));
+          dispatch(fetchProfileSuccess(json.user));
         }
         return json;
       })

@@ -9,14 +9,13 @@ import {
 import { List, Rating, Image, Grid, Button } from 'semantic-ui-react';
 
 const Game = props => {
-  const { game, gamePieceId, removeHandler } = props;
+  const { game, gamePieceId } = props;
   const dispatch = useDispatch();
   const [isButtonLoading, setIsButtonLoading] = useState(false);
 
   const addGame = game => {
     setIsButtonLoading(true);
-    dispatch(asyncAddGameToMyGameLibray(game.bgaId)).then(() => {
-      removeHandler(game.bgaId);
+    dispatch(asyncAddGameToMyGameLibray(game.bgaId)).then(gamePiece => {
       setIsButtonLoading(false);
     });
   };
@@ -66,14 +65,14 @@ const Game = props => {
             </List.Description>
           )}
 
-          {props.gamePieceId ? (
+          {gamePieceId ? (
             <List.Description>
               <Button
                 primary
                 loading={isButtonLoading}
                 onClick={() => removeGame(gamePieceId)}
               >
-                Remove from my library
+                Remove
               </Button>
             </List.Description>
           ) : (

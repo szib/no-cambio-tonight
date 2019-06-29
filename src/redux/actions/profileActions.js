@@ -6,9 +6,9 @@ export const fetchProfileBegin = () => ({
   type: FETCH_PROFILE_BEGIN
 });
 
-export const fetchProfileSuccess = data => ({
+export const fetchProfileSuccess = user => ({
   type: FETCH_PROFILE_SUCCESS,
-  payload: { data }
+  payload: { user }
 });
 
 export const fetchProfileFailure = error => ({

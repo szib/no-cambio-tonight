@@ -7,7 +7,7 @@ import {
 } from '../actions/myGamesActions';
 
 const initialState = {
-  data: [],
+  gamePieces: [],
   loading: false,
   error: null
 };
@@ -25,7 +25,7 @@ const myGamesReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        data: action.payload.data
+        gamePieces: action.payload.gamePieces
       };
 
     case FETCH_MYGAMES_FAILURE:
@@ -33,7 +33,7 @@ const myGamesReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         error: action.payload.error,
-        data: []
+        gamePieces: []
       };
 
     case ADD_GAME_TO_MYGAMES:
@@ -41,16 +41,15 @@ const myGamesReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         error: null,
-        data: [...state.data, action.payload.game]
+        gamePieces: [...state.gamePieces, action.payload.gamePiece]
       };
 
     case REMOVE_GAME_FROM_MYGAMES:
-      console.log('action', action);
       return {
         ...state,
         loading: false,
         error: null,
-        data: state.data.filter(
+        gamePieces: state.gamePieces.filter(
           gamePiece => gamePiece.id !== action.payload.gamePieceId
         )
       };

@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { Menu } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import useToken from '../hooks/useToken';
+
+import useProfile from '../hooks/useProfile';
 
 const Menubar = props => {
   const [token] = useToken();
   const [activeItem, setActiveItem] = useState('profile');
-  const profile = useSelector(state => state.profile.data);
+  const [profile] = useProfile(localStorage.getItem('token'));
 
   const menu = (
     <Menu>
@@ -47,7 +48,7 @@ const Menubar = props => {
         as={Link}
         to="/logout"
       >
-        Logout [{profile.username}]
+        Logout [{profile.user.username}]
       </Menu.Item>
     </Menu>
   );
