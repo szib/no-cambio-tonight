@@ -12,27 +12,47 @@ const Menubar = props => {
 
   const menu = (
     <Menu>
-      <Menu.Item
-        name="games"
-        active={activeItem === 'games'}
-        onClick={() => setActiveItem('games')}
-        as={Link}
-        to="/games"
-      >
-        <Icon name="game"></Icon>
-        Find new games
-      </Menu.Item>
+      <Menu.Menu>
+        <Dropdown item text="Games">
+          <Dropdown.Menu>
+            <Dropdown.Item
+              icon="game"
+              text="My games"
+              name="myGames"
+              as={Link}
+              to="/mygames"
+            />
+            <Dropdown.Item
+              icon="search"
+              text="Find new games"
+              name="findNewGames"
+              as={Link}
+              to="/games/"
+            />
+          </Dropdown.Menu>
+        </Dropdown>
+      </Menu.Menu>
 
-      <Menu.Item
-        name="events"
-        active={activeItem === 'events'}
-        onClick={() => setActiveItem('events')}
-        as={Link}
-        to="/events"
-      >
-        <Icon name="calendar"></Icon>
-        Find events
-      </Menu.Item>
+      <Menu.Menu>
+        <Dropdown item text="Events">
+          <Dropdown.Menu>
+            <Dropdown.Item
+              icon="add"
+              text="New event"
+              name="newEvent"
+              as={Link}
+              to="/events/new"
+            />
+            <Dropdown.Item
+              icon="search"
+              text="Search events"
+              name="events"
+              as={Link}
+              to="/events"
+            />
+          </Dropdown.Menu>
+        </Dropdown>
+      </Menu.Menu>
 
       <Menu.Menu position="right">
         <Dropdown item text={`Hello ${profile.user.firstName}`}>
