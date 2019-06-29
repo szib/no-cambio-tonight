@@ -11,9 +11,7 @@ const GamesPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [games, setGames] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [myGames, findGamePieceIdByBgaId] = useMyGames(
-    localStorage.getItem('token')
-  );
+  const [, findGamePieceIdByBgaId] = useMyGames(localStorage.getItem('token'));
 
   const removeAddedGame = bgaId => {
     const newGames = games.filter(game => game.game.bgaId !== bgaId);
@@ -27,7 +25,11 @@ const GamesPage = () => {
       searchGamesByName(searchTerm)
         .then(json => json.games)
         .then(setGames)
-        .then(() => setIsLoading(false));
+        .then(() => setIsLoading(false))
+        .catch(err => {
+          setIsLoading(false);
+          console.error(err);
+        });
     }
   };
 
