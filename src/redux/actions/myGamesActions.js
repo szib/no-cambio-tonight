@@ -8,9 +8,9 @@ export const fetchMyGamesBegin = () => ({
   type: FETCH_MYGAMES_BEGIN
 });
 
-export const fetchMyGamesSuccess = data => ({
+export const fetchMyGamesSuccess = gamePieces => ({
   type: FETCH_MYGAMES_SUCCESS,
-  payload: { data }
+  payload: { gamePieces }
 });
 
 export const fetchMyGamesFailure = error => ({
@@ -18,9 +18,9 @@ export const fetchMyGamesFailure = error => ({
   payload: { error }
 });
 
-export const addGameToMyGames = game => ({
+export const addGameToMyGames = gamePiece => ({
   type: ADD_GAME_TO_MYGAMES,
-  payload: { game }
+  payload: { gamePiece }
 });
 
 export const removeGameFromMyGames = gamePieceId => ({

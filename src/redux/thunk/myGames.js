@@ -20,8 +20,7 @@ export function aSyncFetchMyGames() {
         if (json.error) {
           dispatch(fetchMyGamesFailure(json));
         } else {
-          console.log('json', json);
-          dispatch(fetchMyGamesSuccess(json));
+          dispatch(fetchMyGamesSuccess(json.gamePieces));
         }
         return json;
       })
@@ -47,7 +46,7 @@ export function asyncAddGameToMyGameLibray(bgaId) {
       .then(convertToCamelCase)
       .then(json => {
         if (!json.error) {
-          dispatch(addGameToMyGames(json));
+          dispatch(addGameToMyGames(json.gamePiece));
         }
       })
       .catch(err => console.error('API error:', err));

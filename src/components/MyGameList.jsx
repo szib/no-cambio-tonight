@@ -1,17 +1,10 @@
 import React from 'react';
 
 import { Segment, List } from 'semantic-ui-react';
-import Game from '../components/Game';
+import Game from './Game';
 
-const GameList = props => {
-  const { games, findGamePieceIdByBgaId } = props;
-
-  const gamePieces = games.map(game => {
-    return {
-      id: findGamePieceIdByBgaId(game.bgaId),
-      game
-    };
-  });
+const MyGameList = props => {
+  const { gamePieces } = props;
 
   return (
     <Segment>
@@ -19,7 +12,7 @@ const GameList = props => {
         {gamePieces.map(gamePiece => {
           return (
             <Game
-              key={gamePiece.game.bgaId}
+              key={gamePiece.id}
               game={gamePiece.game}
               gamePieceId={gamePiece.id}
             />
@@ -30,4 +23,4 @@ const GameList = props => {
   );
 };
 
-export default GameList;
+export default MyGameList;
