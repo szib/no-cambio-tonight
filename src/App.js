@@ -9,6 +9,7 @@ import SignInPage from './containers/SignInPage';
 import LandingPage from './containers/LandingPage';
 import ProfilePage from './containers/ProfilePage';
 import EventsPage from './containers/EventsPage';
+import NewEventPage from './containers/NewEventPage';
 import GamesPage from './containers/GamesPage';
 import LogoutPage from './containers/LogoutPage';
 import Menu from './components/Menu';
@@ -41,6 +42,10 @@ function App() {
         <Route
           path="/profile"
           render={routerProps => <ProfilePage {...routerProps} />}
+        />
+        <Route
+          path="/events/new"
+          render={routerProps => <NewEventPage {...routerProps} />}
         />
         <Route
           path="/events"
