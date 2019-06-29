@@ -15,7 +15,7 @@ const NewEventPage = props => {
       event: {
         title,
         location,
-        dateTime
+        date_time: dateTime
       }
     };
     createNewEvent(eventData).then(() => history.push('/events'));
