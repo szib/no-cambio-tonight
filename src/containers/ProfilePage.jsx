@@ -11,7 +11,11 @@ const ProfilePage = props => {
   const [profile] = useProfile(localStorage.getItem('token'));
   const [myGames] = useMyGames(localStorage.getItem('token'));
 
-  const { firstName, lastName, username, memberSince, email } = profile.data;
+  console.log('profile', profile);
+
+  const { user } = profile;
+  console.log('user', user);
+  const { firstName, lastName, username, memberSince, email } = user;
 
   return (
     <Container>
@@ -31,11 +35,11 @@ const ProfilePage = props => {
           </>
         )}
       </Segment>
-      {myGames.loading ? (
+      {/* {myGames.loading ? (
         <Header as="h1">Loading...</Header>
       ) : (
         <GameList data={myGames.data}></GameList>
-      )}
+      )} */}
     </Container>
   );
 };
