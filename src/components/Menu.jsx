@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Menu } from 'semantic-ui-react';
+import { Menu, Dropdown, Icon } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import useToken from '../hooks/useToken';
 
@@ -13,23 +13,14 @@ const Menubar = props => {
   const menu = (
     <Menu>
       <Menu.Item
-        name="profile"
-        active={activeItem === 'profile'}
-        onClick={() => setActiveItem('profile')}
-        as={Link}
-        to="/profile"
-      >
-        Profile
-      </Menu.Item>
-
-      <Menu.Item
         name="games"
         active={activeItem === 'games'}
         onClick={() => setActiveItem('games')}
         as={Link}
         to="/games"
       >
-        Games
+        <Icon name="game"></Icon>
+        Find new games
       </Menu.Item>
 
       <Menu.Item
@@ -39,17 +30,30 @@ const Menubar = props => {
         as={Link}
         to="/events"
       >
-        Events
+        <Icon name="calendar"></Icon>
+        Find events
       </Menu.Item>
-      <Menu.Item
-        name="logout"
-        active={activeItem === 'logout'}
-        onClick={() => setActiveItem('logout')}
-        as={Link}
-        to="/logout"
-      >
-        Logout [{profile.user.username}]
-      </Menu.Item>
+
+      <Menu.Menu position="right">
+        <Dropdown item text={`Hello ${profile.user.firstName}`}>
+          <Dropdown.Menu>
+            <Dropdown.Item
+              icon="user"
+              text="Profile"
+              name="profile"
+              as={Link}
+              to="/profile"
+            />
+            <Dropdown.Item
+              icon="sign-out"
+              text="Logout"
+              name="logout"
+              as={Link}
+              to="/logout"
+            />
+          </Dropdown.Menu>
+        </Dropdown>
+      </Menu.Menu>
     </Menu>
   );
 
