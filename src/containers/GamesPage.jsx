@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import GameList from '../components/GameList';
+import Games from '../components/Games/Games';
 
 import { Header, Container, Input, Form, Segment } from 'semantic-ui-react';
 
@@ -51,11 +51,11 @@ const GamesPage = () => {
         </Form>
       </Segment>
       {games.length !== 0 && (
-        <GameList
+        <Games
           games={games}
           findGamePieceIdByBgaId={findGamePieceIdByBgaId}
           removeHandler={removeAddedGame}
-        ></GameList>
+        ></Games>
       )}
     </Container>
   );

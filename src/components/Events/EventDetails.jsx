@@ -14,7 +14,7 @@ const EventDetails = ({
   reloadEventsHandler
 }) => {
   const eventFromAPI = useEvent(selectedEventId);
-  const { data, handlers } = eventFromAPI;
+  const { data, isLoading, handlers } = eventFromAPI;
   const { event } = data;
 
   const closeModal = () => {

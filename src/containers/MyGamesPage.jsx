@@ -4,7 +4,7 @@ import { Header, Container, Segment } from 'semantic-ui-react';
 
 import useMyGames from '../hooks/useMyGames';
 
-import MyGameList from '../components/MyGameList';
+import MyGameList from '../components/Games/MyGameList';
 import Loader from '../components/LoaderWithDimmer';
 
 export default function MyGamesPage() {
