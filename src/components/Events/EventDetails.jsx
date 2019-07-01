@@ -2,9 +2,11 @@ import React from 'react';
 
 import useEvent from '../../hooks/useEvent';
 
-import { Button, Header, Icon, Modal, Label } from 'semantic-ui-react';
+import { Button, Header, Icon, Modal, Segment } from 'semantic-ui-react';
 
 import EventLabels from './EventLabels';
+import Attendees from './Attendees';
+import GameList from './GameList';
 
 const EventDetails = ({
   selectedEventId,
@@ -27,15 +29,22 @@ const EventDetails = ({
         <EventLabels event={event} />
       </Header>
       <Modal.Content>
-        <Header icon="time" content={event.location} />
-        <Header icon="map marker alternate" content={event.dateTime} />
+        <Header icon="time" content={event.dateTime} />
+        <Header icon="map marker alternate" content={event.location} />
+        <Segment>
+          <Header content="Attendees" />
+          <Attendees attendees={event.attendees} />
+          <Header content="Games" />
+          <GameList gamelist={event.gamelist} />
+        </Segment>
       </Modal.Content>
+
       <Modal.Actions>
         <Button
           color="green"
           onClick={handlers.cancelHandler}
           inverted
-          disabled={event.isCancelled}
+          disabled={event.isCancelled || !event.isCurrentUserOrganising}
         >
           <Icon name="delete calendar" /> Cancel event
         </Button>
