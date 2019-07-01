@@ -7,6 +7,7 @@ import useEvents from '../hooks/useEvents';
 
 import EventTable from '../components/Events/EventsTable';
 import EventDetails from '../components/Events/EventDetails';
+import Loader from '../components/LoaderWithDimmer';
 
 const EventsPage = () => {
   const [profile] = useProfile(localStorage.getItem('token'));
@@ -33,7 +34,7 @@ const EventsPage = () => {
           onChange={e => setSearchTerm(e.target.value.toLowerCase())}
         />
       </Form>
-      {eventsAPI.isLoading && <Header as="h2">Loading...</Header>}
+      {eventsAPI.isLoading && <Loader content="Loading events..." />}
       {eventsAPI.hasError && <Header as="h2">Failed to fetch 😟</Header>}
       {!eventsAPI.isLoading && !eventsAPI.hasError && (
         <EventTable

@@ -4,6 +4,8 @@ import { Header, Container, Segment } from 'semantic-ui-react';
 
 import useProfile from '../hooks/useProfile';
 
+import Loader from '../components/LoaderWithDimmer';
+
 const ProfilePage = props => {
   const [profile] = useProfile(localStorage.getItem('token'));
 
@@ -14,7 +16,7 @@ const ProfilePage = props => {
     <Container>
       <Segment>
         {profile.loading ? (
-          <Header as="h1">Loading...</Header>
+          <Loader content="Loading profile..." />
         ) : (
           <>
             <Header as="h1">

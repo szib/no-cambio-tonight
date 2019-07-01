@@ -5,6 +5,7 @@ import { Header, Container, Segment } from 'semantic-ui-react';
 import useMyGames from '../hooks/useMyGames';
 
 import MyGameList from '../components/MyGameList';
+import Loader from '../components/LoaderWithDimmer';
 
 export default function MyGamesPage() {
   const [myGames] = useMyGames(localStorage.getItem('token'));
@@ -13,7 +14,7 @@ export default function MyGamesPage() {
   return (
     <Container>
       {myGames.loading ? (
-        <Header as="h1">Loading...</Header>
+        <Loader content="Loading games..." />
       ) : (
         <MyGameList gamePieces={gamePieces}></MyGameList>
       )}

@@ -6,7 +6,15 @@ import {
   asyncRemoveGameFromMyGameLibray
 } from '../redux/thunk/myGames';
 
-import { List, Rating, Image, Grid, Button } from 'semantic-ui-react';
+import {
+  List,
+  Rating,
+  Image,
+  Grid,
+  Button,
+  Segment,
+  Divider
+} from 'semantic-ui-react';
 
 const Game = props => {
   const { game, gamePieceId } = props;
@@ -35,6 +43,7 @@ const Game = props => {
         </Grid.Column>
         <Grid.Column width={10}>
           <List.Header>{game.name}</List.Header>
+
           <List.Description>
             {game.publisher}
             &nbsp;
@@ -49,6 +58,7 @@ const Game = props => {
               />
             )}
           </List.Description>
+          <Divider />
           <List.Description>{game.description}</List.Description>
         </Grid.Column>
 

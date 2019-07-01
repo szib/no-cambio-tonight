@@ -7,6 +7,8 @@ import { Header, Container, Input, Form, Segment } from 'semantic-ui-react';
 import { searchGamesByName } from '../api/games';
 import useMyGames from '../hooks/useMyGames';
 
+import Loader from '../components/LoaderWithDimmer';
+
 const GamesPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [games, setGames] = useState([]);
@@ -35,6 +37,7 @@ const GamesPage = () => {
 
   return (
     <Container>
+      {isLoading && <Loader />}
       <Segment>
         <Header as="h1">Games</Header>
         <Form onSubmit={onSubmitHandler}>
