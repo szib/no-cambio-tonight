@@ -2,6 +2,8 @@ import React from 'react';
 
 import { Table, Label, Icon } from 'semantic-ui-react';
 
+import EventLabels from './EventLabels';
+
 const EventRow = ({ event, selectHandler, active }) => {
   return (
     <Table.Row onClick={() => selectHandler(event.id)} active={active}>
@@ -14,8 +16,7 @@ const EventRow = ({ event, selectHandler, active }) => {
         {event.title}
       </Table.Cell>
       <Table.Cell>
-        {event.isCancelled && <Label color="red">Cancelled</Label>}
-        {event.isCurrentUserAttending && <Label color="blue">Attending</Label>}
+        <EventLabels event={event} />
       </Table.Cell>
       <Table.Cell>{event.location}</Table.Cell>
       <Table.Cell>{event.dateTime}</Table.Cell>
