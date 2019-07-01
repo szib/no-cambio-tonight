@@ -2,18 +2,13 @@ import React from 'react';
 
 import { Header, Container, Segment } from 'semantic-ui-react';
 
-import MyGameList from '../components/MyGameList';
-
 import useProfile from '../hooks/useProfile';
-import useMyGames from '../hooks/useMyGames';
 
 const ProfilePage = props => {
   const [profile] = useProfile(localStorage.getItem('token'));
-  const [myGames] = useMyGames(localStorage.getItem('token'));
 
   const { user } = profile;
   const { firstName, lastName, username, memberSince, email } = user;
-  const { gamePieces } = myGames;
 
   return (
     <Container>
@@ -33,11 +28,6 @@ const ProfilePage = props => {
           </>
         )}
       </Segment>
-      {myGames.loading ? (
-        <Header as="h1">Loading...</Header>
-      ) : (
-        <MyGameList gamePieces={gamePieces}></MyGameList>
-      )}
     </Container>
   );
 };

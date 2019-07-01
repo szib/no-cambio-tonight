@@ -10,6 +10,7 @@ import LandingPage from './containers/LandingPage';
 import ProfilePage from './containers/ProfilePage';
 import EventsPage from './containers/EventsPage';
 import NewEventPage from './containers/NewEventPage';
+import MyGamesPage from './containers/MyGamesPage';
 import GamesPage from './containers/GamesPage';
 import LogoutPage from './containers/LogoutPage';
 import Menu from './components/Menu';
@@ -54,6 +55,10 @@ function App() {
         <Route
           path="/games"
           render={routerProps => <GamesPage {...routerProps} />}
+        />
+        <Route
+          path="/mygames"
+          render={routerProps => <MyGamesPage {...routerProps} />}
         />
       </Switch>
     </Router>

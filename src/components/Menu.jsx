@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Menu, Dropdown, Icon } from 'semantic-ui-react';
+import { Menu, Dropdown, Divider } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import useToken from '../hooks/useToken';
 
@@ -64,6 +64,14 @@ const Menubar = props => {
               as={Link}
               to="/profile"
             />
+            <Dropdown.Item
+              icon="game"
+              text="My games"
+              name="myGames"
+              as={Link}
+              to="/mygames"
+            />
+            <Divider />
             <Dropdown.Item
               icon="sign-out"
               text="Logout"
