@@ -19,3 +19,35 @@ export const createNewEvent = eventData =>
   })
     .then(resp => resp.json())
     .catch(handleApiError);
+
+export const cancelEvent = eventId =>
+  fetch(`${BASE_URL}/events/${eventId}/cancel`, {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${localStorage.token}`
+    }
+  })
+    .then(resp => resp.json())
+    .catch(handleApiError);
+
+export const rsvp = eventId =>
+  fetch(`${BASE_URL}/events/${eventId}/rsvp`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${localStorage.token}`
+    }
+  })
+    .then(resp => resp.json())
+    .catch(handleApiError);
+
+export const cancelRsvp = eventId =>
+  fetch(`${BASE_URL}/events/${eventId}/rsvp`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${localStorage.token}`
+    }
+  })
+    .then(resp => resp.json())
+    .catch(handleApiError);

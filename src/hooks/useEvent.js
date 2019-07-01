@@ -1,7 +1,5 @@
 import useAPI from './useAPI';
 
-import { useState, useEffect } from 'react';
-
 import { cancelEvent, rsvp, cancelRsvp } from '../api/event';
 
 const initialData = {
