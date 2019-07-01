@@ -13,8 +13,8 @@ const EventRow = ({ event, selectHandler, active }) => {
             <Icon name="exclamation" />
           </Label>
         )}
-        {event.title}
       </Table.Cell>
+      <Table.Cell>{event.title}</Table.Cell>
       <Table.Cell>
         <EventLabels event={event} />
       </Table.Cell>
