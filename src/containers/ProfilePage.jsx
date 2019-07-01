@@ -1,6 +1,13 @@
 import React from 'react';
 
-import { Header, Container, Segment } from 'semantic-ui-react';
+import {
+  Header,
+  Container,
+  Segment,
+  List,
+  Grid,
+  Image
+} from 'semantic-ui-react';
 
 import useProfile from '../hooks/useProfile';
 
@@ -10,7 +17,18 @@ const ProfilePage = props => {
   const [profile] = useProfile(localStorage.getItem('token'));
 
   const { user } = profile;
-  const { firstName, lastName, username, memberSince, email } = user;
+  const {
+    fullName,
+    username,
+    memberSince,
+    email,
+    picture,
+    numberOfOrganisedEvents,
+    numberOfAttendedEvents
+  } = user;
+  const { medium, large } = picture;
+
+  console.log('picture', picture);
 
   return (
     <Container>
@@ -18,16 +36,37 @@ const ProfilePage = props => {
         {profile.loading ? (
           <Loader content="Loading profile..." />
         ) : (
-          <>
-            <Header as="h1">
-              {firstName} {lastName}
-            </Header>
-            <ul>
-              <li>{email}</li>
-              <li>{memberSince}</li>
-              <li>{username}</li>
-            </ul>
-          </>
+          <Grid>
+            <Grid.Column width={2}>
+              <Image src={large} bordered circular size="big" />
+            </Grid.Column>
+
+            <Grid.Column width={14}>
+              <Header as="h1">{fullName}</Header>
+              <List>
+                <List.Item>
+                  <List.Icon name="mail" />
+                  <List.Content>{email}</List.Content>
+                </List.Item>
+                <List.Item>
+                  <List.Icon name="clock outline" />
+                  <List.Content>Joined: {memberSince}</List.Content>
+                </List.Item>
+                <List.Item>
+                  <List.Icon name="calendar check outline" />
+                  <List.Content>
+                    Organised events: {numberOfOrganisedEvents}
+                  </List.Content>
+                </List.Item>
+                <List.Item>
+                  <List.Icon name="calendar check outline" />
+                  <List.Content>
+                    Attended events: {numberOfAttendedEvents}
+                  </List.Content>
+                </List.Item>
+              </List>
+            </Grid.Column>
+          </Grid>
         )}
       </Segment>
     </Container>

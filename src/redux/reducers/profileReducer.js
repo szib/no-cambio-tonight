@@ -10,6 +10,7 @@ const initialUser = {
   lastName: '',
   email: '',
   memberSince: '',
+  picture: {},
   gender: 0
 };
 
