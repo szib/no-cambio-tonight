@@ -1,13 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 import { createNewEvent } from '../api/event';
 
-import { Form, Container, Segment, Button } from 'semantic-ui-react';
+import { Form, Container, Segment, Button, Header } from 'semantic-ui-react';
 
 const NewEventPage = props => {
-  const [title, setTitle] = useState('title');
-  const [location, setLocation] = useState('location');
-  const [dateTime, setDateTime] = useState('2019-07-22T19:30:00.000Z');
+  const [title, setTitle] = useState('');
+  const [location, setLocation] = useState('');
+  const [startDateTime, setStartDateTime] = useState(new Date());
+  const [endDateTime, setEndDateTime] = useState(new Date());
   const { history } = props;
 
   const onSubmitHandler = () => {
@@ -15,7 +19,8 @@ const NewEventPage = props => {
       event: {
         title,
         location,
-        date_time: dateTime
+        start_date_time: startDateTime,
+        end_date_time: endDateTime
       }
     };
     createNewEvent(eventData).then(() => history.push('/events'));
@@ -24,9 +29,10 @@ const NewEventPage = props => {
   return (
     <Container>
       <Segment>
+        <Header>New Event</Header>
         <Form onSubmit={onSubmitHandler}>
           <Form.Field>
-            <label>Title</label>
+            <label>What?</label>
             <input
               name="title"
               placeholder="Title"
@@ -35,7 +41,7 @@ const NewEventPage = props => {
             />
           </Form.Field>
           <Form.Field>
-            <label>Location</label>
+            <label>Where?</label>
             <input
               name="location"
               placeholder="Location"
@@ -44,12 +50,29 @@ const NewEventPage = props => {
             />
           </Form.Field>
           <Form.Field>
-            <label>Date Time [TODO]</label>
-            <input
-              name="dateTime"
-              placeholder="Start date and time"
-              value={dateTime}
-              onChange={e => setDateTime(e.target.value)}
+            <label>When?</label>
+            <DatePicker
+              selected={startDateTime}
+              selectsStart
+              startDate={startDateTime}
+              endDate={endDateTime}
+              onChange={setStartDateTime}
+              showTimeSelect
+              dateFormat="MMMM d, yyyy h:mm aa"
+              timeCaption="time"
+            />
+
+            <DatePicker
+              selected={endDateTime}
+              selectsEnd
+              startDate={startDateTime}
+              endDate={endDateTime}
+              onChange={setEndDateTime}
+              minTime={startDateTime}
+              maxTime={startDateTime.getTime() + 120 * 60000}
+              showTimeSelect
+              dateFormat="MMMM d, yyyy h:mm aa"
+              timeCaption="time"
             />
           </Form.Field>
           <Button>Submit</Button>

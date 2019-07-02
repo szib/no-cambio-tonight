@@ -22,6 +22,9 @@ const EventDetails = ({
     reloadEventsHandler();
   };
 
+  const start = new Date(event.startDateTime).toLocaleString();
+  const end = new Date(event.endDateTime).toLocaleString();
+
   return (
     <Modal open={selectedEventId !== null} dimmer="blurring" size="large">
       <Header icon="browser" content={event.title}></Header>
@@ -29,10 +32,7 @@ const EventDetails = ({
         <EventLabels event={event} />
       </Header>
       <Modal.Content>
-        <Header
-          icon="time"
-          content={`${event.startDateTime} - ${event.endDateTime}`}
-        />
+        <Header icon="time" content={`${start} - ${end}`} />
         <Header icon="map marker alternate" content={event.location} />
         <Segment>
           <Header content="Attendees" />
