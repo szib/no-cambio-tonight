@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import useEvent from '../../hooks/useEvent';
 
@@ -6,7 +6,7 @@ import { Button, Header, Icon, Modal, Segment } from 'semantic-ui-react';
 
 import EventLabels from './EventLabels';
 import Attendees from './Attendees';
-import GameList from './GameList';
+import GamePiecesList from './GamePiecesList';
 
 const EventDetails = ({
   selectedEventId,
@@ -14,7 +14,7 @@ const EventDetails = ({
   reloadEventsHandler
 }) => {
   const eventFromAPI = useEvent(selectedEventId);
-  const { data, isLoading, handlers } = eventFromAPI;
+  const { data, eventGamePieces, userGamePieces, handlers } = eventFromAPI;
   const { event } = data;
 
   const closeModal = () => {
@@ -38,8 +38,20 @@ const EventDetails = ({
           <Header content="Attendees" />
           <Attendees attendees={event.attendees} />
           <Header content="Games" />
-          <GameList gamelist={event.gamelist} />
+          <GamePiecesList
+            gamePieces={eventGamePieces}
+            onClickHandler={handlers.removeGameHandler}
+          />
         </Segment>
+        {event.isCurrentUserAttending && (
+          <Segment>
+            <Header content="My Games" />
+            <GamePiecesList
+              gamePieces={userGamePieces}
+              onClickHandler={handlers.addGameHandler}
+            />
+          </Segment>
+        )}
       </Modal.Content>
 
       <Modal.Actions>
@@ -63,6 +75,9 @@ const EventDetails = ({
         </Button>
         <Button color="green" onClick={closeModal} inverted>
           <Icon name="close" /> Back
+        </Button>
+        <Button color="red" onClick={handlers.reload} inverted>
+          <Icon name="close" /> Reload
         </Button>
       </Modal.Actions>
     </Modal>

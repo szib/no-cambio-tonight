@@ -28,8 +28,6 @@ const ProfilePage = props => {
   } = user;
   const { medium, large } = picture;
 
-  console.log('picture', picture);
-
   return (
     <Container>
       <Segment>

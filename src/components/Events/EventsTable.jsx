@@ -6,7 +6,7 @@ import EventRow from './EventRow';
 
 const EventList = props => {
   const { events, selectHandler, selectedEventId, currentUserId } = props;
-  // console.log('events in list', events);
+
   return (
     <Table celled selectable compact size="small">
       <Table.Header>
