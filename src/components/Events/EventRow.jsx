@@ -19,7 +19,7 @@ const EventRow = ({ event, selectHandler, active }) => {
         <EventLabels event={event} />
       </Table.Cell>
       <Table.Cell>{event.location}</Table.Cell>
-      <Table.Cell>{event.dateTime}</Table.Cell>
+      <Table.Cell>{`${event.startDateTime} - ${event.endDateTime}`}</Table.Cell>
       <Table.Cell>
         {event.numberOfAttendees} / {event.capacity}
       </Table.Cell>

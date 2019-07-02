@@ -29,7 +29,10 @@ const EventDetails = ({
         <EventLabels event={event} />
       </Header>
       <Modal.Content>
-        <Header icon="time" content={event.dateTime} />
+        <Header
+          icon="time"
+          content={`${event.startDateTime} - ${event.endDateTime}`}
+        />
         <Header icon="map marker alternate" content={event.location} />
         <Segment>
           <Header content="Attendees" />
