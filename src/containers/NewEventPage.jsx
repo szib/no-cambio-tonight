@@ -12,6 +12,7 @@ const NewEventPage = props => {
   const [location, setLocation] = useState('');
   const [startDateTime, setStartDateTime] = useState(new Date());
   const [endDateTime, setEndDateTime] = useState(new Date());
+  const [goodToGo, setGoodToGo] = useState(false);
   const { history } = props;
 
   const onSubmitHandler = () => {
@@ -26,6 +27,18 @@ const NewEventPage = props => {
     createNewEvent(eventData).then(() => history.push('/events'));
   };
 
+  useEffect(() => {
+    if (
+      title.length > 5 &&
+      location.length > 5 &&
+      startDateTime < endDateTime
+    ) {
+      setGoodToGo(true);
+    } else {
+      setGoodToGo(false);
+    }
+  }, [title, location, startDateTime, endDateTime]);
+
   return (
     <Container>
       <Segment>
@@ -35,7 +48,7 @@ const NewEventPage = props => {
             <label>What?</label>
             <input
               name="title"
-              placeholder="Title"
+              placeholder="Title (min. 5 letters)"
               value={title}
               onChange={e => setTitle(e.target.value)}
             />
@@ -44,7 +57,7 @@ const NewEventPage = props => {
             <label>Where?</label>
             <input
               name="location"
-              placeholder="Location"
+              placeholder="Location  (min. 5 letters)"
               value={location}
               onChange={e => setLocation(e.target.value)}
             />
@@ -56,7 +69,7 @@ const NewEventPage = props => {
               selectsStart
               startDate={startDateTime}
               endDate={endDateTime}
-              onChange={setStartDateTime}
+              onChange={e => setStartDateTime(e)}
               showTimeSelect
               dateFormat="MMMM d, yyyy h:mm aa"
               timeCaption="time"
@@ -67,7 +80,7 @@ const NewEventPage = props => {
               selectsEnd
               startDate={startDateTime}
               endDate={endDateTime}
-              onChange={setEndDateTime}
+              onChange={e => setEndDateTime(e)}
               minTime={startDateTime}
               maxTime={startDateTime.getTime() + 120 * 60000}
               showTimeSelect
@@ -75,7 +88,9 @@ const NewEventPage = props => {
               timeCaption="time"
             />
           </Form.Field>
-          <Button>Submit</Button>
+          <Button fluid primary disabled={!goodToGo}>
+            Submit
+          </Button>
         </Form>
       </Segment>
     </Container>
