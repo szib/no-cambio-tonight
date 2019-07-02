@@ -5,7 +5,14 @@ import 'react-datepicker/dist/react-datepicker.css';
 
 import { createNewEvent } from '../api/event';
 
-import { Form, Container, Segment, Button, Header } from 'semantic-ui-react';
+import {
+  Form,
+  Container,
+  Segment,
+  Button,
+  Header,
+  Input
+} from 'semantic-ui-react';
 
 const NewEventPage = props => {
   const [title, setTitle] = useState('');
@@ -41,12 +48,14 @@ const NewEventPage = props => {
 
   return (
     <Container>
-      <Segment>
-        <Header>New Event</Header>
+      <Segment raised>
+        <Header as="h1">New Event</Header>
         <Form onSubmit={onSubmitHandler}>
           <Form.Field>
             <label>What?</label>
-            <input
+            <Input
+              icon="calendar check outline"
+              iconPosition="left"
               name="title"
               placeholder="Title (min. 5 letters)"
               value={title}
@@ -55,7 +64,9 @@ const NewEventPage = props => {
           </Form.Field>
           <Form.Field>
             <label>Where?</label>
-            <input
+            <Input
+              icon="map outline"
+              iconPosition="left"
               name="location"
               placeholder="Location  (min. 5 letters)"
               value={location}
