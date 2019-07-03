@@ -2,6 +2,7 @@ import React from 'react';
 
 import { Container } from 'semantic-ui-react';
 import Game from './Game';
+import GamesTable from '../../components/GamesTable';
 
 const Games = props => {
   const { games, findGamePieceIdByBgaId } = props;
@@ -15,15 +16,17 @@ const Games = props => {
 
   return (
     <Container>
-      {gamePieces.map(gamePiece => {
-        return (
-          <Game
-            key={gamePiece.game.bgaId}
-            game={gamePiece.game}
-            gamePieceId={gamePiece.id}
-          />
-        );
-      })}
+      <GamesTable>
+        {gamePieces.map(gamePiece => {
+          return (
+            <Game
+              key={gamePiece.game.bgaId}
+              game={gamePiece.game}
+              gamePieceId={gamePiece.id}
+            />
+          );
+        })}
+      </GamesTable>
     </Container>
   );
 };
