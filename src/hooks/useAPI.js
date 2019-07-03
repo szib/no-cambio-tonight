@@ -13,37 +13,36 @@ const useAPI = (initialUrl, initialData) => {
   useEffect(() => {
     let mounted = true;
 
-    const handleFetchResponse = response => {
-      setHasError(!response.ok);
-      setIsLoading(false);
-      return response.ok && response.json
-        ? response.json().then(convertToCamelCase)
-        : initialData;
-    };
-
-    const fetchData = () => {
+    const fetchData = async () => {
       setIsLoading(true);
-      return fetch(url, {
+
+      const response = await fetch(url, {
         headers: {
           Authorization: `Bearer ${localStorage.token}`
         }
-      })
-        .then(handleFetchResponse)
-        .catch(handleFetchResponse);
+      });
+
+      setHasError(!response.ok);
+      setIsLoading(false);
+
+      if (!hasError && response.json) {
+        const json = await response.json();
+        return convertToCamelCase(json);
+      }
+      return initialData;
     };
 
-    if (initialUrl && doFetch && mounted) {
+    if (initialUrl && doFetch && mounted)
       fetchData().then(data => {
         setDoFetch(false);
         setFetchedData(data);
       });
-    }
 
     return () => {
       mounted = false;
       setDoFetch(false);
     };
-  }, [url, doFetch, initialUrl, initialData]);
+  }, [url, doFetch, initialUrl, initialData, hasError]);
 
   const reloadHandler = () => {
     setDoFetch(true);
@@ -51,9 +50,9 @@ const useAPI = (initialUrl, initialData) => {
 
   return {
     data: fetchedData,
+    reload: reloadHandler,
     isLoading,
     hasError,
-    reload: reloadHandler,
     setUrl
   };
 };
