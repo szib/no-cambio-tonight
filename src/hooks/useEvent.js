@@ -34,16 +34,16 @@ const useEvent = eventId => {
   const handleJson = json => {
     if (json.error) {
       console.log('useEvent error: ', json);
-      eventAPI.setReload(true);
+      eventAPI.reload();
     } else {
       return json;
     }
   };
 
   const reload = () => {
-    eventAPI.setReload(true);
-    eventGamesAPI.setReload(true);
-    userGamesAPI.setReload(true);
+    eventAPI.reload();
+    eventGamesAPI.reload();
+    userGamesAPI.reload();
   };
 
   const getUserGamePieces = () => {
