@@ -3,47 +3,58 @@ import convertToCamelCase from 'lodash-humps';
 import { useEffect, useState } from 'react';
 
 const useAPI = (initialUrl, initialData) => {
-  const [reload, setReload] = useState(false);
   const [url, setUrl] = useState(initialUrl);
-  const [isLoading, setIsLoading] = useState(true);
-  const [hasError, setHasError] = useState(false);
   const [fetchedData, setFetchedData] = useState(initialData);
 
+  const [doFetch, setDoFetch] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
+  const [hasError, setHasError] = useState(false);
+
   useEffect(() => {
-    let unmounted = false;
+    let mounted = true;
 
-    const handleFetchResponse = response => {
-      if (unmounted) return initialData;
-
-      setHasError(!response.ok);
-      setIsLoading(false);
-      return response.ok && response.json
-        ? response.json().then(convertToCamelCase)
-        : initialData;
-    };
-
-    const fetchData = () => {
+    const fetchData = async () => {
       setIsLoading(true);
-      return fetch(url, {
+
+      const response = await fetch(url, {
         headers: {
           Authorization: `Bearer ${localStorage.token}`
         }
-      })
-        .then(handleFetchResponse)
-        .catch(handleFetchResponse);
+      });
+
+      setHasError(!response.ok);
+      setIsLoading(false);
+
+      if (!hasError && response.json) {
+        const json = await response.json();
+        return convertToCamelCase(json);
+      }
+      return initialData;
     };
 
-    if (initialUrl && !unmounted)
-      fetchData().then(data => !unmounted && setFetchedData(data));
+    if (initialUrl && doFetch && mounted)
+      fetchData().then(data => {
+        setDoFetch(false);
+        setFetchedData(data);
+      });
 
     return () => {
-      setReload(false);
-      unmounted = true;
+      mounted = false;
+      setDoFetch(false);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [url, reload]);
+  }, [url, doFetch, initialUrl, initialData, hasError]);
 
-  return { data: fetchedData, isLoading, hasError, setReload, setUrl };
+  const reloadHandler = () => {
+    setDoFetch(true);
+  };
+
+  return {
+    data: fetchedData,
+    reload: reloadHandler,
+    isLoading,
+    hasError,
+    setUrl
+  };
 };
 
 export default useAPI;

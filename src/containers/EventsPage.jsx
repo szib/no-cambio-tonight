@@ -48,7 +48,7 @@ const EventsPage = () => {
         <EventDetails
           setSelectedEventId={setSelectedEventId}
           selectedEventId={selectedEventId}
-          reloadEventsHandler={() => eventsAPI.setReload(true)}
+          reloadEventsHandler={() => eventsAPI.reload()}
         ></EventDetails>
       )}
     </Container>
