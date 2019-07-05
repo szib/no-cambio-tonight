@@ -5,13 +5,12 @@ import { Table } from 'semantic-ui-react';
 import EventRow from './EventRow';
 
 const EventList = props => {
-  const { events, selectHandler, selectedEventId, currentUserId } = props;
+  const { events } = props;
 
   return (
     <Table celled selectable compact size="small">
       <Table.Header>
         <Table.Row>
-          <Table.HeaderCell></Table.HeaderCell>
           <Table.HeaderCell>Title</Table.HeaderCell>
           <Table.HeaderCell>Tags</Table.HeaderCell>
           <Table.HeaderCell>Location</Table.HeaderCell>
@@ -22,13 +21,7 @@ const EventList = props => {
 
       <Table.Body>
         {events.map(event => (
-          <EventRow
-            key={event.id}
-            event={event}
-            selectHandler={selectHandler}
-            active={selectedEventId === event.id}
-            currentUserId={currentUserId}
-          />
+          <EventRow key={event.id} event={event} {...props} />
         ))}
       </Table.Body>
     </Table>

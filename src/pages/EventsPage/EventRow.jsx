@@ -1,22 +1,15 @@
 import React from 'react';
 
-import { Table, Label, Icon } from 'semantic-ui-react';
+import { Table } from 'semantic-ui-react';
 
-import EventLabels from './EventLabels';
+import EventLabels from '../../components/EventLabels';
 
-const EventRow = ({ event, selectHandler, active }) => {
+const EventRow = ({ event, history }) => {
   const start = new Date(event.startDateTime).toLocaleString();
   const end = new Date(event.endDateTime).toLocaleString();
 
   return (
-    <Table.Row onClick={() => selectHandler(event.id)} active={active}>
-      <Table.Cell>
-        {event.isCurrentUserOrganising && (
-          <Label ribbon color="orange">
-            <Icon name="exclamation" />
-          </Label>
-        )}
-      </Table.Cell>
+    <Table.Row onClick={() => history.push(`/events/${event.id}`)}>
       <Table.Cell>{event.title}</Table.Cell>
       <Table.Cell>
         <EventLabels event={event} />

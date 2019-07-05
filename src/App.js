@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import MyGamePage from './pages/MyGamePage/MyGamePage';
 import MyGamesPage from './pages/MyGamesPage/MyGamesPage';
 import FindAGamePage from './pages/FindAGamePage/FindAGamePage';
+import EventPage from './pages/EventPage/EventPage';
 
 import SignUpPage from './pages/SignUpPage';
 import SignInPage from './pages/SignInPage';
@@ -47,8 +48,14 @@ function App() {
           render={routerProps => <ProfilePage {...routerProps} />}
         />
         <Route
+          exact
           path="/events/new"
           render={routerProps => <NewEventPage {...routerProps} />}
+        />
+        <Route
+          exact
+          path="/events/:id"
+          render={routerProps => <EventPage {...routerProps} />}
         />
         <Route
           path="/events"

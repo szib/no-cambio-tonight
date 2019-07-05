@@ -2,18 +2,12 @@ import React, { useState } from 'react';
 
 import { Header, Container, Input, Form } from 'semantic-ui-react';
 
-import useProfile from '../../hooks/useProfile';
 import useEvents from '../../hooks/useEvents';
 
 import EventTable from './EventsTable';
-import EventDetails from './EventDetails';
 import Loader from '../../components/LoaderWithDimmer';
 
-const EventsPage = () => {
-  const [profile] = useProfile(localStorage.getItem('token'));
-  const currentUserId = profile.user.id;
-
-  const [selectedEventId, setSelectedEventId] = useState(null);
+const EventsPage = props => {
   const [searchTerm, setSearchTerm] = useState('');
 
   const eventsAPI = useEvents();
@@ -35,21 +29,9 @@ const EventsPage = () => {
         />
       </Form>
       {eventsAPI.isLoading && <Loader content="Loading events..." />}
-      {eventsAPI.hasError && <Header as="h2">Failed to fetch 😟</Header>}
+      {eventsAPI.hasError && <Header as="h2">Failed to fetch</Header>}
       {!eventsAPI.isLoading && !eventsAPI.hasError && (
-        <EventTable
-          events={filteredEvents}
-          selectedEventId={selectedEventId}
-          selectHandler={setSelectedEventId}
-          currentUserId={currentUserId}
-        />
-      )}
-      {selectedEventId !== null && (
-        <EventDetails
-          setSelectedEventId={setSelectedEventId}
-          selectedEventId={selectedEventId}
-          reloadEventsHandler={() => eventsAPI.reload()}
-        ></EventDetails>
+        <EventTable events={filteredEvents} {...props} />
       )}
     </Container>
   );

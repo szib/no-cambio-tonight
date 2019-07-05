@@ -1,16 +1,11 @@
 import React from 'react';
 
-import { Item, Rating, Label, Icon } from 'semantic-ui-react';
+import { Item, Rating } from 'semantic-ui-react';
+
+import PlayersLabel from '../components/PlayersLabel';
+import PlaytimeLabel from '../components/PlaytimeLabel';
 
 const GameDetails = ({ game, withoutDescription }) => {
-  const getPlayers = game => {
-    if (game.minPlayers === game.maxPlayers) {
-      return `${game.minPlayers} players`;
-    } else {
-      return `${game.minPlayers} - ${game.maxPlayers} players`;
-    }
-  };
-
   return (
     <Item.Group>
       <Item>
@@ -33,18 +28,8 @@ const GameDetails = ({ game, withoutDescription }) => {
             <div>{game.publisher}</div>
           </Item.Meta>
           <Item.Extra>
-            {game.minPlayers && game.maxPlayers && (
-              <Label>
-                <Icon name="user" />
-                {getPlayers(game)}
-              </Label>
-            )}
-            {game.minPlaytime && game.maxPlaytime && (
-              <Label>
-                <Icon name="clock outline" />
-                {game.minPlaytime} - {game.maxPlaytime} minutes
-              </Label>
-            )}
+            <PlayersLabel game={game} />
+            <PlaytimeLabel game={game} />
           </Item.Extra>
           {!withoutDescription && (
             <Item.Description
