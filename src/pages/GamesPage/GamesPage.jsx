@@ -2,15 +2,16 @@ import React, { useState } from 'react';
 
 import Games from './Games';
 
-import { Header, Container, Input, Form, Segment } from 'semantic-ui-react';
+import { Header, Container } from 'semantic-ui-react';
 
 import { searchGamesByName } from '../../api/games';
 import useMyGames from '../../hooks/useMyGames';
 
 import Loader from '../../components/LoaderWithDimmer';
+import SearchBar from '../../components/SearchBar';
 
 const GamesPage = () => {
-  const [searchTerm, setSearchTerm] = useState('codenames');
+  const [searchTerm, setSearchTerm] = useState('');
   const [games, setGames] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [, findGamePieceIdByBgaId] = useMyGames(localStorage.getItem('token'));
@@ -37,19 +38,14 @@ const GamesPage = () => {
 
   return (
     <Container>
+      <Header as="h1">Games</Header>
+      <SearchBar
+        onSubmitHandler={onSubmitHandler}
+        searchTerm={searchTerm}
+        onChangeHandler={setSearchTerm}
+        isLoading={isLoading}
+      />
       {isLoading && <Loader />}
-      <Segment>
-        <Header as="h1">Games</Header>
-        <Form onSubmit={onSubmitHandler}>
-          <Input
-            loading={isLoading}
-            fluid
-            placeholder="Search..."
-            value={searchTerm}
-            onChange={e => setSearchTerm(e.target.value)}
-          />
-        </Form>
-      </Segment>
       {games.length !== 0 && (
         <Games
           games={games}
