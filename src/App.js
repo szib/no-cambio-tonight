@@ -4,15 +4,17 @@ import 'semantic-ui-css/semantic.min.css';
 
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-import SignUpPage from './containers/SignUpPage';
-import SignInPage from './containers/SignInPage';
-import LandingPage from './containers/LandingPage';
-import ProfilePage from './containers/ProfilePage';
-import EventsPage from './containers/EventsPage';
-import NewEventPage from './containers/NewEventPage';
-import MyGamesPage from './containers/MyGamesPage';
-import GamesPage from './containers/GamesPage';
-import LogoutPage from './containers/LogoutPage';
+import MyGamePage from './pages/MyGamePage/MyGamePage';
+import MyGamesPage from './pages/MyGamesPage/MyGamesPage';
+import FindAGamePage from './pages/FindAGamePage/FindAGamePage';
+
+import SignUpPage from './pages/SignUpPage';
+import SignInPage from './pages/SignInPage';
+import LandingPage from './pages/LandingPage';
+import ProfilePage from './pages/ProfilePage';
+import EventsPage from './pages/EventsPage';
+import NewEventPage from './pages/NewEventPage';
+import LogoutPage from './pages/LogoutPage';
 import Menu from './components/Menu';
 
 function App() {
@@ -53,10 +55,15 @@ function App() {
           render={routerProps => <EventsPage {...routerProps} />}
         />
         <Route
-          path="/games"
-          render={routerProps => <GamesPage {...routerProps} />}
+          path="/findgame"
+          render={routerProps => <FindAGamePage {...routerProps} />}
         />
         <Route
+          path="/mygames/:id"
+          render={routerProps => <MyGamePage {...routerProps} />}
+        />
+        <Route
+          exact
           path="/mygames"
           render={routerProps => <MyGamesPage {...routerProps} />}
         />

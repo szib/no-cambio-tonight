@@ -27,7 +27,7 @@ const Menubar = props => {
               text="Find new games"
               name="findNewGames"
               as={Link}
-              to="/games/"
+              to="/findgame"
             />
           </Dropdown.Menu>
         </Dropdown>
