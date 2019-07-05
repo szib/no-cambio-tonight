@@ -59,6 +59,7 @@ const EventDetails = props => {
               <Grid.Column>
                 <Header content="Games" />
                 <GameCards
+                  eventCancelled={event.isCancelled}
                   gamePieces={eventGamePieces}
                   onClickHandler={handlers.removeGameHandler}
                 />
@@ -71,30 +72,33 @@ const EventDetails = props => {
           <Segment>
             <Header content="My Games" />
             <GameCards
+              eventCancelled={event.isCancelled}
               gamePieces={userGamePieces}
               onClickHandler={handlers.addGameHandler}
               itemsPerRow={10}
             />
           </Segment>
         )}
-        <Button
-          color="green"
-          onClick={handlers.cancelHandler}
-          inverted
-          disabled={event.isCancelled || !event.isCurrentUserOrganising}
-        >
-          <Icon name="delete calendar" /> Cancel event
-        </Button>
-        <Button
-          color="green"
-          onClick={handlers.rsvpHandler}
-          disabled={event.isCancelled}
-          inverted
-        >
-          <Icon name="checkmark" />
-          {!event.isCurrentUserAttending && 'RSVP'}
-          {event.isCurrentUserAttending && 'Cancel RSVP'}
-        </Button>
+        <Container textAlign="right">
+          {!(event.isCancelled || !event.isCurrentUserOrganising) && (
+            <Button
+              color="red"
+              onClick={handlers.cancelHandler}
+              disabled={event.isCancelled || !event.isCurrentUserOrganising}
+            >
+              <Icon name="delete calendar" /> Cancel event
+            </Button>
+          )}
+          <Button
+            color={event.isCurrentUserAttending ? 'red' : 'green'}
+            onClick={handlers.rsvpHandler}
+            disabled={event.isCancelled}
+          >
+            <Icon name="checkmark" />
+            {!event.isCurrentUserAttending && 'RSVP'}
+            {event.isCurrentUserAttending && 'Cancel RSVP'}
+          </Button>
+        </Container>
       </Segment>
     </Container>
   );

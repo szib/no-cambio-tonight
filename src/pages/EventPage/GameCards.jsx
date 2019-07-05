@@ -5,7 +5,7 @@ import { Card } from 'semantic-ui-react';
 import GameCard from './GameCard';
 
 const GameCards = props => {
-  const { gamePieces, onClickHandler, itemsPerRow } = props;
+  const { gamePieces, onClickHandler, itemsPerRow, eventCancelled } = props;
 
   return (
     <Card.Group size="mini" itemsPerRow={itemsPerRow || 8}>
@@ -15,7 +15,8 @@ const GameCards = props => {
             <GameCard
               key={gamePiece.id}
               gamePiece={gamePiece}
-              onClickHandler={onClickHandler}
+              eventCancelled={eventCancelled}
+              onClickHandler={eventCancelled ? () => {} : onClickHandler}
             />
           );
         })}
