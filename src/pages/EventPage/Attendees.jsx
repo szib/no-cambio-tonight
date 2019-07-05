@@ -1,13 +1,13 @@
 import React from 'react';
 
-import { Label } from 'semantic-ui-react';
+import AttendeeAvatar from './AttendeeAvatar';
 
 const Attendees = props => {
   return (
     <div>
       {props.attendees &&
         props.attendees.map(attendee => (
-          <Label key={attendee.id} content={attendee.fullName} />
+          <AttendeeAvatar key={attendee.id} attendee={attendee} />
         ))}
     </div>
   );
