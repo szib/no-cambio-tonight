@@ -5,7 +5,7 @@ import { Table } from 'semantic-ui-react';
 const GamesTable = props => {
   const { children } = props;
   return (
-    <Table celled textAlign="center">
+    <Table striped textAlign="center">
       <Table.Header>
         <Table.Row>
           <Table.HeaderCell>Image</Table.HeaderCell>
@@ -13,7 +13,7 @@ const GamesTable = props => {
           <Table.HeaderCell>Rating</Table.HeaderCell>
           <Table.HeaderCell>Players</Table.HeaderCell>
           <Table.HeaderCell>Play time</Table.HeaderCell>
-          <Table.HeaderCell>Popularity</Table.HeaderCell>
+          <Table.HeaderCell></Table.HeaderCell>
         </Table.Row>
       </Table.Header>
       <Table.Body>{children}</Table.Body>

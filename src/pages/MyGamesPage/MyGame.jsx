@@ -35,9 +35,6 @@ const MyGame = props => {
             ? `${game.minPlaytime} - ${game.maxPlaytime}`
             : 'N/A'}
         </Table.Cell>
-        <Table.Cell width={2}>
-          {game.numberOfOwners ? game.numberOfOwners : 'N/A'}
-        </Table.Cell>
       </Table.Row>
     </>
   );

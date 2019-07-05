@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Container } from 'semantic-ui-react';
 import Game from './Game';
-import GamesTable from '../../components/GamesTable';
+import GamesTable from './GamesTable';
 
 const Games = props => {
   const { games, findGamePieceIdByBgaId } = props;

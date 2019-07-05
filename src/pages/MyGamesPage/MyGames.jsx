@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import { Container, Table } from 'semantic-ui-react';
 
-import GameTable from '../../components/GamesTable';
+import GameTable from './MyGamesTable';
 import MyGame from './MyGame';
 
 const MyGameList = props => {
