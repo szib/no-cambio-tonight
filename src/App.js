@@ -12,7 +12,7 @@ import SignUpPage from './pages/SignUpPage';
 import SignInPage from './pages/SignInPage';
 import LandingPage from './pages/LandingPage';
 import ProfilePage from './pages/ProfilePage';
-import EventsPage from './pages/EventsPage';
+import EventsPage from './pages/EventsPage/EventsPage';
 import NewEventPage from './pages/NewEventPage';
 import LogoutPage from './pages/LogoutPage';
 import Menu from './components/Menu';
