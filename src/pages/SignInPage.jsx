@@ -30,7 +30,7 @@ const SigninPage = props => {
         setError(data.error);
       } else {
         localStorage.setItem('token', data.token);
-        setRedirectTo('/profile');
+        setRedirectTo('/mygames');
       }
     });
   };
@@ -43,7 +43,7 @@ const SigninPage = props => {
   useEffect(() => {
     const token = localStorage.getItem('token');
     AuthAPI.validate(token).then(data => {
-      if (token === data.token) setRedirectTo('/profile');
+      if (token === data.token) setRedirectTo('/mygames');
     });
   }, []);
 
