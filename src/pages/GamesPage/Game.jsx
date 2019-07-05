@@ -1,23 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-import { useDispatch } from 'react-redux';
-
-import { asyncAddGameToMyGameLibray } from '../../redux/thunk/myGames';
-
-import { Table, Image, Rating, Button } from 'semantic-ui-react';
+import { Table, Image, Rating } from 'semantic-ui-react';
+import AddRemoveButton from './AddRemoveButton';
 
 const Game = props => {
   const { game, gamePieceId } = props;
-
-  const dispatch = useDispatch();
-  const [isButtonLoading, setIsButtonLoading] = useState(false);
-
-  const addGame = () => {
-    setIsButtonLoading(true);
-    dispatch(asyncAddGameToMyGameLibray(game.bgaId)).then(gamePiece => {
-      setIsButtonLoading(false);
-    });
-  };
 
   return (
     <Table.Row>
@@ -48,13 +35,7 @@ const Game = props => {
           : 'N/A'}
       </Table.Cell>
       <Table.Cell width={2}>
-        <Button
-          icon="add"
-          content="Add"
-          loading={isButtonLoading}
-          onClick={addGame}
-          disabled={gamePieceId !== null}
-        />
+        <AddRemoveButton gamePieceId={gamePieceId} game={game} />
       </Table.Cell>
     </Table.Row>
   );
