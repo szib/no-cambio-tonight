@@ -1,14 +1,14 @@
 import React from 'react';
 
-import { List } from 'semantic-ui-react';
+import { Card } from 'semantic-ui-react';
 
 import GameCard from './GameCard';
 
 const GameCards = props => {
-  const { gamePieces, onClickHandler } = props;
+  const { gamePieces, onClickHandler, itemsPerRow } = props;
 
   return (
-    <List horizontal animated size="mini">
+    <Card.Group size="mini" itemsPerRow={itemsPerRow || 8}>
       {gamePieces &&
         gamePieces.map(gamePiece => {
           return (
@@ -19,7 +19,7 @@ const GameCards = props => {
             />
           );
         })}
-    </List>
+    </Card.Group>
   );
 };
 

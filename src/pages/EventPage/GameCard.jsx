@@ -1,24 +1,39 @@
 import React from 'react';
 
-import { List, Image, Popup } from 'semantic-ui-react';
+import { Card, Image, Popup, Divider } from 'semantic-ui-react';
+
+import PlayersLabel from '../../components/PlayersLabel';
+import PlaytimeLabel from '../../components/PlaytimeLabel';
 
 const GameCard = props => {
   const { gamePiece, onClickHandler } = props;
   const { game } = gamePiece;
-  console.log('props', props);
+
   return (
     <Popup
       header={game.name}
-      content={game.name}
+      content={
+        <>
+          <Divider />
+          <PlayersLabel game={game} />
+          <PlaytimeLabel game={game} />
+        </>
+      }
       trigger={
-        <List.Item
+        <Card
+          as="div"
           key={gamePiece.id}
-          content={gamePiece.game.name}
           color={gamePiece.color}
           onClick={() => onClickHandler(gamePiece.id)}
-        >
-          <Image src={game.imageSmall} size="mini" />
-        </List.Item>
+          content={
+            <Image
+              src={game.imageSmall}
+              size="tiny"
+              centered
+              verticalAlign="bottom"
+            />
+          }
+        ></Card>
       }
     />
   );

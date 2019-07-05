@@ -1,63 +1,82 @@
-import React, { useEffect } from 'react';
+import React from 'react';
+
+import { Link } from 'react-router-dom';
 
 import useEvent from '../../hooks/useEvent';
 
-import { Button, Header, Icon, Modal, Segment } from 'semantic-ui-react';
+import {
+  Button,
+  Header,
+  Icon,
+  Segment,
+  Label,
+  Container,
+  Grid,
+  Divider
+} from 'semantic-ui-react';
 
-import EventLabels from './EventLabels';
+import Loader from '../../components/LoaderWithDimmer';
+import EventLabels from '../../components/EventLabels';
 import Attendees from './Attendees';
-import GamePiecesList from './GameCards';
+import GameCards from './GameCards';
 
 const EventDetails = props => {
-  const {
-    selectedEventId,
-    setSelectedEventId,
-    reloadEventsHandler,
-    match
-  } = props;
+  const { match } = props;
 
   const eventFromAPI = useEvent(match.params.id);
   const { data, eventGamePieces, userGamePieces, handlers } = eventFromAPI;
   const { event } = data;
 
-  const closeModal = () => {
-    setSelectedEventId(null);
-    reloadEventsHandler();
-  };
-
   const start = new Date(event.startDateTime).toLocaleString();
   const end = new Date(event.endDateTime).toLocaleString();
 
   return (
-    <Modal open={selectedEventId !== null} dimmer="blurring" size="large">
-      <Header icon="browser" content={event.title}></Header>
-      <Header as="div">
-        <EventLabels event={event} />
-      </Header>
-      <Modal.Content>
-        <Header icon="time" content={`${start} - ${end}`} />
-        <Header icon="map marker alternate" content={event.location} />
+    <Container>
+      {eventFromAPI.isLoading && <Loader />}
+      <Segment raised>
+        <Label corner="left" color="blue" as={Link} to="/events">
+          <Icon name="arrow left" />
+        </Label>
+
         <Segment>
-          <Header content="Attendees" />
-          <Attendees attendees={event.attendees} />
-          <Header content="Games" />
-          <GamePiecesList
-            gamePieces={eventGamePieces}
-            onClickHandler={handlers.removeGameHandler}
-          />
+          <Grid columns="two">
+            <Grid.Row>
+              <Grid.Column>
+                <Header icon="browser" content={event.title}></Header>
+                <EventLabels event={event} />
+              </Grid.Column>
+              <Grid.Column>
+                <Header icon="time" content={`${start} - ${end}`} />
+                <Header icon="map marker alternate" content={event.location} />
+              </Grid.Column>
+            </Grid.Row>
+            <Divider />
+            <Grid.Row>
+              <Grid.Column>
+                <Header content="Attendees" />
+                <Attendees attendees={event.attendees} />
+              </Grid.Column>
+              <Grid.Column>
+                <Header content="Games" />
+                <GameCards
+                  gamePieces={eventGamePieces}
+                  onClickHandler={handlers.removeGameHandler}
+                />
+              </Grid.Column>
+            </Grid.Row>
+          </Grid>
         </Segment>
+
         {event.isCurrentUserAttending && (
           <Segment>
             <Header content="My Games" />
-            <GamePiecesList
+            <GameCards
               gamePieces={userGamePieces}
               onClickHandler={handlers.addGameHandler}
+              itemsPerRow={10}
             />
           </Segment>
         )}
-      </Modal.Content>
-
-      <Modal.Actions>
         <Button
           color="green"
           onClick={handlers.cancelHandler}
@@ -76,14 +95,8 @@ const EventDetails = props => {
           {!event.isCurrentUserAttending && 'RSVP'}
           {event.isCurrentUserAttending && 'Cancel RSVP'}
         </Button>
-        <Button color="green" onClick={closeModal} inverted>
-          <Icon name="close" /> Back
-        </Button>
-        <Button color="red" onClick={handlers.reload} inverted>
-          <Icon name="close" /> Reload
-        </Button>
-      </Modal.Actions>
-    </Modal>
+      </Segment>
+    </Container>
   );
 };
 
