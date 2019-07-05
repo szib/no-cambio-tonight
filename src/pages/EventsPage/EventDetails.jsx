@@ -6,7 +6,7 @@ import { Button, Header, Icon, Modal, Segment } from 'semantic-ui-react';
 
 import EventLabels from './EventLabels';
 import Attendees from './Attendees';
-import GamePiecesList from './GamePiecesList';
+import GamePiecesList from './GameCards';
 
 const EventDetails = ({
   selectedEventId,
