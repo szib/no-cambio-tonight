@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { aSyncFetchMyGames } from '../redux/thunk/myGames';
 
-const useMyGames = initialToken => {
+const useMyGames = () => {
   const dispatch = useDispatch();
   const myGames = useSelector(state => state.myGames);
 
@@ -17,7 +17,7 @@ const useMyGames = initialToken => {
 
   useEffect(() => {
     dispatch(aSyncFetchMyGames());
-  }, [dispatch, initialToken]);
+  }, [dispatch]);
 
   return [myGames, findGamePieceIdByBgaId];
 };
