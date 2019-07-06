@@ -12,7 +12,7 @@ export default function MyGamesPage(props) {
   const authenticated = useAuthentication();
   const [searchTerm, setSearchTerm] = useState('');
 
-  const [myGames] = useMyGames(localStorage.getItem('token'));
+  const [myGames] = useMyGames();
   const { gamePieces } = myGames;
   let filterdGamePieces = gamePieces;
 

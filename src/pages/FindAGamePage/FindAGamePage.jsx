@@ -17,7 +17,7 @@ const GamesPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [games, setGames] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [, findGamePieceIdByBgaId] = useMyGames(localStorage.getItem('token'));
+  const [, findGamePieceIdByBgaId] = useMyGames();
 
   const removeAddedGame = bgaId => {
     const newGames = games.filter(game => game.game.bgaId !== bgaId);
