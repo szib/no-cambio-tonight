@@ -13,7 +13,8 @@ import {
   Label,
   Container,
   Grid,
-  Divider
+  Divider,
+  Popup
 } from 'semantic-ui-react';
 
 import Loader from '../../components/LoaderWithDimmer';
@@ -83,14 +84,26 @@ const EventDetails = props => {
         )}
         <Container textAlign="right">
           {!(event.isCancelled || !event.isCurrentUserOrganising) && (
-            <Button
-              color="red"
-              onClick={handlers.cancelHandler}
-              disabled={event.isCancelled || !event.isCurrentUserOrganising}
-            >
-              <Icon name="delete calendar" /> Cancel event
-            </Button>
+            <Popup
+              on="click"
+              trigger={
+                <Button
+                  color="red"
+                  disabled={event.isCancelled || !event.isCurrentUserOrganising}
+                >
+                  <Icon name="delete calendar" /> Cancel event
+                </Button>
+              }
+              content={
+                <Button
+                  color="green"
+                  content="Confirm cancellation"
+                  onClick={handlers.cancelHandler}
+                />
+              }
+            />
           )}
+
           <Button
             color={event.isCurrentUserAttending ? 'red' : 'green'}
             onClick={handlers.rsvpHandler}
