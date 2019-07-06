@@ -7,10 +7,14 @@ import { Container, Segment } from 'semantic-ui-react';
 import Loader from '../components/LoaderWithDimmer';
 import UserInfo from '../components/UserInfo';
 
-const ProfilePage = ({ match }) => {
+const ProfilePage = ({ match, history }) => {
   useAuthentication();
   const id = match.params.id;
   const userAPI = useAPI(`http://localhost:3030/api/v1/users/${id}`, {});
+
+  if (userAPI.hasError) {
+    history.push('/');
+  }
 
   return (
     <Container>
