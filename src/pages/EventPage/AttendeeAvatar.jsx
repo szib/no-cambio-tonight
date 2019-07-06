@@ -1,30 +1,33 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-import { Image, Popup, Divider } from 'semantic-ui-react';
+import { Image, Popup, Divider, Card } from 'semantic-ui-react';
 
 const AttendeeAvatar = ({ attendee }) => {
   const { picture } = attendee;
 
   return (
-    <Popup
-      header={attendee.fullName}
-      content={
-        <>
-          <Divider />
-          <div>Organised events: {attendee.numberOfOrganisedEvents}</div>
-          <div>Attended events: {attendee.numberOfAttendedEvents}</div>
-        </>
-      }
-      trigger={
-        <Image
-          src={picture.medium}
-          avatar
-          size="tiny"
-          centered
-          verticalAlign="bottom"
-        />
-      }
-    />
+    <Card as={Link} to={`/users/${attendee.id}`}>
+      <Popup
+        header={attendee.fullName}
+        content={
+          <>
+            <Divider />
+            <div>Organised events: {attendee.numberOfOrganisedEvents}</div>
+            <div>Attended events: {attendee.numberOfAttendedEvents}</div>
+          </>
+        }
+        trigger={
+          <Image
+            src={picture.medium}
+            avatar
+            size="massive"
+            centered
+            verticalAlign="bottom"
+          />
+        }
+      />
+    </Card>
   );
 };
 

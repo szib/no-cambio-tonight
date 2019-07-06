@@ -1,26 +1,28 @@
 import React from 'react';
 import useAuthentication from '../hooks/useAuthentication';
+import useAPI from '../hooks/useAPI';
 
 import { Container, Segment } from 'semantic-ui-react';
-
-import useProfile from '../hooks/useProfile';
 
 import Loader from '../components/LoaderWithDimmer';
 import UserInfo from '../components/UserInfo';
 
-const ProfilePage = props => {
-  const authenticated = useAuthentication();
-  const [profile] = useProfile(localStorage.getItem('token'));
+const ProfilePage = ({ match, history }) => {
+  useAuthentication();
+  const id = match.params.id;
+  const userAPI = useAPI(`http://localhost:3030/api/v1/users/${id}`, {});
 
-  const { user } = profile;
+  if (userAPI.hasError) {
+    history.push('/');
+  }
 
   return (
     <Container>
       <Segment>
-        {profile.loading ? (
+        {userAPI.loading || !userAPI.data.user ? (
           <Loader content="Loading profile..." />
         ) : (
-          <UserInfo user={user} />
+          <UserInfo user={userAPI.data.user} />
         )}
       </Segment>
     </Container>
