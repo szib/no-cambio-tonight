@@ -7,6 +7,12 @@ import GameCard from './GameCard';
 const GameCards = props => {
   const { gamePieces, onClickHandler, itemsPerRow, eventCancelled } = props;
 
+  const handleClick = gamePiece => {
+    if (!eventCancelled && gamePiece.ownedByCurrentUser) {
+      onClickHandler(gamePiece.id);
+    }
+  };
+
   return (
     <Card.Group size="mini" itemsPerRow={itemsPerRow || 8}>
       {gamePieces &&
@@ -16,7 +22,7 @@ const GameCards = props => {
               key={gamePiece.id}
               gamePiece={gamePiece}
               eventCancelled={eventCancelled}
-              onClickHandler={eventCancelled ? () => {} : onClickHandler}
+              onClickHandler={handleClick}
             />
           );
         })}

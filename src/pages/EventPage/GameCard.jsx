@@ -13,8 +13,8 @@ const GameCard = props => {
     <Card
       as="a"
       key={gamePiece.id}
-      color={gamePiece.color}
-      onClick={() => onClickHandler(gamePiece.id)}
+      color={gamePiece.ownedByCurrentUser ? 'red' : 'blue'}
+      onClick={() => onClickHandler(gamePiece)}
     >
       <Popup
         header={game.name}

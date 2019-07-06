@@ -26,14 +26,14 @@ const useEvent = eventId => {
     const eventGameIds = eventAPI.data.event.gamepieces.map(gp => gp.id);
     return currentUserGames.gamePieces
       .filter(gp => !eventGameIds.includes(gp.id))
-      .map(gp => Object.assign({}, gp, { color: 'red' }));
+      .map(gp => Object.assign({}, gp, { ownedByCurrentUser: true }));
   };
 
   const getEventGamePieces = () => {
     const userGameIds = currentUserGames.gamePieces.map(gp => gp.id);
     return eventAPI.data.event.gamepieces.map(gp => {
-      const color = userGameIds.includes(gp.id) ? 'red' : 'blue';
-      return Object.assign({}, gp, { color: color });
+      const ownedByCurrentUser = userGameIds.includes(gp.id);
+      return Object.assign({}, gp, { ownedByCurrentUser });
     });
   };
 
