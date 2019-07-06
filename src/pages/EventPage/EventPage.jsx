@@ -21,17 +21,15 @@ import Loader from '../../components/LoaderWithDimmer';
 import EventLabels from '../../components/EventLabels';
 import Attendees from './Attendees';
 import GameCards from './GameCards';
+import EventDateTime from '../../components/EventDateTime';
 
 const EventDetails = props => {
+  useAuthentication();
   const { match } = props;
-  const authenticated = useAuthentication();
 
   const eventFromAPI = useEvent(match.params.id);
   const { data, eventGamePieces, userGamePieces, handlers } = eventFromAPI;
   const { event } = data;
-
-  const start = new Date(event.startDateTime).toLocaleString();
-  const end = new Date(event.endDateTime).toLocaleString();
 
   return (
     <Container>
@@ -49,7 +47,7 @@ const EventDetails = props => {
                 <EventLabels event={event} />
               </Grid.Column>
               <Grid.Column>
-                <Header icon="time" content={`${start} - ${end}`} />
+                <EventDateTime event={event} />
                 <Header icon="map marker alternate" content={event.location} />
               </Grid.Column>
             </Grid.Row>
