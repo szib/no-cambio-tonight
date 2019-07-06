@@ -12,17 +12,26 @@ import {
   Segment,
   Button,
   Header,
-  Input
+  Input,
+  Select
 } from 'semantic-ui-react';
 
 const NewEventPage = props => {
-  const authenticated = useAuthentication();
+  useAuthentication();
+
   const [title, setTitle] = useState('');
   const [location, setLocation] = useState('');
   const [startDateTime, setStartDateTime] = useState(new Date());
   const [endDateTime, setEndDateTime] = useState(new Date());
+  const [capacity, setCapacity] = useState(50);
   const [goodToGo, setGoodToGo] = useState(false);
   const { history } = props;
+
+  const capacityOptions = Array.from(Array(50), (x, i) => ({
+    key: i + 1,
+    text: i + 1,
+    value: i + 1
+  }));
 
   const onSubmitHandler = () => {
     const eventData = {
@@ -30,7 +39,8 @@ const NewEventPage = props => {
         title,
         location,
         start_date_time: startDateTime,
-        end_date_time: endDateTime
+        end_date_time: endDateTime,
+        capacity
       }
     };
     createNewEvent(eventData).then(() => history.push('/events'));
@@ -42,8 +52,8 @@ const NewEventPage = props => {
 
   useEffect(() => {
     if (
-      title.length > 5 &&
-      location.length > 5 &&
+      title.length >= 5 &&
+      location.length >= 5 &&
       startDateTime < endDateTime
     ) {
       setGoodToGo(true);
@@ -52,36 +62,43 @@ const NewEventPage = props => {
     }
   }, [title, location, startDateTime, endDateTime]);
 
+  useEffect(() => console.log(capacity), [capacity]);
+
   return (
     <Container>
       <Segment raised>
         <Header as="h1">New Event</Header>
         <Form onSubmit={onSubmitHandler}>
-          <Form.Field>
-            <label>What?</label>
-            <Input
-              icon="calendar check outline"
-              iconPosition="left"
-              name="title"
-              placeholder="Title (min. 5 letters)"
-              value={title}
-              onChange={e => setTitle(e.target.value)}
-            />
-          </Form.Field>
-          <Form.Field>
-            <label>Where?</label>
-            <Input
-              icon="map outline"
-              iconPosition="left"
-              name="location"
-              placeholder="Location  (min. 5 letters)"
-              value={location}
-              onChange={e => setLocation(e.target.value)}
-            />
-          </Form.Field>
-          <Form.Field>
-            <label>When?</label>
-            <DatePicker
+          <Form.Field
+            required
+            error={title.length <= 5}
+            control={Input}
+            label="What?"
+            icon="calendar check outline"
+            iconPosition="left"
+            name="title"
+            placeholder="Title (min. 5 letters)"
+            value={title}
+            onChange={e => setTitle(e.target.value)}
+          />
+
+          <Form.Field
+            required
+            error={location.length <= 5}
+            control={Input}
+            label="Where?"
+            icon="map outline"
+            iconPosition="left"
+            name="location"
+            placeholder="Location  (min. 5 letters)"
+            value={location}
+            onChange={e => setLocation(e.target.value)}
+          />
+          <Form.Group inline>
+            <Form.Field
+              required
+              control={DatePicker}
+              label="Starts??"
               selected={startDateTime}
               selectsStart
               startDate={startDateTime}
@@ -91,8 +108,11 @@ const NewEventPage = props => {
               dateFormat="MMMM d, yyyy h:mm aa"
               timeCaption="time"
             />
-
-            <DatePicker
+            <Form.Field
+              required
+              error={startDateTime >= endDateTime}
+              control={DatePicker}
+              label="Ends?"
               selected={endDateTime}
               selectsEnd
               startDate={startDateTime}
@@ -104,7 +124,16 @@ const NewEventPage = props => {
               dateFormat="MMMM d, yyyy h:mm aa"
               timeCaption="time"
             />
-          </Form.Field>
+          </Form.Group>
+
+          <Form.Field
+            required
+            control={Select}
+            label=" Venue capacity"
+            value={capacity}
+            options={capacityOptions}
+            onChange={(e, data) => setCapacity(data.value)}
+          />
           <Button fluid primary disabled={!goodToGo}>
             Submit
           </Button>

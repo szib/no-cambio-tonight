@@ -30,6 +30,8 @@ const EventDetails = props => {
   const eventFromAPI = useEvent(match.params.id);
   const { data, eventGamePieces, userGamePieces, handlers } = eventFromAPI;
   const { event } = data;
+  const eventIsFullAndUserIsNotAttending =
+    event.capacity <= event.numberOfAttendees && !event.isCurrentUserAttending;
 
   return (
     <Container>
@@ -105,7 +107,7 @@ const EventDetails = props => {
           <Button
             color={event.isCurrentUserAttending ? 'red' : 'green'}
             onClick={handlers.rsvpHandler}
-            disabled={event.isCancelled}
+            disabled={event.isCancelled || eventIsFullAndUserIsNotAttending}
           >
             <Icon name="checkmark" />
             {!event.isCurrentUserAttending && 'RSVP'}
