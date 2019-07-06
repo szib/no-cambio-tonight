@@ -10,32 +10,31 @@ const GameCard = props => {
   const { game } = gamePiece;
 
   return (
-    <Popup
-      header={game.name}
-      content={
-        <>
-          <Divider />
-          <PlayersLabel game={game} />
-          <PlaytimeLabel game={game} />
-        </>
-      }
-      trigger={
-        <Card
-          as="div"
-          key={gamePiece.id}
-          color={gamePiece.color}
-          onClick={() => onClickHandler(gamePiece.id)}
-          content={
-            <Image
-              src={game.imageSmall}
-              size="tiny"
-              centered
-              verticalAlign="bottom"
-            />
-          }
-        ></Card>
-      }
-    />
+    <Card
+      as="a"
+      key={gamePiece.id}
+      color={gamePiece.color}
+      onClick={() => onClickHandler(gamePiece.id)}
+    >
+      <Popup
+        header={game.name}
+        trigger={
+          <Image
+            src={game.imageSmall}
+            size="tiny"
+            centered
+            verticalAlign="bottom"
+          />
+        }
+        content={
+          <>
+            <Divider />
+            <PlayersLabel game={game} />
+            <PlaytimeLabel game={game} />
+          </>
+        }
+      ></Popup>
+    </Card>
   );
 };
 
