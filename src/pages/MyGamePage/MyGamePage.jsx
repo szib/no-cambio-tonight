@@ -1,4 +1,5 @@
 import React from 'react';
+import useAuthentication from '../../hooks/useAuthentication';
 
 import { Container } from 'semantic-ui-react';
 
@@ -8,6 +9,7 @@ import MyGame from './MyGame';
 import Loader from '../../components/LoaderWithDimmer';
 
 export default function MyGamesPage(props) {
+  const authenticated = useAuthentication();
   const gamePieceId = props.match.params.id;
   const myGameAPI = useMyGame(gamePieceId);
 

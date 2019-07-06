@@ -1,81 +1,60 @@
-import React from 'react';
+import React, { Suspense, useEffect } from 'react';
+
+import { useSelector, useDispatch } from 'react-redux';
+import {
+  setToAuthenticated,
+  setToUnuthenticated,
+  setToError
+} from './redux/actions/authActions';
 
 import 'semantic-ui-css/semantic.min.css';
 
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Loader from './components/LoaderWithDimmer';
 
-import MyGamePage from './pages/MyGamePage/MyGamePage';
-import MyGamesPage from './pages/MyGamesPage/MyGamesPage';
-import FindAGamePage from './pages/FindAGamePage/FindAGamePage';
-import EventPage from './pages/EventPage/EventPage';
-
-import SignUpPage from './pages/SignUpPage';
-import SignInPage from './pages/SignInPage';
-import LandingPage from './pages/LandingPage';
-import ProfilePage from './pages/ProfilePage';
-import EventsPage from './pages/EventsPage/EventsPage';
-import NewEventPage from './pages/NewEventPage';
-import LogoutPage from './pages/LogoutPage';
-import Menu from './components/Menu';
+const AuthenticatedApp = React.lazy(() => import('./AuthenticatedApp'));
+const UnauthenticatedApp = React.lazy(() => import('./UnauthenticatedApp'));
 
 function App() {
-  return (
-    <Router>
-      <Menu></Menu>
-      <Switch>
-        <Route
-          exact
-          path="/signup"
-          render={routerProps => <SignUpPage {...routerProps} />}
-        />
-        <Route
-          exact
-          path="/signin"
-          render={routerProps => <SignInPage {...routerProps} />}
-        />
-        <Route
-          exact
-          path="/logout"
-          render={routerProps => <LogoutPage {...routerProps} />}
-        />
-        <Route
-          exact
-          path="/"
-          render={routerProps => <LandingPage {...routerProps} />}
-        />
-        <Route
-          path="/profile"
-          render={routerProps => <ProfilePage {...routerProps} />}
-        />
-        <Route
-          exact
-          path="/events/new"
-          render={routerProps => <NewEventPage {...routerProps} />}
-        />
-        <Route
-          exact
-          path="/events/:id"
-          render={routerProps => <EventPage {...routerProps} />}
-        />
-        <Route
-          path="/events"
-          render={routerProps => <EventsPage {...routerProps} />}
-        />
-        <Route
-          path="/findgame"
-          render={routerProps => <FindAGamePage {...routerProps} />}
-        />
-        <Route
-          path="/mygames/:id"
-          render={routerProps => <MyGamePage {...routerProps} />}
-        />
-        <Route
-          exact
-          path="/mygames"
-          render={routerProps => <MyGamesPage {...routerProps} />}
-        />
-      </Switch>
-    </Router>
+  const authenticated = useSelector(state => state.auth);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    console.log('authenticated', authenticated);
+    if (authenticated.status === 'PENDING') {
+      fetch('http://localhost:3030/api/v1/validate', {
+        headers: {
+          Authorization: `Bearer ${localStorage.token}`
+        }
+      })
+        .then(resp => {
+          if (!resp.ok) throw resp;
+          return resp.json();
+        })
+        .then(json => {
+          if (json.error) {
+            dispatch(setToUnuthenticated());
+          } else {
+            dispatch(setToAuthenticated(json.token));
+          }
+        })
+        .catch(err => {
+          err.json().then(error => dispatch(setToError(error)));
+        });
+    }
+  }, [authenticated, authenticated.status, dispatch]);
+
+  if (authenticated.status === 'PENDING')
+    return <Loader content="Authenticating..." />;
+  // if (authenticated.status === 'ERROR') return <Loader content={`ERR: ${authenticated.error}`}/>;
+
+  return authenticated.status === 'AUTHENTICATED' ? (
+    <Suspense fallback={<Loader />}>
+      <AuthenticatedApp />
+    </Suspense>
+  ) : (
+    <Suspense fallback={<Loader />}>
+      <UnauthenticatedApp />
+    </Suspense>
   );
 }
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import useAuthentication from '../hooks/useAuthentication';
 
 import {
   Header,
@@ -14,6 +15,7 @@ import useProfile from '../hooks/useProfile';
 import Loader from '../components/LoaderWithDimmer';
 
 const ProfilePage = props => {
+  const authenticated = useAuthentication();
   const [profile] = useProfile(localStorage.getItem('token'));
 
   const { user } = profile;
