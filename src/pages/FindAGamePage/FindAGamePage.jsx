@@ -1,16 +1,19 @@
 import React, { useState } from 'react';
 
+import useAuthentication from '../../hooks/useAuthentication';
+import useMyGames from '../../hooks/useMyGames';
+
 import Games from './Games';
 
 import { Header, Container } from 'semantic-ui-react';
 
 import { searchGamesByName } from '../../api/games';
-import useMyGames from '../../hooks/useMyGames';
 
 import Loader from '../../components/LoaderWithDimmer';
 import SearchBar from '../../components/SearchBar';
 
 const GamesPage = () => {
+  const authenticated = useAuthentication();
   const [searchTerm, setSearchTerm] = useState('');
   const [games, setGames] = useState([]);
   const [isLoading, setIsLoading] = useState(false);

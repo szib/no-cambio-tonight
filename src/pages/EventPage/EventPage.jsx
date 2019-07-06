@@ -3,6 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import useEvent from '../../hooks/useEvent';
+import useAuthentication from '../../hooks/useAuthentication';
 
 import {
   Button,
@@ -22,6 +23,7 @@ import GameCards from './GameCards';
 
 const EventDetails = props => {
   const { match } = props;
+  const authenticated = useAuthentication();
 
   const eventFromAPI = useEvent(match.params.id);
   const { data, eventGamePieces, userGamePieces, handlers } = eventFromAPI;

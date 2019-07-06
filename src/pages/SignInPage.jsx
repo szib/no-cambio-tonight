@@ -1,5 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import useTimeout from '@rooks/use-timeout';
+
+import { useDispatch } from 'react-redux';
+import { setToAuthenticated } from '../redux/actions/authActions';
 
 import Background from '../components/Background';
 
@@ -13,14 +16,15 @@ import {
   Popup
 } from 'semantic-ui-react';
 
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import * as AuthAPI from '../api/auth';
 
-const SigninPage = props => {
+const SigninPage = () => {
+  const dispatch = useDispatch();
+
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [redirectTo, setRedirectTo] = useState('');
   const [error, setError] = useState('');
 
   const handleSubmit = e => {
@@ -30,7 +34,7 @@ const SigninPage = props => {
         setError(data.error);
       } else {
         localStorage.setItem('token', data.token);
-        setRedirectTo('/mygames');
+        dispatch(setToAuthenticated(data.token));
       }
     });
   };
@@ -40,16 +44,8 @@ const SigninPage = props => {
     clear();
   }, 2000);
 
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    AuthAPI.validate(token).then(data => {
-      if (token === data.token) setRedirectTo('/mygames');
-    });
-  }, []);
-
   return (
     <>
-      {redirectTo && <Redirect to={redirectTo} />}
       <Background />
       <Grid
         textAlign="center"

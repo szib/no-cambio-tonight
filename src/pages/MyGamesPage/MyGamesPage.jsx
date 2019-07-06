@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
+import useAuthentication from '../../hooks/useAuthentication';
+import useMyGames from '../../hooks/useMyGames';
 
 import { Container, Header } from 'semantic-ui-react';
-
-import useMyGames from '../../hooks/useMyGames';
 
 import MyGames from './MyGames';
 import Loader from '../../components/LoaderWithDimmer';
 import SearchBar from '../../components/SearchBar';
 
 export default function MyGamesPage(props) {
+  const authenticated = useAuthentication();
   const [searchTerm, setSearchTerm] = useState('');
 
   const [myGames] = useMyGames(localStorage.getItem('token'));
