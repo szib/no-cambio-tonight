@@ -37,6 +37,10 @@ const NewEventPage = props => {
   };
 
   useEffect(() => {
+    if (startDateTime > endDateTime) setEndDateTime(startDateTime);
+  }, [endDateTime, startDateTime]);
+
+  useEffect(() => {
     if (
       title.length > 5 &&
       location.length > 5 &&
