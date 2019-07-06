@@ -3,8 +3,7 @@ import React from 'react';
 import backgroundImage from '../assets/images/landing_page_bg.jpg';
 
 const style = {
-  position: 'absolute',
-  display: 'fixed',
+  position: 'fixed',
   left: 0,
   top: 0,
   zIndex: '-1000',
@@ -13,7 +12,9 @@ const style = {
   backgroundRepeat: 'no-repeat',
   backgroundSize: 'cover',
   backgroundPosition: 'center center',
-  backgroundImage: `url(${backgroundImage})`
+  backgroundAttachment: 'fixed',
+  backgroundImage: `url(${backgroundImage})`,
+  overflow: 'scroll'
 };
 
 const Background = () => {
