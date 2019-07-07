@@ -3,13 +3,13 @@ import React, { useState } from 'react';
 import { Header, Container, Input, Form } from 'semantic-ui-react';
 
 import useEvents from '../../hooks/useEvents';
-// import useAuthentication from '../../hooks/useAuthentication'
+import useAuthentication from '../../hooks/useAuthentication';
 
 import EventTable from './EventsTable';
 import Loader from '../../components/LoaderWithDimmer';
 
 const EventsPage = props => {
-  // const authenticated = useAuthentication();
+  useAuthentication();
   const [searchTerm, setSearchTerm] = useState('');
 
   const eventsAPI = useEvents();

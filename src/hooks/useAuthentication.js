@@ -10,11 +10,8 @@ const useAuthentication = () => {
 
   useEffect(() => {
     const localToken = localStorage.token;
-    // console.log('authenticated', authenticated)
-    // console.log('localToken', localToken)
-    // console.log('authenticated.token', authenticated.token)
-    console.warn(authenticated.token !== localToken);
     if (authenticated.token !== localToken) {
+      localStorage.removeItem('token');
       dispatch(setToUnuthenticated());
     }
   }, [authenticated, dispatch]);

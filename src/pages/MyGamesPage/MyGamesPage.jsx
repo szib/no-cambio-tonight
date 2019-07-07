@@ -9,7 +9,7 @@ import Loader from '../../components/LoaderWithDimmer';
 import SearchBar from '../../components/SearchBar';
 
 export default function MyGamesPage(props) {
-  const authenticated = useAuthentication();
+  useAuthentication();
   const [searchTerm, setSearchTerm] = useState('');
 
   const [myGames] = useMyGames();

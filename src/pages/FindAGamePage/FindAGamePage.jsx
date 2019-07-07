@@ -13,7 +13,7 @@ import Loader from '../../components/LoaderWithDimmer';
 import SearchBar from '../../components/SearchBar';
 
 const GamesPage = () => {
-  const authenticated = useAuthentication();
+  useAuthentication();
   const [searchTerm, setSearchTerm] = useState('');
   const [games, setGames] = useState([]);
   const [isLoading, setIsLoading] = useState(false);

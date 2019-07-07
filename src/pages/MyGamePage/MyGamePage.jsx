@@ -9,7 +9,7 @@ import MyGame from './MyGame';
 import Loader from '../../components/LoaderWithDimmer';
 
 export default function MyGamesPage(props) {
-  const authenticated = useAuthentication();
+  useAuthentication();
   const gamePieceId = props.match.params.id;
   const myGameAPI = useMyGame(gamePieceId);
 

@@ -9,7 +9,7 @@ import Loader from '../components/LoaderWithDimmer';
 import UserInfo from '../components/UserInfo';
 
 const ProfilePage = props => {
-  const authenticated = useAuthentication();
+  useAuthentication();
   const [profile] = useProfile(localStorage.getItem('token'));
 
   const { user } = profile;
