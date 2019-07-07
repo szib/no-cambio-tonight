@@ -23,9 +23,8 @@ import Attendees from './Attendees';
 import GameCards from './GameCards';
 import EventDateTime from '../../components/EventDateTime';
 
-const EventDetails = props => {
+const EventDetails = ({ match, history }) => {
   useAuthentication();
-  const { match } = props;
 
   const eventFromAPI = useEvent(match.params.id);
   const { data, eventGamePieces, userGamePieces, handlers } = eventFromAPI;
@@ -33,11 +32,15 @@ const EventDetails = props => {
   const eventIsFullAndUserIsNotAttending =
     event.capacity <= event.numberOfAttendees && !event.isCurrentUserAttending;
 
+  const backHandler = e => {
+    history.goBack();
+  };
+
   return (
     <Container>
       {eventFromAPI.isLoading && <Loader />}
       <Segment raised>
-        <Label corner="left" color="blue" as={Link} to="/events">
+        <Label corner="left" color="blue" as={Link} onClick={backHandler}>
           <Icon name="arrow left" />
         </Label>
 
