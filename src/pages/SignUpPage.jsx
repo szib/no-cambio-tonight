@@ -4,10 +4,14 @@ import { Button, Form, Grid, Header, Segment, Popup } from 'semantic-ui-react';
 import { Redirect } from 'react-router-dom';
 
 import * as AuthAPI from '../api/auth';
+import { useDispatch } from 'react-redux';
+import { setToAuthenticated } from '../redux/actions/authActions';
 
 import Background from '../components/Background';
 
-const RegistrationPage = () => {
+const RegistrationPage = ({ history }) => {
+  const dispatch = useDispatch();
+
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
@@ -32,6 +36,8 @@ const RegistrationPage = () => {
         setError(data.error);
       } else {
         localStorage.setItem('token', data.token);
+        dispatch(setToAuthenticated(data.token));
+        history.push('/');
       }
     });
   };
