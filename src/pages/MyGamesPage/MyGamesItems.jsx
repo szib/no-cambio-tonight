@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { Item, Rating } from 'semantic-ui-react';
 
 import Tags from '../../components/Tags/Tags';
+import AddRemoveButton from '../FindAGamePage/AddRemoveButton';
 
 const MyGameItems = ({ gamePieces }) => {
   return (
@@ -11,7 +12,7 @@ const MyGameItems = ({ gamePieces }) => {
       {gamePieces.map(gp => {
         const { game } = gp;
         return (
-          <Item>
+          <Item key={gp.id}>
             <Item.Image
               size="tiny"
               src={game.imageSmall}
@@ -35,6 +36,9 @@ const MyGameItems = ({ gamePieces }) => {
               <Item.Description>
                 <Tags game={game} />
               </Item.Description>
+              <Item.Meta>
+                <AddRemoveButton gamePieceId={gp.id} game={game} />
+              </Item.Meta>
             </Item.Content>
           </Item>
         );
