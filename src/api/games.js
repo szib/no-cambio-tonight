@@ -10,3 +10,21 @@ export const searchGamesByName = name =>
     .then(resp => resp.json())
     .then(convertToCamelCase)
     .catch(err => console.error('API error:', err));
+
+export const fetchCategories = () =>
+  fetch(`${BASE_URL}/categories`, {
+    method: 'GET',
+    headers: { Authorization: `Bearer ${localStorage.token}` }
+  })
+    .then(resp => resp.json())
+    .then(convertToCamelCase)
+    .catch(err => console.error('API error:', err));
+
+export const fetchMechanics = () =>
+  fetch(`${BASE_URL}/mechanics`, {
+    method: 'GET',
+    headers: { Authorization: `Bearer ${localStorage.token}` }
+  })
+    .then(resp => resp.json())
+    .then(convertToCamelCase)
+    .catch(err => console.error('API error:', err));

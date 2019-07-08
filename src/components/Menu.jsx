@@ -30,6 +30,13 @@ const Menubar = props => {
                 as={Link}
                 to="/findgame"
               />
+              <Dropdown.Item
+                icon="gem"
+                text="Recommend games"
+                name="recommendGames"
+                as={Link}
+                to="/recommendgames"
+              />
             </Dropdown.Menu>
           </Dropdown>
         </Menu.Menu>
