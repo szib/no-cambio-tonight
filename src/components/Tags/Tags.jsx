@@ -1,6 +1,8 @@
 import React from 'react';
 import Tag from './Tag';
 
+import uuid from 'uuid/v4';
+
 const Tags = ({ game }) => {
   const { categories, mechanics } = game;
 
@@ -15,6 +17,7 @@ const Tags = ({ game }) => {
   const playtimeTag =
     game.minPlaytime && game.maxPlaytime ? (
       <Tag
+        key={uuid()}
         name={`${game.minPlaytime} - ${game.maxPlaytime} minutes`}
         color="blue"
         iconName="clock"
@@ -23,7 +26,7 @@ const Tags = ({ game }) => {
 
   const playersTag =
     game.minPlayers && game.maxPlayers ? (
-      <Tag name={getPlayers()} color="blue" iconName="user" />
+      <Tag key={uuid()} name={getPlayers()} color="blue" iconName="user" />
     ) : null;
 
   return (
@@ -32,11 +35,16 @@ const Tags = ({ game }) => {
       {playersTag}
       {categories &&
         categories.map(category => (
-          <Tag name={category.name} color="teal" iconName="tag" />
+          <Tag key={uuid()} name={category.name} color="teal" iconName="tag" />
         ))}
       {mechanics &&
         mechanics.map(mechanic => (
-          <Tag name={mechanic.name} color="yellow" iconName="settings" />
+          <Tag
+            key={uuid()}
+            name={mechanic.name}
+            color="yellow"
+            iconName="settings"
+          />
         ))}
     </>
   );
