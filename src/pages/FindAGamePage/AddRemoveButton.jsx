@@ -6,7 +6,7 @@ import {
   asyncRemoveGameFromMyGameLibray
 } from '../../redux/thunk/myGames';
 
-import { Button, Icon } from 'semantic-ui-react';
+import { Button, Icon, Popup } from 'semantic-ui-react';
 
 const AddRemoveButton = ({ game, gamePieceId }) => {
   const dispatch = useDispatch();
@@ -28,16 +28,21 @@ const AddRemoveButton = ({ game, gamePieceId }) => {
 
   if (gamePieceId) {
     return (
-      <Button
-        loading={isButtonLoading}
-        color="red"
-        inverted
-        fluid
-        onClick={removeGame}
-      >
-        <Icon name="trash" alt="Remove from my game library" />
-        Remove
-      </Button>
+      <Popup
+        on="click"
+        trigger={
+          <Button color="red">
+            <Icon name="trash" alt="Remove from my game library" /> Remove
+          </Button>
+        }
+        content={
+          <Button
+            color="red"
+            content="Confirm removing game"
+            onClick={removeGame}
+          />
+        }
+      />
     );
   } else {
     return (
