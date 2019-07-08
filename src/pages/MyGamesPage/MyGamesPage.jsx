@@ -4,7 +4,7 @@ import useMyGames from '../../hooks/useMyGames';
 
 import { Container, Header } from 'semantic-ui-react';
 
-import MyGames from './MyGames';
+import MyGamesItems from './MyGamesItems';
 import Loader from '../../components/LoaderWithDimmer';
 import SearchBar from '../../components/SearchBar';
 
@@ -29,7 +29,7 @@ export default function MyGamesPage(props) {
       {myGames.loading ? (
         <Loader content="Loading games..." />
       ) : (
-        <MyGames gamePieces={filterdGamePieces} {...props} />
+        <MyGamesItems gamePieces={filterdGamePieces} />
       )}
     </Container>
   );
