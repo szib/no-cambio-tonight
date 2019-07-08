@@ -53,9 +53,11 @@ const SigninPage = () => {
         verticalAlign="middle"
       >
         <Grid.Column style={{ maxWidth: 450 }}>
-          <Header as="h2" color="black" textAlign="center">
-            Log-in to your account
-          </Header>
+          <Segment>
+            <Header as="h2" color="black" textAlign="center">
+              Log-in to your account
+            </Header>
+          </Segment>
           <Form size="large" onSubmit={handleSubmit}>
             <Segment stacked>
               <Form.Input
