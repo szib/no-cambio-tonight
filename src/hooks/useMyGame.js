@@ -4,7 +4,9 @@ const initialData = {
   id: null,
   owner_id: null,
   game_id: null,
-  game: {}
+  game: {},
+  categories: [],
+  mechanics: []
 };
 
 const useMyGame = id => {

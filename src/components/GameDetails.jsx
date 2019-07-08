@@ -4,8 +4,12 @@ import { Item, Rating } from 'semantic-ui-react';
 
 import PlayersLabel from '../components/PlayersLabel';
 import PlaytimeLabel from '../components/PlaytimeLabel';
+import CategoryTag from './CategoryTag';
+import MechanicTag from './MechanicTag';
 
 const GameDetails = ({ game, withoutDescription }) => {
+  const { categories, mechanics } = game;
+
   return (
     <Item.Group>
       <Item>
@@ -30,6 +34,10 @@ const GameDetails = ({ game, withoutDescription }) => {
           <Item.Extra>
             <PlayersLabel game={game} />
             <PlaytimeLabel game={game} />
+            {categories &&
+              categories.map(category => <CategoryTag name={category.name} />)}
+            {mechanics &&
+              mechanics.map(mechanic => <MechanicTag name={mechanic.name} />)}
           </Item.Extra>
           {!withoutDescription && (
             <Item.Description
