@@ -2,13 +2,13 @@ import React from 'react';
 
 import { Icon, Label } from 'semantic-ui-react';
 
-const CategoryTag = ({ name }) => {
+const Tag = ({ name, iconName, color }) => {
   return (
-    <Label>
-      <Icon name="tag" />
+    <Label color={color}>
+      <Icon name={iconName} />
       {name}
     </Label>
   );
 };
 
-export default CategoryTag;
+export default Tag;

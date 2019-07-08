@@ -2,14 +2,9 @@ import React from 'react';
 
 import { Item, Rating } from 'semantic-ui-react';
 
-import PlayersLabel from '../components/PlayersLabel';
-import PlaytimeLabel from '../components/PlaytimeLabel';
-import CategoryTag from './CategoryTag';
-import MechanicTag from './MechanicTag';
+import Tags from './Tags/Tags';
 
 const GameDetails = ({ game, withoutDescription }) => {
-  const { categories, mechanics } = game;
-
   return (
     <Item.Group>
       <Item>
@@ -32,12 +27,7 @@ const GameDetails = ({ game, withoutDescription }) => {
             <div>{game.publisher}</div>
           </Item.Meta>
           <Item.Extra>
-            <PlayersLabel game={game} />
-            <PlaytimeLabel game={game} />
-            {categories &&
-              categories.map(category => <CategoryTag name={category.name} />)}
-            {mechanics &&
-              mechanics.map(mechanic => <MechanicTag name={mechanic.name} />)}
+            <Tags game={game} />
           </Item.Extra>
           {!withoutDescription && (
             <Item.Description

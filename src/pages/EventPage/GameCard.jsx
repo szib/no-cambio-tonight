@@ -2,8 +2,7 @@ import React from 'react';
 
 import { Card, Image, Popup, Divider } from 'semantic-ui-react';
 
-import PlayersLabel from '../../components/PlayersLabel';
-import PlaytimeLabel from '../../components/PlaytimeLabel';
+import Tags from '../../components/Tags/Tags';
 
 const GameCard = props => {
   const { gamePiece, onClickHandler } = props;
@@ -29,8 +28,7 @@ const GameCard = props => {
         content={
           <>
             <Divider />
-            <PlayersLabel game={game} />
-            <PlaytimeLabel game={game} />
+            <Tags game={game} />
           </>
         }
       ></Popup>
