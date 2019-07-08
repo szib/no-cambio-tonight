@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import useAuthentication from '../../hooks/useAuthentication';
 import useMyGames from '../../hooks/useMyGames';
 
-import { Container, Header } from 'semantic-ui-react';
+import { Container, Header, Segment } from 'semantic-ui-react';
 
 import MyGamesItems from './MyGamesItems';
 import Loader from '../../components/LoaderWithDimmer';
@@ -24,13 +24,15 @@ export default function MyGamesPage(props) {
 
   return (
     <Container>
-      <Header as="h1">Games</Header>
-      <SearchBar searchTerm={searchTerm} onChangeHandler={setSearchTerm} />
-      {myGames.loading ? (
-        <Loader content="Loading games..." />
-      ) : (
-        <MyGamesItems gamePieces={filterdGamePieces} />
-      )}
+      <Segment>
+        <Header as="h1">My game library</Header>
+        <SearchBar searchTerm={searchTerm} onChangeHandler={setSearchTerm} />
+        {myGames.loading ? (
+          <Loader content="Loading games..." />
+        ) : (
+          <MyGamesItems gamePieces={filterdGamePieces} />
+        )}
+      </Segment>
     </Container>
   );
 }

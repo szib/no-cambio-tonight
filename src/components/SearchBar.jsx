@@ -11,17 +11,15 @@ const SearchBar = ({
   const submitHandler = onSubmitHandler || (() => {});
 
   return (
-    <Segment>
-      <Form onSubmit={submitHandler}>
-        <Input
-          loading={isLoading}
-          fluid
-          placeholder="Search..."
-          value={searchTerm}
-          onChange={e => onChangeHandler(e.target.value)}
-        />
-      </Form>
-    </Segment>
+    <Form onSubmit={submitHandler}>
+      <Input
+        loading={isLoading}
+        fluid
+        placeholder="Search..."
+        value={searchTerm}
+        onChange={e => onChangeHandler(e.target.value)}
+      />
+    </Form>
   );
 };
 

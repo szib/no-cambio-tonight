@@ -5,7 +5,7 @@ import useMyGames from '../../hooks/useMyGames';
 
 import Games from './Games';
 
-import { Header, Container } from 'semantic-ui-react';
+import { Header, Container, Segment } from 'semantic-ui-react';
 
 import { searchGamesByName } from '../../api/games';
 
@@ -41,21 +41,23 @@ const GamesPage = () => {
 
   return (
     <Container>
-      <Header as="h1">Games</Header>
-      <SearchBar
-        onSubmitHandler={onSubmitHandler}
-        searchTerm={searchTerm}
-        onChangeHandler={setSearchTerm}
-        isLoading={isLoading}
-      />
-      {isLoading && <Loader />}
-      {games.length !== 0 && (
-        <Games
-          games={games}
-          findGamePieceIdByBgaId={findGamePieceIdByBgaId}
-          removeHandler={removeAddedGame}
-        ></Games>
-      )}
+      <Segment>
+        <Header as="h1">Find a game</Header>
+        <SearchBar
+          onSubmitHandler={onSubmitHandler}
+          searchTerm={searchTerm}
+          onChangeHandler={setSearchTerm}
+          isLoading={isLoading}
+        />
+        {isLoading && <Loader />}
+        {games.length !== 0 && (
+          <Games
+            games={games}
+            findGamePieceIdByBgaId={findGamePieceIdByBgaId}
+            removeHandler={removeAddedGame}
+          ></Games>
+        )}
+      </Segment>
     </Container>
   );
 };
