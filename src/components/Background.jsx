@@ -18,7 +18,7 @@ const Background = React.memo(() => {
     backgroundSize: 'cover',
     backgroundPosition: 'center center',
     backgroundAttachment: 'fixed',
-    transition: 'background-image 5s ease-in-out',
+    transition: 'background-image 2s ease-in-out',
     backgroundImage: `url(${
       backgrounds[activeBackground % backgrounds.length]
     })`,
@@ -27,7 +27,7 @@ const Background = React.memo(() => {
 
   useInteval(() => {
     setActiveBackground(activeBackground + 1);
-  }, 6000);
+  }, 2500);
 
   return <div style={style}></div>;
 });
