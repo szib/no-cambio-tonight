@@ -13,12 +13,10 @@ import EventsPage from './pages/EventsPage/EventsPage';
 import NewEventPage from './pages/NewEventPage';
 import LogoutPage from './pages/LogoutPage';
 import Menu from './components/Menu';
-import Background from './components/Background';
 
 function App() {
   return (
     <>
-      <Background />
       <Router>
         <Menu></Menu>
         <Switch>
