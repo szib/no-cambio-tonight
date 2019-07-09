@@ -4,6 +4,8 @@ import useTimeout from '@rooks/use-timeout';
 import { useDispatch } from 'react-redux';
 import { setToAuthenticated } from '../redux/actions/authActions';
 
+import Logo from '../assets/images/logo.png';
+
 import {
   Button,
   Form,
@@ -11,7 +13,8 @@ import {
   Header,
   Message,
   Segment,
-  Popup
+  Popup,
+  Image
 } from 'semantic-ui-react';
 
 import { Link } from 'react-router-dom';
@@ -49,49 +52,54 @@ const SigninPage = () => {
         style={{ height: '100vh' }}
         verticalAlign="middle"
       >
-        <Grid.Column style={{ maxWidth: 450 }}>
-          <Segment>
-            <Header as="h2" color="black" textAlign="center">
-              Log-in to your account
-            </Header>
-          </Segment>
-          <Form size="large" onSubmit={handleSubmit}>
-            <Segment stacked>
-              <Form.Input
-                fluid
-                icon="user"
-                iconPosition="left"
-                placeholder="Username"
-                name="username"
-                value={username}
-                onChange={e => setUsername(e.target.value)}
-              />
-              <Form.Input
-                fluid
-                icon="lock"
-                iconPosition="left"
-                placeholder="Password"
-                type="password"
-                name="password"
-                value={password}
-                onChange={e => setPassword(e.target.value)}
-              />
-              <Popup
-                trigger={
-                  <Button color="black" fluid size="large">
-                    Signin
-                  </Button>
-                }
-                content={error}
-                open={error !== ''}
-                onOpen={start}
-              />
+        <Grid.Row style={{ marginTop: '100px' }}>
+          <Image src={Logo} />
+        </Grid.Row>
+        <Grid.Row>
+          <Grid.Column style={{ maxWidth: 450 }}>
+            <Segment>
+              <Header as="h2" color="black" textAlign="center">
+                Log-in to your account
+              </Header>
             </Segment>
-          </Form>
-          <Message>
-            New to us? <Link to="/signup">Sign Up</Link>
-          </Message>
-        </Grid.Column>
+            <Form size="large" onSubmit={handleSubmit}>
+              <Segment stacked>
+                <Form.Input
+                  fluid
+                  icon="user"
+                  iconPosition="left"
+                  placeholder="Username"
+                  name="username"
+                  value={username}
+                  onChange={e => setUsername(e.target.value)}
+                />
+                <Form.Input
+                  fluid
+                  icon="lock"
+                  iconPosition="left"
+                  placeholder="Password"
+                  type="password"
+                  name="password"
+                  value={password}
+                  onChange={e => setPassword(e.target.value)}
+                />
+                <Popup
+                  trigger={
+                    <Button color="black" fluid size="large">
+                      Signin
+                    </Button>
+                  }
+                  content={error}
+                  open={error !== ''}
+                  onOpen={start}
+                />
+              </Segment>
+            </Form>
+            <Message>
+              New to us? <Link to="/signup">Sign Up</Link>
+            </Message>
+          </Grid.Column>
+        </Grid.Row>
       </Grid>
     </>
   );
