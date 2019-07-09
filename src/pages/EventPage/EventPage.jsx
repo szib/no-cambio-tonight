@@ -15,7 +15,8 @@ import {
   Container,
   Grid,
   Divider,
-  Popup
+  Popup,
+  Placeholder
 } from 'semantic-ui-react';
 
 import Loader from '../../components/LoaderWithDimmer';
@@ -68,11 +69,15 @@ const EventDetails = ({ match, history }) => {
               </Grid.Column>
               <Grid.Column>
                 <Header content="Games" />
-                <GameCards
-                  eventCancelled={event.isCancelled}
-                  gamePieces={eventGamePieces}
-                  onClickHandler={handlers.removeGameHandler}
-                />
+                {eventGamePieces.length > 0 ? (
+                  <GameCards
+                    eventCancelled={event.isCancelled}
+                    gamePieces={eventGamePieces}
+                    onClickHandler={handlers.removeGameHandler}
+                  />
+                ) : (
+                  <Header as="h2">No games yet...</Header>
+                )}
               </Grid.Column>
             </Grid.Row>
           </Grid>
@@ -81,12 +86,19 @@ const EventDetails = ({ match, history }) => {
         {event.isCurrentUserAttending && (
           <Segment>
             <Header content="My Games" />
-            <GameCards
-              eventCancelled={event.isCancelled}
-              gamePieces={userGamePieces}
-              onClickHandler={handlers.addGameHandler}
-              itemsPerRow={10}
-            />
+            {userGamePieces.length > 0 ? (
+              <GameCards
+                eventCancelled={event.isCancelled}
+                gamePieces={userGamePieces}
+                onClickHandler={handlers.addGameHandler}
+                itemsPerRow={10}
+              />
+            ) : (
+              <Header as="h2">
+                No more games to bring...
+                <Link to="/findgame">Find a few</Link>
+              </Header>
+            )}
           </Segment>
         )}
         <Container textAlign="right">
