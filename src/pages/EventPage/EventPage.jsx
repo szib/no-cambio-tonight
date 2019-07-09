@@ -40,7 +40,7 @@ const EventDetails = ({ match, history }) => {
     <Container>
       {eventFromAPI.isLoading && <Loader />}
       <Segment raised>
-        <Label corner="left" color="blue" as={Link} onClick={backHandler}>
+        <Label corner="left" color="blue" as={Link} to="" onClick={backHandler}>
           <Icon name="arrow left" />
         </Label>
 
