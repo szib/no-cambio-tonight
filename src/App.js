@@ -50,13 +50,14 @@ function App() {
 
   return (
     <>
-      <Background />
       {authenticated.status === 'AUTHENTICATED' ? (
         <Suspense fallback={<Loader />}>
+          <Background dynamic />
           <AuthenticatedApp />
         </Suspense>
       ) : (
         <Suspense fallback={<Loader />}>
+          <Background />
           <UnauthenticatedApp />
         </Suspense>
       )}
