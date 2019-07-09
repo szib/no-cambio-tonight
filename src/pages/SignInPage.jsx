@@ -4,8 +4,6 @@ import useTimeout from '@rooks/use-timeout';
 import { useDispatch } from 'react-redux';
 import { setToAuthenticated } from '../redux/actions/authActions';
 
-import Background from '../components/Background';
-
 import {
   Button,
   Form,
@@ -46,7 +44,6 @@ const SigninPage = () => {
 
   return (
     <>
-      <Background />
       <Grid
         textAlign="center"
         style={{ height: '100vh' }}
