@@ -9,7 +9,8 @@ const UserInfo = ({ user }) => {
     email,
     picture,
     numberOfOrganisedEvents,
-    numberOfAttendedEvents
+    numberOfAttendedEvents,
+    numberOfComments
   } = user;
 
   return (
@@ -42,6 +43,10 @@ const UserInfo = ({ user }) => {
             <List.Content>
               Attended events: {numberOfAttendedEvents}
             </List.Content>
+          </List.Item>
+          <List.Item>
+            <List.Icon name="comments" />
+            <List.Content>Comments: {numberOfComments}</List.Content>
           </List.Item>
         </List>
       </Grid.Column>

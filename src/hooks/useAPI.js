@@ -53,7 +53,8 @@ const useAPI = (initialUrl, initialData) => {
     reload: reloadHandler,
     isLoading,
     hasError,
-    setUrl
+    setUrl,
+    setFetchedData
   };
 };
 

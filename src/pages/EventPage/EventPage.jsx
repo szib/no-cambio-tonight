@@ -3,6 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import useEvent from '../../hooks/useEvent';
+import useComments from '../../hooks/useComments';
 import useAuthentication from '../../hooks/useAuthentication';
 
 import {
@@ -23,10 +24,13 @@ import Attendees from './Attendees';
 import GameCards from './GameCards';
 import EventDateTime from '../../components/EventDateTime';
 
+import Comments from '../../components/Comments/Comments';
+
 const EventDetails = ({ match, history }) => {
   useAuthentication();
-
   const eventFromAPI = useEvent(match.params.id);
+  const commentsFromAPI = useComments({ path: '/events', id: match.params.id });
+
   const { data, eventGamePieces, userGamePieces, handlers } = eventFromAPI;
   const { event } = data;
   const eventIsFullAndUserIsNotAttending =
@@ -118,6 +122,8 @@ const EventDetails = ({ match, history }) => {
           </Button>
         </Container>
       </Segment>
+
+      <Comments comments={event.comments} API={commentsFromAPI} />
     </Container>
   );
 };
