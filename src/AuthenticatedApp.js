@@ -12,6 +12,7 @@ import UserPage from './pages/UserPage';
 import EventsPage from './pages/EventsPage/EventsPage';
 import NewEventPage from './pages/NewEventPage';
 import LogoutPage from './pages/LogoutPage';
+import DashboardPage from './pages/DashboardPage';
 import Menu from './components/Menu';
 
 function App() {
@@ -61,8 +62,8 @@ function App() {
             render={routerProps => <MyGamesPage {...routerProps} />}
           />
           <Route
-            path="/"
-            render={routerProps => <MyGamesPage {...routerProps} />}
+            path="/dashboard"
+            render={routerProps => <DashboardPage {...routerProps} />}
           />
         </Switch>
         <div style={{ height: '42px' }}></div>

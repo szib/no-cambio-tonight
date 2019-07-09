@@ -14,6 +14,15 @@ const Menubar = props => {
     <>
       <Menu fixed="top">
         <Menu.Item
+          icon="dashboard"
+          text="Dashboard"
+          name="dashboard"
+          active={activeItem === 'dashboard'}
+          onClick={() => setActiveItem('dashboard')}
+          as={Link}
+          to="/dashboard"
+        />
+        <Menu.Item
           icon="game"
           text="My games"
           name="myGames"
