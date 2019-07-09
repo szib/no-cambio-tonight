@@ -7,56 +7,66 @@ import useProfile from '../hooks/useProfile';
 
 const Menubar = props => {
   const [token] = useToken();
-  const [activeItem, setActiveItem] = useState('profile');
+  const [activeItem, setActiveItem] = useState('events');
   const [profile] = useProfile(localStorage.getItem('token'));
 
   const menu = (
     <>
       <Menu fixed="top">
-        <Menu.Menu>
-          <Dropdown item text="Games">
-            <Dropdown.Menu>
-              <Dropdown.Item
-                icon="game"
-                text="My games"
-                name="myGames"
-                as={Link}
-                to="/mygames"
-              />
-              <Dropdown.Item
-                icon="search"
-                text="Find new games"
-                name="findNewGames"
-                as={Link}
-                to="/findgame"
-              />
-            </Dropdown.Menu>
-          </Dropdown>
-        </Menu.Menu>
+        <Menu.Item
+          icon="dashboard"
+          text="Dashboard"
+          name="dashboard"
+          active={activeItem === 'dashboard'}
+          onClick={() => setActiveItem('dashboard')}
+          as={Link}
+          to="/dashboard"
+        />
+        <Menu.Item
+          icon="game"
+          text="My games"
+          name="myGames"
+          active={activeItem === 'myGames'}
+          onClick={() => setActiveItem('myGames')}
+          as={Link}
+          to="/mygames"
+        />
+        <Menu.Item
+          icon="search"
+          text="Find new games"
+          name="findNewGames"
+          active={activeItem === 'findNewGames'}
+          onClick={() => setActiveItem('findNewGames')}
+          as={Link}
+          to="/findgame"
+        />
 
-        <Menu.Menu>
-          <Dropdown item text="Events">
-            <Dropdown.Menu>
-              <Dropdown.Item
-                icon="add"
-                text="New event"
-                name="newEvent"
-                as={Link}
-                to="/events/new"
-              />
-              <Dropdown.Item
-                icon="search"
-                text="Search events"
-                name="events"
-                as={Link}
-                to="/events"
-              />
-            </Dropdown.Menu>
-          </Dropdown>
-        </Menu.Menu>
+        <Menu.Item
+          icon="add"
+          text="New event"
+          name="newEvent"
+          active={activeItem === 'newEvent'}
+          onClick={() => setActiveItem('newEvent')}
+          as={Link}
+          to="/events/new"
+        />
+        <Menu.Item
+          icon="search"
+          text="Search events"
+          name="events"
+          active={activeItem === 'events'}
+          onClick={() => setActiveItem('events')}
+          as={Link}
+          to="/events"
+        />
 
         <Menu.Menu position="right">
-          <Dropdown item text={`Hello ${profile.user.firstName}`}>
+          <Dropdown
+            item
+            text={`Hello ${profile.user.firstName}`}
+            active={activeItem === 'profile'}
+            onClick={() => setActiveItem('profile')}
+          >
             <Dropdown.Menu>
               <Dropdown.Item
                 icon="user"

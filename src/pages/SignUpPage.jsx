@@ -7,7 +7,8 @@ import {
   Header,
   Segment,
   Popup,
-  Message
+  Message,
+  Divider
 } from 'semantic-ui-react';
 import { Redirect, Link } from 'react-router-dom';
 
@@ -79,24 +80,6 @@ const RegistrationPage = ({ history }) => {
             <Segment stacked>
               <Form.Input
                 fluid
-                icon="user"
-                iconPosition="left"
-                placeholder="Username"
-                value={username}
-                name="username"
-                onChange={e => setUsername(e.target.value)}
-              />
-              <Form.Input
-                fluid
-                icon="envelope"
-                iconPosition="left"
-                placeholder="E-mail address"
-                value={email}
-                name="email"
-                onChange={e => setEmail(e.target.value)}
-              />
-              <Form.Input
-                fluid
                 icon="edit"
                 iconPosition="left"
                 placeholder="First name"
@@ -113,6 +96,27 @@ const RegistrationPage = ({ history }) => {
                 name="lastName"
                 onChange={e => setLastName(e.target.value)}
               />
+
+              <Form.Input
+                fluid
+                icon="envelope"
+                iconPosition="left"
+                placeholder="E-mail address"
+                value={email}
+                name="email"
+                onChange={e => setEmail(e.target.value)}
+              />
+              <Divider />
+              <Form.Input
+                fluid
+                icon="user"
+                iconPosition="left"
+                placeholder="Username"
+                value={username}
+                name="username"
+                onChange={e => setUsername(e.target.value)}
+              />
+
               <Form.Input
                 fluid
                 icon="lock"

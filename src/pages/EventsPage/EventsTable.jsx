@@ -19,7 +19,7 @@ const EventList = props => {
         </Table.Row>
       </Table.Header>
 
-      <Table.Body>
+      <Table.Body style={{ cursor: 'pointer' }}>
         {events.map(event => (
           <EventRow key={event.id} event={event} {...props} />
         ))}

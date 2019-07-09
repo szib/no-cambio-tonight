@@ -11,7 +11,6 @@ import {
   Header,
   Icon,
   Segment,
-  Label,
   Container,
   Grid,
   Divider,
@@ -23,6 +22,7 @@ import EventLabels from '../../components/EventLabels';
 import Attendees from './Attendees';
 import GameCards from './GameCards';
 import EventDateTime from '../../components/EventDateTime';
+import LabelBack from '../../components/LabelBack';
 
 import Comments from '../../components/Comments/Comments';
 
@@ -36,18 +36,11 @@ const EventDetails = ({ match, history }) => {
   const eventIsFullAndUserIsNotAttending =
     event.capacity <= event.numberOfAttendees && !event.isCurrentUserAttending;
 
-  const backHandler = e => {
-    history.goBack();
-  };
-
   return (
     <Container>
       {eventFromAPI.isLoading && <Loader />}
       <Segment raised>
-        <Label corner="left" color="blue" as={Link} to="" onClick={backHandler}>
-          <Icon name="arrow left" />
-        </Label>
-
+        <LabelBack />
         <Segment>
           <Grid columns="two">
             <Grid.Row>
@@ -68,11 +61,15 @@ const EventDetails = ({ match, history }) => {
               </Grid.Column>
               <Grid.Column>
                 <Header content="Games" />
-                <GameCards
-                  eventCancelled={event.isCancelled}
-                  gamePieces={eventGamePieces}
-                  onClickHandler={handlers.removeGameHandler}
-                />
+                {eventGamePieces.length > 0 ? (
+                  <GameCards
+                    eventCancelled={event.isCancelled}
+                    gamePieces={eventGamePieces}
+                    onClickHandler={handlers.removeGameHandler}
+                  />
+                ) : (
+                  <Header as="h2">No games yet...</Header>
+                )}
               </Grid.Column>
             </Grid.Row>
           </Grid>
@@ -81,12 +78,19 @@ const EventDetails = ({ match, history }) => {
         {event.isCurrentUserAttending && (
           <Segment>
             <Header content="My Games" />
-            <GameCards
-              eventCancelled={event.isCancelled}
-              gamePieces={userGamePieces}
-              onClickHandler={handlers.addGameHandler}
-              itemsPerRow={10}
-            />
+            {userGamePieces.length > 0 ? (
+              <GameCards
+                eventCancelled={event.isCancelled}
+                gamePieces={userGamePieces}
+                onClickHandler={handlers.addGameHandler}
+                itemsPerRow={10}
+              />
+            ) : (
+              <Header as="h2">
+                No more games to bring...
+                <Link to="/findgame">Find a few</Link>
+              </Header>
+            )}
           </Segment>
         )}
         <Container textAlign="right">

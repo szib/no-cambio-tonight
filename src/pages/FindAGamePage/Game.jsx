@@ -6,6 +6,14 @@ import AddRemoveButton from './AddRemoveButton';
 const Game = props => {
   const { game, gamePieceId } = props;
 
+  const getStringFor = (min, max) => {
+    if (min && max) {
+      return min === max ? `${min}` : `${min} - ${max}`;
+    } else {
+      return 'N/A';
+    }
+  };
+
   return (
     <Table.Row>
       <Table.Cell width={2}>
@@ -25,14 +33,10 @@ const Game = props => {
         )}
       </Table.Cell>
       <Table.Cell width={2}>
-        {game.minPlayers && game.maxPlayers
-          ? `${game.minPlayers} - ${game.maxPlayers}`
-          : 'N/A'}
+        {getStringFor(game.minPlayers, game.maxPlayers)}
       </Table.Cell>
       <Table.Cell width={2}>
-        {game.minPlaytime && game.maxPlaytime
-          ? `${game.minPlaytime} - ${game.maxPlaytime}`
-          : 'N/A'}
+        {getStringFor(game.minPlaytime, game.maxPlaytime)}
       </Table.Cell>
       <Table.Cell width={2}>
         <AddRemoveButton gamePieceId={gamePieceId} game={game} />

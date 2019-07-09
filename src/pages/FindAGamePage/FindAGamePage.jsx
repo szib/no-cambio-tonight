@@ -1,18 +1,21 @@
 import React, { useState } from 'react';
 
+import { withRouter, Link } from 'react-router-dom';
+
 import useAuthentication from '../../hooks/useAuthentication';
 import useMyGames from '../../hooks/useMyGames';
 
 import Games from './Games';
 
-import { Header, Container, Segment } from 'semantic-ui-react';
+import { Header, Container, Segment, Label, Icon } from 'semantic-ui-react';
 
 import { searchGamesByName } from '../../api/games';
 
 import Loader from '../../components/LoaderWithDimmer';
 import SearchBar from '../../components/SearchBar';
+import LabelBack from '../../components/LabelBack';
 
-const GamesPage = () => {
+const GamesPage = props => {
   useAuthentication();
   const [searchTerm, setSearchTerm] = useState('');
   const [games, setGames] = useState([]);
@@ -42,6 +45,7 @@ const GamesPage = () => {
   return (
     <Container>
       <Segment>
+        <LabelBack />
         <Header as="h1">Find a game</Header>
         <SearchBar
           onSubmitHandler={onSubmitHandler}
@@ -62,4 +66,4 @@ const GamesPage = () => {
   );
 };
 
-export default GamesPage;
+export default withRouter(GamesPage);

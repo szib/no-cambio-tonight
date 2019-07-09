@@ -4,7 +4,7 @@ import useInteval from '../hooks/useInterval';
 
 import backgrounds from '../lib/images';
 
-const Background = React.memo(() => {
+const Background = React.memo(({ dynamic }) => {
   const [activeBackground, setActiveBackground] = useState(0);
 
   const style = {
@@ -20,7 +20,9 @@ const Background = React.memo(() => {
     backgroundAttachment: 'fixed',
     transition: 'background-image 2s ease-in-out',
     backgroundImage: `url(${
-      backgrounds[activeBackground % backgrounds.length]
+      dynamic
+        ? backgrounds[activeBackground % backgrounds.length]
+        : backgrounds[0]
     })`,
     overflow: 'scroll'
   };
