@@ -27,7 +27,7 @@ const Background = React.memo(() => {
 
   useInteval(() => {
     setActiveBackground(activeBackground + 1);
-  }, 2500);
+  }, 30000);
 
   return <div style={style}></div>;
 });
