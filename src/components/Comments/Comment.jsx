@@ -1,10 +1,15 @@
 import React from 'react';
+import { DateTime } from 'luxon';
 
 import { Item } from 'semantic-ui-react';
 
 const Comment = ({ comment }) => {
   if (!comment) return null;
   const { commentText, author, id, createdAt } = comment;
+
+  const creationTime = new DateTime.fromISO(createdAt)
+    .setLocale('en')
+    .toFormat('cccc, dd LLLL, yyyy t');
 
   return (
     <Item size="small">
@@ -17,7 +22,7 @@ const Comment = ({ comment }) => {
       />
       <Item.Content>
         <Item.Meta>
-          {author.fullName} @ {createdAt}
+          {author.fullName} @ {creationTime}
         </Item.Meta>
         <Item.Header>{commentText}</Item.Header>
       </Item.Content>
