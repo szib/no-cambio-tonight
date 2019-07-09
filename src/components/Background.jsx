@@ -4,7 +4,7 @@ import useInteval from '../hooks/useInterval';
 
 import backgrounds from '../lib/images';
 
-const Background = () => {
+const Background = React.memo(() => {
   const [activeBackground, setActiveBackground] = useState(0);
 
   const style = {
@@ -18,7 +18,7 @@ const Background = () => {
     backgroundSize: 'cover',
     backgroundPosition: 'center center',
     backgroundAttachment: 'fixed',
-    transition: 'background-image 2s ease-in-out',
+    transition: 'background-image 5s ease-in-out',
     backgroundImage: `url(${
       backgrounds[activeBackground % backgrounds.length]
     })`,
@@ -27,9 +27,9 @@ const Background = () => {
 
   useInteval(() => {
     setActiveBackground(activeBackground + 1);
-  }, 10000);
+  }, 6000);
 
   return <div style={style}></div>;
-};
+});
 
 export default Background;
