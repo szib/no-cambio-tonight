@@ -23,14 +23,14 @@ const NewEventPage = props => {
   const [location, setLocation] = useState('');
   const [startDateTime, setStartDateTime] = useState(new Date());
   const [endDateTime, setEndDateTime] = useState(new Date());
-  const [capacity, setCapacity] = useState(50);
+  const [capacity, setCapacity] = useState(20);
   const [goodToGo, setGoodToGo] = useState(false);
   const { history } = props;
 
-  const capacityOptions = Array.from(Array(50), (x, i) => ({
-    key: i + 1,
-    text: i + 1,
-    value: i + 1
+  const capacityOptions = Array.from(Array(31), (x, i) => ({
+    key: i + 10,
+    text: i + 10,
+    value: i + 10
   }));
 
   const onSubmitHandler = () => {
@@ -98,7 +98,7 @@ const NewEventPage = props => {
             <Form.Field
               required
               control={DatePicker}
-              label="Starts??"
+              label="Starts?"
               selected={startDateTime}
               selectsStart
               startDate={startDateTime}
@@ -119,7 +119,7 @@ const NewEventPage = props => {
               endDate={endDateTime}
               onChange={e => setEndDateTime(e)}
               minTime={startDateTime}
-              maxTime={startDateTime.getTime() + 120 * 60000}
+              maxTime={startDateTime.getTime() + 600 * 60000}
               showTimeSelect
               dateFormat="MMMM d, yyyy h:mm aa"
               timeCaption="time"

@@ -14,7 +14,8 @@ const MyGame = props => {
 
   const dispatch = useDispatch();
 
-  const removeGame = () => {
+  const removeGame = e => {
+    e.preventDefault();
     dispatch(asyncRemoveGameFromMyGameLibray(gamePiece.id)).then(() => {
       props.history.push('/mygames');
     });
@@ -25,7 +26,7 @@ const MyGame = props => {
       <Label corner="left" color="blue" as={Link} to="/mygames">
         <Icon name="arrow left" />
       </Label>
-      <Label corner="right" color="red" onClick={removeGame}>
+      <Label corner="right" color="red" as={Link} to="/" onClick={removeGame}>
         <Icon name="trash alternate outline" />
       </Label>
       <GameDetails game={game} />
