@@ -23,6 +23,8 @@ import Attendees from './Attendees';
 import GameCards from './GameCards';
 import EventDateTime from '../../components/EventDateTime';
 
+import Comments from '../../components/Comments/Comments';
+
 const EventDetails = ({ match, history }) => {
   useAuthentication();
 
@@ -118,6 +120,8 @@ const EventDetails = ({ match, history }) => {
           </Button>
         </Container>
       </Segment>
+
+      <Comments comments={event.comments} />
     </Container>
   );
 };
