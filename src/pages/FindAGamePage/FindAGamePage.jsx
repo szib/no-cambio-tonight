@@ -13,6 +13,7 @@ import { searchGamesByName } from '../../api/games';
 
 import Loader from '../../components/LoaderWithDimmer';
 import SearchBar from '../../components/SearchBar';
+import LabelBack from '../../components/LabelBack';
 
 const GamesPage = props => {
   useAuthentication();
@@ -44,15 +45,7 @@ const GamesPage = props => {
   return (
     <Container>
       <Segment>
-        <Label
-          corner="left"
-          color="blue"
-          as={Link}
-          to=""
-          onClick={() => props.history.goBack()}
-        >
-          <Icon name="arrow left" />
-        </Label>
+        <LabelBack />
         <Header as="h1">Find a game</Header>
         <SearchBar
           onSubmitHandler={onSubmitHandler}

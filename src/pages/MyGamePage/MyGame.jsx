@@ -7,6 +7,7 @@ import { asyncRemoveGameFromMyGameLibray } from '../../redux/thunk/myGames';
 
 import { Segment, Label, Icon } from 'semantic-ui-react';
 import GameDetails from '../../components/GameDetails';
+import LabelBack from '../../components/LabelBack';
 
 const MyGame = props => {
   const { gamePiece } = props;
@@ -23,9 +24,7 @@ const MyGame = props => {
 
   return (
     <Segment raised>
-      <Label corner="left" color="blue" as={Link} to="/mygames">
-        <Icon name="arrow left" />
-      </Label>
+      <LabelBack />
       <Label corner="right" color="red" as={Link} to="/" onClick={removeGame}>
         <Icon name="trash alternate outline" />
       </Label>

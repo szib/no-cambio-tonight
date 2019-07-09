@@ -11,12 +11,10 @@ import {
   Header,
   Icon,
   Segment,
-  Label,
   Container,
   Grid,
   Divider,
-  Popup,
-  Placeholder
+  Popup
 } from 'semantic-ui-react';
 
 import Loader from '../../components/LoaderWithDimmer';
@@ -24,6 +22,7 @@ import EventLabels from '../../components/EventLabels';
 import Attendees from './Attendees';
 import GameCards from './GameCards';
 import EventDateTime from '../../components/EventDateTime';
+import LabelBack from '../../components/LabelBack';
 
 import Comments from '../../components/Comments/Comments';
 
@@ -37,18 +36,11 @@ const EventDetails = ({ match, history }) => {
   const eventIsFullAndUserIsNotAttending =
     event.capacity <= event.numberOfAttendees && !event.isCurrentUserAttending;
 
-  const backHandler = e => {
-    history.goBack();
-  };
-
   return (
     <Container>
       {eventFromAPI.isLoading && <Loader />}
       <Segment raised>
-        <Label corner="left" color="blue" as={Link} to="" onClick={backHandler}>
-          <Icon name="arrow left" />
-        </Label>
-
+        <LabelBack />
         <Segment>
           <Grid columns="two">
             <Grid.Row>
