@@ -1,24 +1,35 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-import backgroundImage from '../assets/images/landing_page_bg.jpg';
+import useInteval from '../hooks/useInterval';
 
-const style = {
-  position: 'fixed',
-  left: 0,
-  top: 0,
-  zIndex: '-1000',
-  height: '100vh',
-  width: '100vw',
-  backgroundRepeat: 'no-repeat',
-  backgroundSize: 'cover',
-  backgroundPosition: 'center center',
-  backgroundAttachment: 'fixed',
-  backgroundImage: `url(${backgroundImage})`,
-  overflow: 'scroll'
-};
+import backgrounds from '../lib/images';
 
-const Background = () => {
+const Background = React.memo(() => {
+  const [activeBackground, setActiveBackground] = useState(0);
+
+  const style = {
+    position: 'fixed',
+    left: 0,
+    top: 0,
+    zIndex: '-1000',
+    height: '100vh',
+    width: '100vw',
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center center',
+    backgroundAttachment: 'fixed',
+    transition: 'background-image 5s ease-in-out',
+    backgroundImage: `url(${
+      backgrounds[activeBackground % backgrounds.length]
+    })`,
+    overflow: 'scroll'
+  };
+
+  useInteval(() => {
+    setActiveBackground(activeBackground + 1);
+  }, 6000);
+
   return <div style={style}></div>;
-};
+});
 
 export default Background;

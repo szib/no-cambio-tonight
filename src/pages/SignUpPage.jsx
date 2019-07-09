@@ -15,8 +15,6 @@ import * as AuthAPI from '../api/auth';
 import { useDispatch } from 'react-redux';
 import { setToAuthenticated } from '../redux/actions/authActions';
 
-import Background from '../components/Background';
-
 const RegistrationPage = ({ history }) => {
   const dispatch = useDispatch();
 
@@ -66,7 +64,6 @@ const RegistrationPage = ({ history }) => {
   return (
     <>
       {redirectTo && <Redirect to={redirectTo} />}
-      <Background />
       <Grid
         textAlign="center"
         style={{ height: '100vh' }}

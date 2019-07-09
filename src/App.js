@@ -10,6 +10,7 @@ import {
 import 'semantic-ui-css/semantic.min.css';
 
 import Loader from './components/LoaderWithDimmer';
+import Background from './components/Background';
 
 const AuthenticatedApp = React.lazy(() => import('./AuthenticatedApp'));
 const UnauthenticatedApp = React.lazy(() => import('./UnauthenticatedApp'));
@@ -47,14 +48,19 @@ function App() {
     return <Loader content="Authenticating..." />;
   // if (authenticated.status === 'ERROR') return <Loader content={`ERR: ${authenticated.error}`}/>;
 
-  return authenticated.status === 'AUTHENTICATED' ? (
-    <Suspense fallback={<Loader />}>
-      <AuthenticatedApp />
-    </Suspense>
-  ) : (
-    <Suspense fallback={<Loader />}>
-      <UnauthenticatedApp />
-    </Suspense>
+  return (
+    <>
+      <Background />
+      {authenticated.status === 'AUTHENTICATED' ? (
+        <Suspense fallback={<Loader />}>
+          <AuthenticatedApp />
+        </Suspense>
+      ) : (
+        <Suspense fallback={<Loader />}>
+          <UnauthenticatedApp />
+        </Suspense>
+      )}
+    </>
   );
 }
 
