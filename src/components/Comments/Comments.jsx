@@ -1,15 +1,28 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
+
 import { Segment, Item } from 'semantic-ui-react';
 
 import Comment from './Comment';
 import NewCommentForm from './NewCommentForm';
 
-const Comments = ({ comments }) => {
-  if (!comments) return null;
+const Comments = ({ API }) => {
+  const authorId = useSelector(state => state.profile.user.id);
+
+  if (API.isLoading) return <Segment>Loading...</Segment>;
+  if (API.hasError) return <Segment>Error</Segment>;
+
+  const { comments } = API.data;
 
   const submitHandler = text => {
-    console.log(text);
+    const comment = {
+      text,
+      authorId
+    };
+    API.postComment(comment);
   };
+
+  console.warn(API.data);
 
   return (
     <Segment>
