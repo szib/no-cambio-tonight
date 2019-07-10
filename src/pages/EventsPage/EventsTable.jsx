@@ -12,8 +12,6 @@ const EventList = props => {
       <Table.Header>
         <Table.Row>
           <Table.HeaderCell>Title</Table.HeaderCell>
-          <Table.HeaderCell>Tags</Table.HeaderCell>
-          <Table.HeaderCell>Location</Table.HeaderCell>
           <Table.HeaderCell>Date</Table.HeaderCell>
           <Table.HeaderCell>Capacity</Table.HeaderCell>
         </Table.Row>

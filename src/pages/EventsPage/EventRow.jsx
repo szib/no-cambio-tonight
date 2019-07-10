@@ -8,11 +8,10 @@ import EventDateTime from '../../components/EventDateTime';
 const EventRow = ({ event, history }) => {
   return (
     <Table.Row onClick={() => history.push(`/events/${event.id}`)}>
-      <Table.Cell>{event.title}</Table.Cell>
       <Table.Cell>
+        {event.title}
         <EventLabels event={event} />
       </Table.Cell>
-      <Table.Cell>{event.location}</Table.Cell>
       <EventDateTime component={Table.Cell} event={event} />
       <Table.Cell>
         {event.numberOfAttendees} / {event.capacity}
