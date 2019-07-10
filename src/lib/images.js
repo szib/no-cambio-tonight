@@ -4,7 +4,9 @@ import backgroundImage2 from '../assets/images/bg2.jpg';
 import backgroundImage3 from '../assets/images/bg3.jpg';
 import backgroundImage4 from '../assets/images/bg4.jpg';
 
-const backgrounds = [
+import signinBg from '../assets/images/signinbg.png';
+
+export const backgrounds = [
   backgroundImage0,
   backgroundImage1,
   backgroundImage2,
@@ -12,4 +14,4 @@ const backgrounds = [
   backgroundImage4
 ];
 
-export default backgrounds;
+export const signInBackground = signinBg;

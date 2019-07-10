@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import useInteval from '../hooks/useInterval';
 
-import backgrounds from '../lib/images';
+import { backgrounds, signInBackground } from '../lib/images';
 
 const Background = React.memo(({ dynamic }) => {
   const [activeBackground, setActiveBackground] = useState(0);
@@ -22,7 +22,7 @@ const Background = React.memo(({ dynamic }) => {
     backgroundImage: `url(${
       dynamic
         ? backgrounds[activeBackground % backgrounds.length]
-        : backgrounds[0]
+        : signInBackground
     })`,
     overflow: 'scroll'
   };

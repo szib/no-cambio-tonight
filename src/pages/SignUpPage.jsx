@@ -68,7 +68,7 @@ const RegistrationPage = ({ history }) => {
       <Grid
         textAlign="center"
         style={{ height: '100vh' }}
-        verticalAlign="middle"
+        verticalAlign="bottom"
       >
         <Grid.Column style={{ maxWidth: 450 }}>
           <Segment>
