@@ -1,8 +1,19 @@
 import React from 'react';
 
-import { Card, Image, Popup, Divider } from 'semantic-ui-react';
+import styled from 'styled-components';
+
+import { Card, Popup, Divider } from 'semantic-ui-react';
 
 import Tags from '../../components/Tags/Tags';
+
+const Img = styled.div`
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  background-image: url(${props => props.bgImage});
+  min-height: 60px;
+  margin: 2px;
+`;
 
 const GameCard = props => {
   const { gamePiece, onClickHandler } = props;
@@ -17,15 +28,7 @@ const GameCard = props => {
     >
       <Popup
         header={game.name}
-        trigger={
-          <Image
-            src={game.imageSmall}
-            size="tiny"
-            centered
-            wrapped
-            verticalAlign="bottom"
-          />
-        }
+        trigger={<Img bgImage={game.imageSmall} />}
         content={
           <>
             <Divider />

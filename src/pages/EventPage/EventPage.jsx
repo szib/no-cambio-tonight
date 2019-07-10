@@ -82,7 +82,7 @@ const EventDetails = ({ match, history }) => {
                 eventCancelled={event.isCancelled}
                 gamePieces={userGamePieces}
                 onClickHandler={handlers.addGameHandler}
-                itemsPerRow={10}
+                itemsPerRow="ten"
               />
             ) : (
               <Header as="h2">
