@@ -1,5 +1,7 @@
 import React from 'react';
 
+import LabelBack from './LabelBack';
+
 import { Header, List, Grid, Image } from 'semantic-ui-react';
 
 const UserInfo = ({ user }) => {
@@ -15,6 +17,7 @@ const UserInfo = ({ user }) => {
 
   return (
     <Grid>
+      <LabelBack />
       <Grid.Column width={2}>
         <Image src={picture.large} bordered circular size="big" />
       </Grid.Column>

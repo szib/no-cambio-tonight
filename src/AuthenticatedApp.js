@@ -7,7 +7,6 @@ import MyGamesPage from './pages/MyGamesPage/MyGamesPage';
 import FindAGamePage from './pages/FindAGamePage/FindAGamePage';
 import EventPage from './pages/EventPage/EventPage';
 
-import ProfilePage from './pages/ProfilePage';
 import UserPage from './pages/UserPage';
 import EventsPage from './pages/EventsPage/EventsPage';
 import NewEventPage from './pages/NewEventPage';
@@ -26,10 +25,6 @@ function App() {
             exact
             path="/logout"
             render={routerProps => <LogoutPage {...routerProps} />}
-          />
-          <Route
-            path="/profile"
-            render={routerProps => <ProfilePage {...routerProps} />}
           />
           <Route
             path="/users/:id"

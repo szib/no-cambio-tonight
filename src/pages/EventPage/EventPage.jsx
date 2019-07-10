@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { DateTime } from 'luxon';
+
 import { Link } from 'react-router-dom';
 
 import useEvent from '../../hooks/useEvent';
@@ -36,54 +38,51 @@ const EventDetails = ({ match, history }) => {
   const eventIsFullAndUserIsNotAttending =
     event.capacity <= event.numberOfAttendees && !event.isCurrentUserAttending;
 
+  const diffFromNow = DateTime.fromISO(event.startDateTime).diffNow().values;
+  const editable = diffFromNow && diffFromNow.milliseconds > 0;
+
   return (
     <Container>
       {eventFromAPI.isLoading && <Loader />}
       <Segment raised>
         <LabelBack />
         <Segment>
-          <Grid columns="two">
-            <Grid.Row>
-              <Grid.Column>
-                <Header icon="browser" content={event.title}></Header>
-                <EventLabels event={event} />
-              </Grid.Column>
-              <Grid.Column>
-                <EventDateTime event={event} />
-                <Header icon="map marker alternate" content={event.location} />
-              </Grid.Column>
-            </Grid.Row>
-            <Divider />
-            <Grid.Row>
-              <Grid.Column>
-                <Header content="Attendees" />
-                <Attendees attendees={event.attendees} />
-              </Grid.Column>
-              <Grid.Column>
-                <Header content="Games" />
-                {eventGamePieces.length > 0 ? (
-                  <GameCards
-                    eventCancelled={event.isCancelled}
-                    gamePieces={eventGamePieces}
-                    onClickHandler={handlers.removeGameHandler}
-                  />
-                ) : (
-                  <Header as="h2">No games yet...</Header>
-                )}
-              </Grid.Column>
-            </Grid.Row>
+          <Grid columns="two" divided>
+            <Grid.Column>
+              <Header icon="browser" content={event.title}></Header>
+              <EventLabels event={event} />
+              <EventDateTime event={event} />
+              <Header icon="map marker alternate" content={event.location} />
+            </Grid.Column>
+            <Grid.Column>
+              <Header content="Attendees" />
+              <Attendees attendees={event.attendees} />
+              <Divider />
+              <Header content="Games" />
+              {eventGamePieces.length > 0 ? (
+                <GameCards
+                  editable={editable}
+                  eventCancelled={event.isCancelled}
+                  gamePieces={eventGamePieces}
+                  onClickHandler={handlers.removeGameHandler}
+                />
+              ) : (
+                <Header as="h2">No games yet...</Header>
+              )}
+            </Grid.Column>
           </Grid>
         </Segment>
 
-        {event.isCurrentUserAttending && (
+        {editable && event.isCurrentUserAttending && (
           <Segment>
             <Header content="My Games" />
             {userGamePieces.length > 0 ? (
               <GameCards
+                editable={editable}
                 eventCancelled={event.isCancelled}
                 gamePieces={userGamePieces}
                 onClickHandler={handlers.addGameHandler}
-                itemsPerRow={10}
+                itemsPerRow="ten"
               />
             ) : (
               <Header as="h2">
@@ -93,38 +92,43 @@ const EventDetails = ({ match, history }) => {
             )}
           </Segment>
         )}
-        <Container textAlign="right">
-          {!(event.isCancelled || !event.isCurrentUserOrganising) && (
-            <Popup
-              on="click"
-              trigger={
-                <Button
-                  color="red"
-                  disabled={event.isCancelled || !event.isCurrentUserOrganising}
-                >
-                  <Icon name="delete calendar" /> Cancel event
-                </Button>
-              }
-              content={
-                <Button
-                  color="green"
-                  content="Confirm cancellation"
-                  onClick={handlers.cancelHandler}
-                />
-              }
-            />
-          )}
 
-          <Button
-            color={event.isCurrentUserAttending ? 'red' : 'green'}
-            onClick={handlers.rsvpHandler}
-            disabled={event.isCancelled || eventIsFullAndUserIsNotAttending}
-          >
-            <Icon name="checkmark" />
-            {!event.isCurrentUserAttending && 'RSVP'}
-            {event.isCurrentUserAttending && 'Cancel RSVP'}
-          </Button>
-        </Container>
+        {editable && (
+          <Container textAlign="right">
+            {!(event.isCancelled || !event.isCurrentUserOrganising) && (
+              <Popup
+                on="click"
+                trigger={
+                  <Button
+                    color="red"
+                    disabled={
+                      event.isCancelled || !event.isCurrentUserOrganising
+                    }
+                  >
+                    <Icon name="delete calendar" /> Cancel event
+                  </Button>
+                }
+                content={
+                  <Button
+                    color="green"
+                    content="Confirm cancellation"
+                    onClick={handlers.cancelHandler}
+                  />
+                }
+              />
+            )}
+
+            <Button
+              color={event.isCurrentUserAttending ? 'red' : 'green'}
+              onClick={handlers.rsvpHandler}
+              disabled={event.isCancelled || eventIsFullAndUserIsNotAttending}
+            >
+              <Icon name="checkmark" />
+              {!event.isCurrentUserAttending && 'RSVP'}
+              {event.isCurrentUserAttending && 'Cancel RSVP'}
+            </Button>
+          </Container>
+        )}
       </Segment>
 
       <Comments comments={event.comments} API={commentsFromAPI} />

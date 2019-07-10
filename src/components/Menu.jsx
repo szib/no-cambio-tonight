@@ -72,7 +72,7 @@ const Menubar = props => {
                 text="Profile"
                 name="profile"
                 as={Link}
-                to="/profile"
+                to={`/users/${profile.user.id}`}
               />
               <Dropdown.Item
                 icon="game"

@@ -5,10 +5,16 @@ import { Card } from 'semantic-ui-react';
 import GameCard from './GameCard';
 
 const GameCards = props => {
-  const { gamePieces, onClickHandler, itemsPerRow, eventCancelled } = props;
+  const {
+    gamePieces,
+    onClickHandler,
+    itemsPerRow,
+    eventCancelled,
+    editable
+  } = props;
 
   const handleClick = gamePiece => {
-    if (!eventCancelled && gamePiece.ownedByCurrentUser) {
+    if (editable && !eventCancelled && gamePiece.ownedByCurrentUser) {
       onClickHandler(gamePiece.id);
     }
   };
