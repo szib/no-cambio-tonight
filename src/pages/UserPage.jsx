@@ -6,6 +6,7 @@ import { Container, Segment } from 'semantic-ui-react';
 
 import Loader from '../components/LoaderWithDimmer';
 import UserInfo from '../components/UserInfo';
+import GameLibrary from '../components/GameLibrary';
 
 const ProfilePage = ({ match, history }) => {
   useAuthentication();
@@ -22,7 +23,10 @@ const ProfilePage = ({ match, history }) => {
         {userAPI.loading || !userAPI.data.user ? (
           <Loader content="Loading profile..." />
         ) : (
-          <UserInfo user={userAPI.data.user} />
+          <>
+            <UserInfo user={userAPI.data.user} />
+            <GameLibrary user={userAPI.data.user} />
+          </>
         )}
       </Segment>
     </Container>
