@@ -22,8 +22,6 @@ const Comments = ({ API }) => {
     API.postComment(comment);
   };
 
-  console.warn(API.data);
-
   return (
     <Segment>
       <NewCommentForm onSubmitHandler={submitHandler} />

@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { DateTime } from 'luxon';
+
 import { Link } from 'react-router-dom';
 
 import useEvent from '../../hooks/useEvent';
@@ -36,6 +38,9 @@ const EventDetails = ({ match, history }) => {
   const eventIsFullAndUserIsNotAttending =
     event.capacity <= event.numberOfAttendees && !event.isCurrentUserAttending;
 
+  const diffFromNow = DateTime.fromISO(event.startDateTime).diffNow().values;
+  const editable = diffFromNow && diffFromNow.milliseconds > 0;
+
   return (
     <Container>
       {eventFromAPI.isLoading && <Loader />}
@@ -56,6 +61,7 @@ const EventDetails = ({ match, history }) => {
               <Header content="Games" />
               {eventGamePieces.length > 0 ? (
                 <GameCards
+                  editable={editable}
                   eventCancelled={event.isCancelled}
                   gamePieces={eventGamePieces}
                   onClickHandler={handlers.removeGameHandler}
@@ -67,11 +73,12 @@ const EventDetails = ({ match, history }) => {
           </Grid>
         </Segment>
 
-        {event.isCurrentUserAttending && (
+        {editable && event.isCurrentUserAttending && (
           <Segment>
             <Header content="My Games" />
             {userGamePieces.length > 0 ? (
               <GameCards
+                editable={editable}
                 eventCancelled={event.isCancelled}
                 gamePieces={userGamePieces}
                 onClickHandler={handlers.addGameHandler}
@@ -85,38 +92,43 @@ const EventDetails = ({ match, history }) => {
             )}
           </Segment>
         )}
-        <Container textAlign="right">
-          {!(event.isCancelled || !event.isCurrentUserOrganising) && (
-            <Popup
-              on="click"
-              trigger={
-                <Button
-                  color="red"
-                  disabled={event.isCancelled || !event.isCurrentUserOrganising}
-                >
-                  <Icon name="delete calendar" /> Cancel event
-                </Button>
-              }
-              content={
-                <Button
-                  color="green"
-                  content="Confirm cancellation"
-                  onClick={handlers.cancelHandler}
-                />
-              }
-            />
-          )}
 
-          <Button
-            color={event.isCurrentUserAttending ? 'red' : 'green'}
-            onClick={handlers.rsvpHandler}
-            disabled={event.isCancelled || eventIsFullAndUserIsNotAttending}
-          >
-            <Icon name="checkmark" />
-            {!event.isCurrentUserAttending && 'RSVP'}
-            {event.isCurrentUserAttending && 'Cancel RSVP'}
-          </Button>
-        </Container>
+        {editable && (
+          <Container textAlign="right">
+            {!(event.isCancelled || !event.isCurrentUserOrganising) && (
+              <Popup
+                on="click"
+                trigger={
+                  <Button
+                    color="red"
+                    disabled={
+                      event.isCancelled || !event.isCurrentUserOrganising
+                    }
+                  >
+                    <Icon name="delete calendar" /> Cancel event
+                  </Button>
+                }
+                content={
+                  <Button
+                    color="green"
+                    content="Confirm cancellation"
+                    onClick={handlers.cancelHandler}
+                  />
+                }
+              />
+            )}
+
+            <Button
+              color={event.isCurrentUserAttending ? 'red' : 'green'}
+              onClick={handlers.rsvpHandler}
+              disabled={event.isCancelled || eventIsFullAndUserIsNotAttending}
+            >
+              <Icon name="checkmark" />
+              {!event.isCurrentUserAttending && 'RSVP'}
+              {event.isCurrentUserAttending && 'Cancel RSVP'}
+            </Button>
+          </Container>
+        )}
       </Segment>
 
       <Comments comments={event.comments} API={commentsFromAPI} />
