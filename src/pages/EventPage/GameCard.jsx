@@ -22,6 +22,7 @@ const GameCard = props => {
             src={game.imageSmall}
             size="tiny"
             centered
+            wrapped
             verticalAlign="bottom"
           />
         }

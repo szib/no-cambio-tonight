@@ -12,8 +12,8 @@ const EventLabels = props => {
   return (
     <Label.Group>
       {isCancelled && <Label color="red">Cancelled</Label>}
-      {isCurrentUserOrganising && <Label color="orange">My event</Label>}
-      {isCurrentUserAttending && <Label color="blue">Attending</Label>}
+      {isCurrentUserOrganising && <Label color="orange">Organiser</Label>}
+      {isCurrentUserAttending && <Label color="blue">You're going</Label>}
     </Label.Group>
   );
 };

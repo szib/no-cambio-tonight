@@ -42,36 +42,28 @@ const EventDetails = ({ match, history }) => {
       <Segment raised>
         <LabelBack />
         <Segment>
-          <Grid columns="two">
-            <Grid.Row>
-              <Grid.Column>
-                <Header icon="browser" content={event.title}></Header>
-                <EventLabels event={event} />
-              </Grid.Column>
-              <Grid.Column>
-                <EventDateTime event={event} />
-                <Header icon="map marker alternate" content={event.location} />
-              </Grid.Column>
-            </Grid.Row>
-            <Divider />
-            <Grid.Row>
-              <Grid.Column>
-                <Header content="Attendees" />
-                <Attendees attendees={event.attendees} />
-              </Grid.Column>
-              <Grid.Column>
-                <Header content="Games" />
-                {eventGamePieces.length > 0 ? (
-                  <GameCards
-                    eventCancelled={event.isCancelled}
-                    gamePieces={eventGamePieces}
-                    onClickHandler={handlers.removeGameHandler}
-                  />
-                ) : (
-                  <Header as="h2">No games yet...</Header>
-                )}
-              </Grid.Column>
-            </Grid.Row>
+          <Grid columns="two" divided>
+            <Grid.Column>
+              <Header icon="browser" content={event.title}></Header>
+              <EventLabels event={event} />
+              <EventDateTime event={event} />
+              <Header icon="map marker alternate" content={event.location} />
+            </Grid.Column>
+            <Grid.Column>
+              <Header content="Attendees" />
+              <Attendees attendees={event.attendees} />
+              <Divider />
+              <Header content="Games" />
+              {eventGamePieces.length > 0 ? (
+                <GameCards
+                  eventCancelled={event.isCancelled}
+                  gamePieces={eventGamePieces}
+                  onClickHandler={handlers.removeGameHandler}
+                />
+              ) : (
+                <Header as="h2">No games yet...</Header>
+              )}
+            </Grid.Column>
           </Grid>
         </Segment>
 
