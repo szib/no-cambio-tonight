@@ -9,15 +9,20 @@ const EventList = props => {
 
   return (
     <Table celled selectable compact size="small">
-      <Table.Header>
+      {/* <Table.Header>
         <Table.Row>
           <Table.HeaderCell>Title</Table.HeaderCell>
           <Table.HeaderCell>Date</Table.HeaderCell>
           <Table.HeaderCell>Capacity</Table.HeaderCell>
         </Table.Row>
-      </Table.Header>
+      </Table.Header> */}
 
       <Table.Body style={{ cursor: 'pointer' }}>
+        {events.length === 0 && (
+          <Table.Row>
+            <Table.Cell>No event here</Table.Cell>
+          </Table.Row>
+        )}
         {events.map(event => (
           <EventRow key={event.id} event={event} {...props} />
         ))}

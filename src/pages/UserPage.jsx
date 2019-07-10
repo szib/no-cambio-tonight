@@ -14,7 +14,7 @@ const ProfilePage = ({ match, history }) => {
   const userAPI = useAPI(`http://localhost:3030/api/v1/users/${id}`, {});
 
   if (userAPI.hasError) {
-    history.push('/');
+    history.push('/dashboard');
   }
 
   return (

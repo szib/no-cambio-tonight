@@ -44,7 +44,7 @@ const RegistrationPage = ({ history }) => {
       } else {
         localStorage.setItem('token', data.token);
         dispatch(setToAuthenticated(data.token));
-        history.push('/');
+        history.push('/dashboard');
       }
     });
   };
@@ -58,7 +58,7 @@ const RegistrationPage = ({ history }) => {
   useEffect(() => {
     const token = localStorage.getItem('token');
     AuthAPI.validate(token).then(data => {
-      if (token === data.token) setRedirectTo('/mygames');
+      if (token === data.token) setRedirectTo('/dashboard');
     });
   }, []);
 

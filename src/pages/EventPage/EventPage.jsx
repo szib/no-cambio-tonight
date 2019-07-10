@@ -58,7 +58,7 @@ const EventDetails = ({ match, history }) => {
               <Header content="Attendees" />
               <Attendees attendees={event.attendees} />
               <Divider />
-              <Header content="Games" />
+              <Header content="Games at the event" />
               {eventGamePieces.length > 0 ? (
                 <GameCards
                   editable={editable}
@@ -67,7 +67,9 @@ const EventDetails = ({ match, history }) => {
                   onClickHandler={handlers.removeGameHandler}
                 />
               ) : (
-                <Header as="h2">No games yet...</Header>
+                <Header as="h2">
+                  It's going to be boring without games... Bring a few.
+                </Header>
               )}
             </Grid.Column>
           </Grid>

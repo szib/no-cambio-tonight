@@ -12,7 +12,8 @@ const UserInfo = ({ user }) => {
     picture,
     numberOfOrganisedEvents,
     numberOfAttendedEvents,
-    numberOfComments
+    numberOfComments,
+    numberOfOwnedGames
   } = user;
 
   return (
@@ -50,6 +51,10 @@ const UserInfo = ({ user }) => {
           <List.Item>
             <List.Icon name="comments" />
             <List.Content>Comments: {numberOfComments}</List.Content>
+          </List.Item>
+          <List.Item>
+            <List.Icon name="game" />
+            <List.Content>Games: {numberOfOwnedGames}</List.Content>
           </List.Item>
         </List>
       </Grid.Column>

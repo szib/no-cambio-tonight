@@ -62,7 +62,7 @@ function App() {
             render={routerProps => <MyGamesPage {...routerProps} />}
           />
           <Route
-            path="/dashboard"
+            path="/"
             render={routerProps => <DashboardPage {...routerProps} />}
           />
         </Switch>
