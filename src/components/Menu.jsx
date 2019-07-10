@@ -64,7 +64,6 @@ const Menubar = props => {
           <Dropdown
             item
             text={`Hello ${profile.user.firstName}`}
-            active={activeItem === 'profile'}
             onClick={() => setActiveItem('profile')}
           >
             <Dropdown.Menu>
