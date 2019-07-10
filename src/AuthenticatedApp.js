@@ -13,6 +13,7 @@ import EventsPage from './pages/EventsPage/EventsPage';
 import NewEventPage from './pages/NewEventPage';
 import LogoutPage from './pages/LogoutPage';
 import DashboardPage from './pages/DashboardPage';
+import GameItemPage from './pages/GameItemPage';
 import Menu from './components/Menu';
 
 function App() {
@@ -55,6 +56,10 @@ function App() {
           <Route
             path="/mygames/:id"
             render={routerProps => <MyGamePage {...routerProps} />}
+          />
+          <Route
+            path="/gameitems/:id"
+            render={routerProps => <GameItemPage {...routerProps} />}
           />
           <Route
             exact
