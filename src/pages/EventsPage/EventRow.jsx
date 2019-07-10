@@ -7,13 +7,13 @@ import EventDateTime from '../../components/EventDateTime';
 
 const EventRow = ({ event, history }) => {
   const diffFromNow = DateTime.fromISO(event.startDateTime).diffNow().values;
-  const pastEvent = diffFromNow && diffFromNow.milliseconds > 0;
+  const pastEvent = diffFromNow && diffFromNow.milliseconds < 0;
 
   return (
     <Table.Row
       onClick={() => history.push(`/events/${event.id}`)}
-      positive={pastEvent}
-      negative={!pastEvent}
+      positive={!pastEvent}
+      negative={pastEvent}
     >
       <Table.Cell>
         {event.title}
