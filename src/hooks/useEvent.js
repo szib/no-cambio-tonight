@@ -39,7 +39,6 @@ const useEvent = eventId => {
 
   const handleJson = json => {
     if (json.error) {
-      console.log('useEvent error: ', json);
       eventAPI.reload();
     } else {
       return json;

@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 
-import { withRouter, Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 import useAuthentication from '../../hooks/useAuthentication';
 import useMyGames from '../../hooks/useMyGames';
 
 import Games from './Games';
 
-import { Header, Container, Segment, Label, Icon } from 'semantic-ui-react';
+import { Header, Container, Segment } from 'semantic-ui-react';
 
 import { searchGamesByName } from '../../api/games';
 

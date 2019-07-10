@@ -20,7 +20,6 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log('authenticated', authenticated);
     if (authenticated.status === 'PENDING') {
       fetch('http://localhost:3030/api/v1/validate', {
         headers: {

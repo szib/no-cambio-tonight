@@ -62,8 +62,6 @@ const NewEventPage = props => {
     }
   }, [title, location, startDateTime, endDateTime]);
 
-  useEffect(() => console.log(capacity), [capacity]);
-
   return (
     <Container>
       <Segment raised>

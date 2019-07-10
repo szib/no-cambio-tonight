@@ -3,16 +3,7 @@ import useAPI from '../hooks/useAPI';
 
 import { withRouter } from 'react-router-dom';
 
-import {
-  Header,
-  Segment,
-  List,
-  Icon,
-  Grid,
-  Image,
-  Card,
-  Placeholder
-} from 'semantic-ui-react';
+import { Segment, Grid, Image, Card, Placeholder } from 'semantic-ui-react';
 
 const GameLibrary = props => {
   const { user } = props;
@@ -80,7 +71,6 @@ const GameLibrary = props => {
       {gameitems &&
         gameitems.map(gameitem => {
           const { game } = gameitem;
-          console.warn(game);
           return (
             <Card
               key={gameitem.id}

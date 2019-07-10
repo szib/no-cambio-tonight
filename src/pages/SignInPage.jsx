@@ -4,8 +4,6 @@ import useTimeout from '@rooks/use-timeout';
 import { useDispatch } from 'react-redux';
 import { setToAuthenticated } from '../redux/actions/authActions';
 
-import Logo from '../assets/images/logo.png';
-
 import {
   Button,
   Form,
@@ -13,8 +11,7 @@ import {
   Header,
   Message,
   Segment,
-  Popup,
-  Image
+  Popup
 } from 'semantic-ui-react';
 
 import { Link } from 'react-router-dom';

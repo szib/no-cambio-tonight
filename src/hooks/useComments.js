@@ -25,7 +25,6 @@ const useComments = commentable => {
       .then(resp => resp.json())
       .then(json => {
         if (!json.error) {
-          console.log(json);
           API.setFetchedData({ comments: convertToCamelCase(json.comments) });
         } else {
           console.error(json.error);

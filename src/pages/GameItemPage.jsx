@@ -10,7 +10,6 @@ import LoaderWithDimmer from '../components/LoaderWithDimmer';
 import Comments from '../components/Comments/Comments';
 
 const GameItemPage = props => {
-  console.log('props', props);
   const gameitemId = props.match.params.id;
   const gameItemAPI = useAPI(
     `http://localhost:3030/api/v1/gameitems/${gameitemId}`,
@@ -27,7 +26,6 @@ const GameItemPage = props => {
   }
 
   const { gameitem } = gameItemAPI.data;
-  console.log('gameitem', gameitem);
   const { game } = gameitem;
 
   return (

@@ -5,7 +5,7 @@ import { Item } from 'semantic-ui-react';
 
 const Comment = ({ comment }) => {
   if (!comment) return null;
-  const { commentText, author, id, createdAt } = comment;
+  const { commentText, author, createdAt } = comment;
 
   const creationTime = new DateTime.fromISO(createdAt)
     .setLocale('en')

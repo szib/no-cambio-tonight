@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Input, Form, Segment } from 'semantic-ui-react';
+import { Input, Form } from 'semantic-ui-react';
 
 const SearchBar = ({
   onSubmitHandler,
