@@ -10,6 +10,7 @@ import GameDetails from '../../components/GameDetails';
 import LabelBack from '../../components/LabelBack';
 
 const MyGame = props => {
+  console.log('props', props);
   const { gamePiece } = props;
   const { game } = gamePiece;
 
