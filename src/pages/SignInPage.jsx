@@ -49,10 +49,7 @@ const SigninPage = () => {
         style={{ height: '100vh' }}
         verticalAlign="middle"
       >
-        <Grid.Row style={{ marginTop: '100px' }}>
-          {/* <Image src={Logo} />
-        </Grid.Row>
-        <Grid.Row> */}
+        <Grid.Row>
           <Grid.Column style={{ maxWidth: 450 }}>
             <Segment>
               <Header as="h2" color="black" textAlign="center">

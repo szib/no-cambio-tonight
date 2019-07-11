@@ -4,7 +4,7 @@ import backgroundImage2 from '../assets/images/bg2.jpg';
 import backgroundImage3 from '../assets/images/bg3.jpg';
 import backgroundImage4 from '../assets/images/bg4.jpg';
 
-import signinBg from '../assets/images/signinbg.png';
+import signinBg from '../assets/images/bg2.jpg';
 
 export const backgrounds = [
   backgroundImage0,
