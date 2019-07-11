@@ -67,7 +67,7 @@ const GameLibrary = props => {
   const { gameitems } = gameItemsAPI.data;
 
   return (
-    <Card.Group itemsPerRow={6} stackable>
+    <Card.Group itemsPerRow={8} stackable>
       {gameitems &&
         gameitems.map(gameitem => {
           const { game } = gameitem;
