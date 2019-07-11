@@ -15,7 +15,10 @@ const SearchBar = ({
       <Input
         loading={isLoading}
         fluid
+        focus
         placeholder="Search..."
+        icon="search"
+        iconPosition="left"
         value={searchTerm}
         onChange={e => onChangeHandler(e.target.value)}
       />
