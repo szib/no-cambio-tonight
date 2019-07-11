@@ -13,6 +13,7 @@ import NewEventPage from './pages/NewEventPage';
 import LogoutPage from './pages/LogoutPage';
 import DashboardPage from './pages/DashboardPage';
 import GameItemPage from './pages/GameItemPage';
+import MembersPage from './pages/MembersPage';
 import Menu from './components/Menu';
 
 function App() {
@@ -43,6 +44,10 @@ function App() {
           <Route
             path="/events"
             render={routerProps => <EventsPage {...routerProps} />}
+          />
+          <Route
+            path="/members"
+            render={routerProps => <MembersPage {...routerProps} />}
           />
           <Route
             path="/findgame"

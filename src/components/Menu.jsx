@@ -59,6 +59,15 @@ const Menubar = props => {
           as={Link}
           to="/events"
         />
+        <Menu.Item
+          icon="users"
+          text="Members"
+          name="members"
+          active={activeItem === 'members'}
+          onClick={() => setActiveItem('members')}
+          as={Link}
+          to="/members"
+        />
 
         <Menu.Menu position="right">
           <Dropdown
