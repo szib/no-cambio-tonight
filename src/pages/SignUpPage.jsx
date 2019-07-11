@@ -152,7 +152,7 @@ const RegistrationPage = ({ history }) => {
               </Segment>
             </Form>
             <Message>
-              Have an account? <Link to="/">Sign in</Link>
+              Have an account? <Link to="/signin">Sign in</Link>
             </Message>
           </Grid.Column>
         </Grid.Row>
