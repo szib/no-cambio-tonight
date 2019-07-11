@@ -20,7 +20,7 @@ const GameCards = props => {
   };
 
   return (
-    <Card.Group size="mini" itemsPerRow={itemsPerRow || 8}>
+    <Card.Group size="mini" itemsPerRow={itemsPerRow || 5}>
       {gamePieces &&
         gamePieces.map(gamePiece => {
           return (

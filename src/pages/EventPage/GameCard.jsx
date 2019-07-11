@@ -11,7 +11,7 @@ const Img = styled.div`
   background-size: cover;
   background-position: center center;
   background-image: url(${props => props.bgImage});
-  min-height: 60px;
+  min-height: 80px;
   margin: 2px;
 `;
 

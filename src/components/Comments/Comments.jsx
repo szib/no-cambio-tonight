@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
-import { Segment, Item } from 'semantic-ui-react';
+import { Segment, Item, Header } from 'semantic-ui-react';
 
 import Comment from './Comment';
 import NewCommentForm from './NewCommentForm';
@@ -26,6 +26,7 @@ const Comments = ({ API }) => {
     <Segment>
       <NewCommentForm onSubmitHandler={submitHandler} />
       <Item.Group divided>
+        {comments && comments.length === 0 && <Header>No comments yet.</Header>}
         {comments &&
           comments.map(comment => (
             <Comment key={comment.id} comment={comment} />

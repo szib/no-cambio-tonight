@@ -67,7 +67,7 @@ const GameLibrary = props => {
   const { gameitems } = gameItemsAPI.data;
 
   return (
-    <Card.Group itemsPerRow={10} stackable>
+    <Card.Group itemsPerRow={6} stackable>
       {gameitems &&
         gameitems.map(gameitem => {
           const { game } = gameitem;
@@ -76,10 +76,7 @@ const GameLibrary = props => {
               key={gameitem.id}
               onClick={() => props.history.push(`/gameitems/${gameitem.id}`)}
             >
-              <Image src={game.imageSmall} wrapped ui={false} size="small" />
-              <Card.Content>
-                <Card.Meta>{game.name}</Card.Meta>
-              </Card.Content>
+              <Image src={game.imageMedium} wrapped ui={false} size="small" />
             </Card>
           );
         })}
