@@ -8,16 +8,23 @@ import Loader from '../components/LoaderWithDimmer';
 import UsersInfo from '../components/UsersInfo';
 import SearchBar from '../components/SearchBar';
 
+const apiConfig = {
+  url: `http://localhost:3030/api/v1/users/`,
+  initialData: {
+    users: []
+  }
+};
+
 const MembersPage = props => {
   useAuthentication();
   const { history } = props;
 
   const [searchTerm, setSearchTerm] = useState('');
 
-  const usersAPI = useAPI(`http://localhost:3030/api/v1/users`, { users: [] });
+  const { data, error, isLoading } = useAPI(apiConfig);
 
-  if (usersAPI.isLoading) return <Loader content="Loading members..." />;
-  if (usersAPI.hasError) {
+  if (isLoading) return <Loader content="Loading members..." />;
+  if (error) {
     history.push('/dashboard');
   }
 
@@ -31,7 +38,7 @@ const MembersPage = props => {
       <Segment>
         <SearchBar searchTerm={searchTerm} onChangeHandler={setSearchTerm} />
         <List divided relaxed>
-          {getFilteredMembers(usersAPI.data.users).map(user => (
+          {getFilteredMembers(data.users).map(user => (
             <List.Item
               style={{ cursor: 'pointer' }}
               key={user.id}

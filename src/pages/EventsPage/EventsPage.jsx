@@ -2,37 +2,44 @@ import React, { useState } from 'react';
 
 import { Header, Container, Input, Form } from 'semantic-ui-react';
 
-import useEvents from '../../hooks/useEvents';
+import useAPI from '../../hooks/useAPI';
 import useAuthentication from '../../hooks/useAuthentication';
 
 import EventTable from './EventsTable';
 import Loader from '../../components/LoaderWithDimmer';
 
+const apiConfig = {
+  url: `http://localhost:3030/api/v1/events/`,
+  initialData: {
+    events: []
+  }
+};
+
 const EventsPage = props => {
   useAuthentication();
   const [searchTerm, setSearchTerm] = useState('');
 
-  const eventsAPI = useEvents();
-
-  const { events } = eventsAPI.data;
+  const { data, error, isLoading } = useAPI(apiConfig);
+  const { events } = data;
 
   const filteredEvents = events.filter(event =>
     event.title.toLowerCase().includes(searchTerm)
   );
+
   return (
     <Container>
       <Form>
         <Input
-          loading={eventsAPI.isLoading}
+          loading={isLoading}
           fluid
           placeholder="Search events..."
           value={searchTerm}
           onChange={e => setSearchTerm(e.target.value.toLowerCase())}
         />
       </Form>
-      {eventsAPI.isLoading && <Loader content="Loading events..." />}
-      {eventsAPI.hasError && <Header as="h2">Failed to fetch</Header>}
-      {!eventsAPI.isLoading && !eventsAPI.hasError && (
+      {isLoading && <Loader content="Loading events..." />}
+      {error && <Header as="h2">Failed to fetch</Header>}
+      {!isLoading && !error && (
         <EventTable events={filteredEvents} {...props} />
       )}
     </Container>

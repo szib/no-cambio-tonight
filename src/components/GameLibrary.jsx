@@ -9,12 +9,16 @@ const GameLibrary = props => {
   const { user } = props;
   const { id: userId } = user;
 
-  const gameItemsAPI = useAPI(
-    `http://localhost:3030/api/v1/users/${userId}/gameitems`,
-    { gameitems: [] }
-  );
+  const apiConfig = {
+    url: `http://localhost:3030/api/v1/users/${userId}/gameitems`,
+    initialData: {
+      gameitems: []
+    }
+  };
 
-  if (gameItemsAPI.isLoading) {
+  const { data, error, isLoading } = useAPI(apiConfig);
+
+  if (isLoading) {
     return (
       <Grid columns={3} stackable>
         <Grid.Column>
@@ -64,7 +68,7 @@ const GameLibrary = props => {
     );
   }
 
-  const { gameitems } = gameItemsAPI.data;
+  const { gameitems } = data;
 
   return (
     <Card.Group itemsPerRow={8} stackable>

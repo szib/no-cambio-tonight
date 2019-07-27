@@ -9,24 +9,28 @@ import { Header, Container, Segment } from 'semantic-ui-react';
 
 import EventTable from '../pages/EventsPage/EventsTable';
 import GameLibrary from '../components/GameLibrary';
+import Loader from '../components/LoaderWithDimmer';
 
-const initialUpcomingEventsData = {
-  user: {
-    attendedEvents: [],
-    organisedEvents: []
+const apiConfig = {
+  url: 'http://localhost:3030/api/v1/upcomingEvents',
+  initialData: {
+    user: {
+      attendedEvents: [],
+      organisedEvents: []
+    }
   }
 };
 
 const DashboardPage = props => {
   useAuthentication();
-  const upcomingEventsAPI = useAPI(
-    'http://localhost:3030/api/v1/upcomingEvents',
-    initialUpcomingEventsData
-  );
+  const { data, error, isLoading } = useAPI(apiConfig);
   const [profile] = useProfile(localStorage.getItem('token'));
   const { user } = profile;
 
-  const { organisedEvents, attendedEvents } = upcomingEventsAPI.data.user;
+  const { organisedEvents, attendedEvents } = data.user;
+
+  if (isLoading) return <Loader />;
+
   return (
     <Container>
       <Segment>

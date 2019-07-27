@@ -11,21 +11,32 @@ import GameLibrary from '../components/GameLibrary';
 const ProfilePage = ({ match, history }) => {
   useAuthentication();
   const id = match.params.id;
-  const userAPI = useAPI(`http://localhost:3030/api/v1/users/${id}`, {});
 
-  if (userAPI.hasError) {
+  const apiConfig = {
+    url: `http://localhost:3030/api/v1/users/${id}`,
+    initialData: {
+      user: {
+        attendedEvents: [],
+        organisedEvents: []
+      }
+    }
+  };
+
+  const { data, error, isLoading } = useAPI(apiConfig);
+
+  if (error) {
     history.push('/dashboard');
   }
 
   return (
     <Container>
       <Segment>
-        {userAPI.loading || !userAPI.data.user ? (
+        {isLoading || !data.user ? (
           <Loader content="Loading profile..." />
         ) : (
           <>
-            <UserInfo user={userAPI.data.user} />
-            <GameLibrary user={userAPI.data.user} />
+            <UserInfo user={data.user} />
+            <GameLibrary user={data.user} />
           </>
         )}
       </Segment>
