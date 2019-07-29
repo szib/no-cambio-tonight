@@ -11,21 +11,28 @@ import Comments from '../components/Comments/Comments';
 
 const GameItemPage = props => {
   const gameitemId = props.match.params.id;
-  const gameItemAPI = useAPI(
-    `http://localhost:3030/api/v1/gameitems/${gameitemId}`,
-    { gameitem: { game: {} } }
-  );
+
+  const apiConfig = {
+    url: `http://localhost:3030/api/v1/gameitems/${gameitemId}`,
+    initialData: {
+      gameitem: {
+        game: {}
+      }
+    }
+  };
+
+  const { data, error, isLoading } = useAPI(apiConfig);
 
   const commentsFromAPI = useComments({
     path: '/gameitems',
     id: props.match.params.id
   });
 
-  if (gameItemAPI.isLoading) {
+  if (isLoading) {
     return <LoaderWithDimmer />;
   }
 
-  const { gameitem } = gameItemAPI.data;
+  const { gameitem } = data;
   const { game } = gameitem;
 
   return (
