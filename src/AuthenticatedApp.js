@@ -16,9 +16,14 @@ import GameItemPage from './pages/GameItemPage';
 import MembersPage from './pages/MembersPage';
 import Menu from './components/Menu';
 
+import { ProfileContext } from './lib/context';
+import useProfile from './hooks/useProfile';
+
 function App() {
+  const profile = useProfile(localStorage.getItem('token'));
+
   return (
-    <>
+    <ProfileContext.Provider value={profile}>
       <Router>
         <Menu></Menu>
         <Switch>
@@ -73,7 +78,7 @@ function App() {
         </Switch>
         <div style={{ height: '42px' }}></div>
       </Router>
-    </>
+    </ProfileContext.Provider>
   );
 }
 

@@ -12,7 +12,7 @@ export const MyGamesContext = React.createContext({
   error: null
 });
 
-export const UserContext = React.createContext({
+export const ProfileContext = React.createContext({
   username: '',
   firstName: '',
   lastName: '',
