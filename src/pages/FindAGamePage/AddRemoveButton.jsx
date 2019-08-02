@@ -1,29 +1,22 @@
 import React, { useState } from 'react';
 
-import { useDispatch } from 'react-redux';
-import {
-  asyncAddGameToMyGameLibray,
-  asyncRemoveGameFromMyGameLibray
-} from '../../redux/thunk/myGames';
-
 import { Button, Icon, Popup } from 'semantic-ui-react';
 
 const AddRemoveButton = ({ game, gamePieceId }) => {
-  const dispatch = useDispatch();
   const [isButtonLoading, setIsButtonLoading] = useState(false);
 
   const addGame = () => {
     setIsButtonLoading(true);
-    dispatch(asyncAddGameToMyGameLibray(game.bgaId)).then(gamePiece => {
-      setIsButtonLoading(false);
-    });
+    // dispatch(asyncAddGameToMyGameLibray(game.bgaId)).then(gamePiece => {
+    //   setIsButtonLoading(false);
+    // });
   };
 
   const removeGame = () => {
     setIsButtonLoading(true);
-    dispatch(asyncRemoveGameFromMyGameLibray(gamePieceId)).then(() => {
-      setIsButtonLoading(false);
-    });
+    // dispatch(asyncRemoveGameFromMyGameLibray(gamePieceId)).then(() => {
+    //   setIsButtonLoading(false);
+    // });
   };
 
   if (gamePieceId) {
