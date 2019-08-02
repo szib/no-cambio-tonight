@@ -19,7 +19,11 @@ import Menu from './components/Menu';
 import { ProfileContext } from './lib/context';
 import useProfile from './hooks/useProfile';
 
-function App() {
+function AuthenticatedApp({ authentication }) {
+  console.log(
+    '%c << AUTHENTICATED APP >>',
+    'color: #222; background: #bada55; font-weight: bold;'
+  );
   const profile = useProfile(localStorage.getItem('token'));
 
   return (
@@ -30,7 +34,9 @@ function App() {
           <Route
             exact
             path="/logout"
-            render={routerProps => <LogoutPage {...routerProps} />}
+            render={routerProps => (
+              <LogoutPage {...routerProps} authentication={authentication} />
+            )}
           />
           <Route
             path="/users/:id"
@@ -82,4 +88,4 @@ function App() {
   );
 }
 
-export default App;
+export default AuthenticatedApp;

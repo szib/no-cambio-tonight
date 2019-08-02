@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import { Header, Container, Input, Form } from 'semantic-ui-react';
 
 import useAPI from '../../hooks/useAPI';
-import useAuthentication from '../../hooks/useAuthentication';
 
 import EventTable from './EventsTable';
 import Loader from '../../components/LoaderWithDimmer';
@@ -16,7 +15,6 @@ const apiConfig = {
 };
 
 const EventsPage = props => {
-  useAuthentication();
   const [searchTerm, setSearchTerm] = useState('');
 
   const { data, error, isLoading } = useAPI(apiConfig);

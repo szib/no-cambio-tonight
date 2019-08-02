@@ -2,7 +2,6 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 
 import useAPI from '../hooks/useAPI';
-import useAuthentication from '../hooks/useAuthentication';
 
 import { ProfileContext } from '../lib/context';
 
@@ -23,9 +22,8 @@ const apiConfig = {
 };
 
 const DashboardPage = props => {
-  useAuthentication();
   const profile = useContext(ProfileContext);
-  const { data, error, isLoading } = useAPI(apiConfig);
+  const { data, isLoading } = useAPI(apiConfig);
   const { user } = profile;
   const { organisedEvents, attendedEvents } = data.user;
 

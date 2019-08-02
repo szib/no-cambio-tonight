@@ -1,11 +1,9 @@
 import { combineReducers } from 'redux';
 
 import myGames from './myGamesReducer';
-import auth from './authReducer';
 
 const reducer = combineReducers({
-  myGames,
-  auth
+  myGames
 });
 
 export default reducer;

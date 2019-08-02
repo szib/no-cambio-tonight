@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import useAuthentication from '../hooks/useAuthentication';
 import useAPI from '../hooks/useAPI';
 
 import { Container, Segment, List } from 'semantic-ui-react';
@@ -16,7 +15,6 @@ const apiConfig = {
 };
 
 const MembersPage = props => {
-  useAuthentication();
   const { history } = props;
 
   const [searchTerm, setSearchTerm] = useState('');

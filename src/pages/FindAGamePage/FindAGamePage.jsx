@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 
 import { withRouter } from 'react-router-dom';
 
-import useAuthentication from '../../hooks/useAuthentication';
 import useMyGames from '../../hooks/useMyGames';
 
 import Games from './Games';
@@ -16,7 +15,6 @@ import SearchBar from '../../components/SearchBar';
 import LabelBack from '../../components/LabelBack';
 
 const GamesPage = props => {
-  useAuthentication();
   const [searchTerm, setSearchTerm] = useState('');
   const [games, setGames] = useState([]);
   const [isLoading, setIsLoading] = useState(false);

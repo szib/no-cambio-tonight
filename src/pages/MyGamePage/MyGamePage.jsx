@@ -1,5 +1,4 @@
 import React from 'react';
-import useAuthentication from '../../hooks/useAuthentication';
 
 import { Container } from 'semantic-ui-react';
 
@@ -18,7 +17,6 @@ const initialData = {
 };
 
 const MyGamesPage = props => {
-  useAuthentication();
   const gamePieceId = props.match.params.id;
   const apiConfig = {
     url: `http://localhost:3030/api/v1/mygames/${gamePieceId}`,

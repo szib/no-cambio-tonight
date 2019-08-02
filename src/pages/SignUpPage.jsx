@@ -12,12 +12,8 @@ import {
 } from 'semantic-ui-react';
 import { Redirect, Link } from 'react-router-dom';
 
-import * as AuthAPI from '../api/auth';
-import { useDispatch } from 'react-redux';
-import { setToAuthenticated } from '../redux/actions/authActions';
-
-const RegistrationPage = ({ history }) => {
-  const dispatch = useDispatch();
+const RegistrationPage = ({ authentication, history }) => {
+  const { error, signup } = authentication;
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -27,7 +23,7 @@ const RegistrationPage = ({ history }) => {
   const [email, setEmail] = useState('');
 
   const [redirectTo, setRedirectTo] = useState('');
-  const [error, setError] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleSubmit = e => {
     const userData = {
@@ -38,29 +34,14 @@ const RegistrationPage = ({ history }) => {
       last_name: lastName,
       email
     };
-    AuthAPI.registration(userData).then(data => {
-      if (data.error) {
-        setError(data.error);
-      } else {
-        localStorage.setItem('token', data.token);
-        dispatch(setToAuthenticated(data.token));
-        history.push('/dashboard');
-      }
-    });
+    signup(userData);
+    setRedirectTo('/dashboard');
   };
 
   const { start, clear } = useTimeout(() => {
-    setError('');
+    setErrorMessage('error');
     clear();
   }, 2000);
-
-  //redirect to MyGames if we has a valid token
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    AuthAPI.validate(token).then(data => {
-      if (token === data.token) setRedirectTo('/dashboard');
-    });
-  }, []);
 
   return (
     <>
@@ -145,8 +126,8 @@ const RegistrationPage = ({ history }) => {
                       Sign up
                     </Button>
                   }
-                  content={error}
-                  open={error !== ''}
+                  content={errorMessage}
+                  open={errorMessage !== ''}
                   onOpen={start}
                 />
               </Segment>
