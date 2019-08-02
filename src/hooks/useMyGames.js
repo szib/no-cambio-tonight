@@ -1,25 +1,38 @@
-import { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import convertToCamelCase from 'lodash-humps';
 
-import { aSyncFetchMyGames } from '../redux/thunk/myGames';
+import { useState, useEffect } from 'react';
 
 const useMyGames = () => {
-  const dispatch = useDispatch();
-  const myGames = useSelector(state => state.myGames);
-
-  const findGamePieceIdByBgaId = bgaId => {
-    const gamePieces = myGames.gamePieces.filter(
-      myGame => myGame.game.bgaId === bgaId
-    );
-    if (gamePieces.length === 0) return null;
-    return gamePieces[0].id;
-  };
+  const [gamePieces, setGamePieces] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    dispatch(aSyncFetchMyGames());
-  }, [dispatch]);
+    fetch('http://localhost:3030/api/v1/mygames', {
+      headers: { Authorization: `Bearer ${localStorage.token}` }
+    })
+      .then(res => res.json())
+      .then(convertToCamelCase)
+      .then(json => {
+        if (json.error) {
+          setGamePieces([]);
+          setError(json.error);
+          setIsLoading(false);
+        } else {
+          setGamePieces(json.gamePieces);
+          setError(null);
+          setIsLoading(false);
+        }
+        return json;
+      })
+      .catch(error => {
+        setGamePieces([]);
+        setError(error);
+        setIsLoading(false);
+      });
+  }, []);
 
-  return [myGames, findGamePieceIdByBgaId];
+  return { gamePieces, isLoading, error };
 };
 
 export default useMyGames;

@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 
 import { withRouter } from 'react-router-dom';
 
-import useMyGames from '../../hooks/useMyGames';
-
 import Games from './Games';
 
 import { Header, Container, Segment } from 'semantic-ui-react';
@@ -16,13 +14,12 @@ import LabelBack from '../../components/LabelBack';
 
 const GamesPage = props => {
   const [searchTerm, setSearchTerm] = useState('');
-  const [games, setGames] = useState([]);
+  const [searchResults, setSearchResults] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [, findGamePieceIdByBgaId] = useMyGames();
 
   const removeAddedGame = bgaId => {
-    const newGames = games.filter(game => game.game.bgaId !== bgaId);
-    setGames([...newGames]);
+    const newGames = searchResults.filter(game => game.game.bgaId !== bgaId);
+    setSearchResults([...newGames]);
   };
 
   const onSubmitHandler = event => {
@@ -31,7 +28,7 @@ const GamesPage = props => {
 
       searchGamesByName(searchTerm)
         .then(json => json.games)
-        .then(setGames)
+        .then(setSearchResults)
         .then(() => setIsLoading(false))
         .catch(err => {
           setIsLoading(false);
@@ -52,12 +49,8 @@ const GamesPage = props => {
           isLoading={isLoading}
         />
         {isLoading && <Loader />}
-        {games.length !== 0 && (
-          <Games
-            games={games}
-            findGamePieceIdByBgaId={findGamePieceIdByBgaId}
-            removeHandler={removeAddedGame}
-          ></Games>
+        {searchResults.length !== 0 && (
+          <Games games={searchResults} removeHandler={removeAddedGame}></Games>
         )}
       </Segment>
     </Container>
