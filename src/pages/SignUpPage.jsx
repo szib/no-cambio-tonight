@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import useTimeout from '@rooks/use-timeout';
 import {
   Button,
@@ -13,7 +13,7 @@ import {
 import { Redirect, Link } from 'react-router-dom';
 
 const RegistrationPage = ({ authentication, history }) => {
-  const { error, signup } = authentication;
+  const { signup } = authentication;
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');

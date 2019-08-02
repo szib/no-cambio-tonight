@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react';
 
-const useAuthentication = token => {
+import useToken from './useToken';
+
+const useAuthentication = () => {
+  const [token, setToken] = useToken();
   const [authenticated, setAuthenticated] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -37,6 +40,10 @@ const useAuthentication = token => {
             setAuthenticated(false);
           });
         });
+    } else {
+      setAuthenticated(false);
+      setError(null);
+      setIsLoading(false);
     }
   }, [token]);
 
@@ -89,6 +96,7 @@ const useAuthentication = token => {
 
   const signout = () => {
     localStorage.removeItem('token');
+    setToken(null);
     setAuthenticated(false);
   };
 
