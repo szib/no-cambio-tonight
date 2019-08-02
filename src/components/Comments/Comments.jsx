@@ -1,13 +1,15 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useContext } from 'react';
 
 import { Segment, Item, Header } from 'semantic-ui-react';
 
 import Comment from './Comment';
 import NewCommentForm from './NewCommentForm';
 
+import { ProfileContext } from '../../lib/context';
+
 const Comments = ({ API }) => {
-  const authorId = useSelector(state => state.profile.user.id);
+  const profile = useContext(ProfileContext);
+  const authorId = profile.user.id;
 
   if (API.isLoading) return <Segment>Loading...</Segment>;
   if (API.hasError) return <Segment>Error</Segment>;
