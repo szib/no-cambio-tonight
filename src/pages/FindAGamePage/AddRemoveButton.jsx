@@ -1,22 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+
+import { MyGamesContext } from '../../lib/context';
 
 import { Button, Icon, Popup } from 'semantic-ui-react';
 
 const AddRemoveButton = ({ game, gamePieceId }) => {
   const [isButtonLoading, setIsButtonLoading] = useState(false);
+  const [, , addGame, removeGame] = useContext(MyGamesContext);
 
-  const addGame = () => {
+  const addGameHandler = () => {
     setIsButtonLoading(true);
-    // dispatch(asyncAddGameToMyGameLibray(game.bgaId)).then(gamePiece => {
-    //   setIsButtonLoading(false);
-    // });
+    addGame(game.bgaId).then(gamePiece => {
+      setIsButtonLoading(false);
+    });
   };
 
-  const removeGame = () => {
+  const removeGameHandler = () => {
     setIsButtonLoading(true);
-    // dispatch(asyncRemoveGameFromMyGameLibray(gamePieceId)).then(() => {
-    //   setIsButtonLoading(false);
-    // });
+    removeGame(gamePieceId).then(() => {
+      setIsButtonLoading(false);
+    });
   };
 
   if (gamePieceId) {
@@ -32,7 +35,7 @@ const AddRemoveButton = ({ game, gamePieceId }) => {
           <Button
             color="red"
             content="Confirm removing game"
-            onClick={removeGame}
+            onClick={removeGameHandler}
           />
         }
       />
@@ -44,7 +47,7 @@ const AddRemoveButton = ({ game, gamePieceId }) => {
         color="green"
         inverted
         fluid
-        onClick={addGame}
+        onClick={addGameHandler}
       >
         <Icon name="add" alt="Add to my game library" />
         Add

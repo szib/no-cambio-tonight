@@ -7,7 +7,8 @@ import GamesTable from './GamesTable';
 
 const Games = props => {
   const { games } = props;
-  const myGames = useContext(MyGamesContext);
+  const [myGames] = useContext(MyGamesContext);
+  console.log('myGames', myGames);
 
   const findGamePieceIdByBgaId = bgaId => {
     const gp = myGames.gamePieces.filter(myGame => myGame.game.bgaId === bgaId);

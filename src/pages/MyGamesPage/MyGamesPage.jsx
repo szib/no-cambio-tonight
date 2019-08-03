@@ -11,7 +11,7 @@ import SearchBar from '../../components/SearchBar';
 export default function MyGamesPage(props) {
   const [searchTerm, setSearchTerm] = useState('');
 
-  const myGames = useContext(MyGamesContext);
+  const [myGames] = useContext(MyGamesContext);
   const { gamePieces } = myGames;
   let filterdGamePieces = gamePieces;
 
