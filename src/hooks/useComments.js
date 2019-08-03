@@ -1,17 +1,19 @@
 import useAPI from './useAPI';
 import convertToCamelCase from 'lodash-humps';
 
-const initialData = {
-  comments: []
-};
-
 // commentable: { path: '/events', id: 1 }
 const useComments = commentable => {
-  let url = `http://localhost:3030/api/v1${commentable.path}/${commentable.id}/comments`;
-  const API = useAPI(url, initialData);
+  const apiConfig = {
+    url: `http://localhost:3030/api/v1${commentable.path}/${commentable.id}/comments`,
+    initialData: {
+      comments: []
+    }
+  };
+
+  const API = useAPI(apiConfig);
 
   API.postComment = comment => {
-    fetch(url, {
+    fetch(apiConfig.url, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -25,7 +27,7 @@ const useComments = commentable => {
       .then(resp => resp.json())
       .then(json => {
         if (!json.error) {
-          API.setFetchedData({ comments: convertToCamelCase(json.comments) });
+          API.setData({ comments: convertToCamelCase(json.comments) });
         } else {
           console.error(json.error);
         }

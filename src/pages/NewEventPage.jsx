@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import useAuthentication from '../hooks/useAuthentication';
 
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -17,8 +16,6 @@ import {
 } from 'semantic-ui-react';
 
 const NewEventPage = props => {
-  useAuthentication();
-
   const [title, setTitle] = useState('');
   const [location, setLocation] = useState('');
   const [startDateTime, setStartDateTime] = useState(new Date());

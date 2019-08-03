@@ -1,32 +1,34 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 
 import useAPI from '../hooks/useAPI';
-import useAuthentication from '../hooks/useAuthentication';
-import useProfile from '../hooks/useProfile';
+
+import { ProfileContext } from '../lib/context';
 
 import { Header, Container, Segment } from 'semantic-ui-react';
 
 import EventTable from '../pages/EventsPage/EventsTable';
 import GameLibrary from '../components/GameLibrary';
+import Loader from '../components/LoaderWithDimmer';
 
-const initialUpcomingEventsData = {
-  user: {
-    attendedEvents: [],
-    organisedEvents: []
+const apiConfig = {
+  url: 'http://localhost:3030/api/v1/upcomingEvents',
+  initialData: {
+    user: {
+      attendedEvents: [],
+      organisedEvents: []
+    }
   }
 };
 
 const DashboardPage = props => {
-  useAuthentication();
-  const upcomingEventsAPI = useAPI(
-    'http://localhost:3030/api/v1/upcomingEvents',
-    initialUpcomingEventsData
-  );
-  const [profile] = useProfile(localStorage.getItem('token'));
+  const profile = useContext(ProfileContext);
+  const { data, isLoading } = useAPI(apiConfig);
   const { user } = profile;
+  const { organisedEvents, attendedEvents } = data.user;
 
-  const { organisedEvents, attendedEvents } = upcomingEventsAPI.data.user;
+  if (isLoading) return <Loader />;
+
   return (
     <Container>
       <Segment>

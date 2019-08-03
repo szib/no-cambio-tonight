@@ -1,17 +1,46 @@
-import { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import convertToCamelCase from 'lodash-humps';
 
-import { asyncFetchProfile } from '../redux/thunk/profile';
+import { useState, useEffect } from 'react';
+
+const initialProfile = {
+  username: '',
+  firstName: '',
+  lastName: '',
+  email: '',
+  memberSince: '',
+  picture: {},
+  gender: 0
+};
 
 const useProfile = initialToken => {
-  const dispatch = useDispatch();
-  const profile = useSelector(state => state.profile);
+  const [profile, setProfile] = useState(initialProfile);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    dispatch(asyncFetchProfile());
-  }, [dispatch, initialToken]);
+    setIsLoading(true);
+    fetch('http://localhost:3030/api/v1/profile', {
+      headers: { Authorization: `Bearer ${localStorage.token}` }
+    })
+      .then(res => res.json())
+      .then(convertToCamelCase)
+      .then(json => {
+        if (json.error) {
+          setError(json.error);
+          setIsLoading(false);
+        } else {
+          setProfile(json.user);
+          setIsLoading(false);
+        }
+        return json;
+      })
+      .catch(error => {
+        setError(error.message);
+        setIsLoading(false);
+      });
+  }, [initialToken]);
 
-  return [profile];
+  return { user: profile, isLoading, error };
 };
 
 export default useProfile;

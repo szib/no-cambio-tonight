@@ -6,7 +6,6 @@ import { Link } from 'react-router-dom';
 
 import useEvent from '../../hooks/useEvent';
 import useComments from '../../hooks/useComments';
-import useAuthentication from '../../hooks/useAuthentication';
 
 import {
   Button,
@@ -29,7 +28,6 @@ import LabelBack from '../../components/LabelBack';
 import Comments from '../../components/Comments/Comments';
 
 const EventDetails = ({ match, history }) => {
-  useAuthentication();
   const eventFromAPI = useEvent(match.params.id);
   const commentsFromAPI = useComments({ path: '/events', id: match.params.id });
 

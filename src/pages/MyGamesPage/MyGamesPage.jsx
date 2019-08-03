@@ -1,20 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 
-import useAuthentication from '../../hooks/useAuthentication';
-import useMyGames from '../../hooks/useMyGames';
-
 import { Container, Header, Segment } from 'semantic-ui-react';
+import { MyGamesContext } from '../../lib/context';
 
 import MyGamesItems from './MyGamesItems';
 import Loader from '../../components/LoaderWithDimmer';
 import SearchBar from '../../components/SearchBar';
 
 export default function MyGamesPage(props) {
-  useAuthentication();
   const [searchTerm, setSearchTerm] = useState('');
 
-  const [myGames] = useMyGames();
+  const [myGames] = useContext(MyGamesContext);
   const { gamePieces } = myGames;
   let filterdGamePieces = gamePieces;
 

@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
 import useTimeout from '@rooks/use-timeout';
 
-import { useDispatch } from 'react-redux';
-import { setToAuthenticated } from '../redux/actions/authActions';
-
 import {
   Button,
   Form,
@@ -16,29 +13,20 @@ import {
 
 import { Link } from 'react-router-dom';
 
-import * as AuthAPI from '../api/auth';
-
-const SigninPage = () => {
-  const dispatch = useDispatch();
+const SigninPage = ({ authentication }) => {
+  const { error, signin } = authentication;
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleSubmit = e => {
     e.preventDefault();
-    AuthAPI.signin(username, password).then(data => {
-      if (data.error) {
-        setError(data.error);
-      } else {
-        localStorage.setItem('token', data.token);
-        dispatch(setToAuthenticated(data.token));
-      }
-    });
+    signin(username, password);
   };
 
   const { start, clear } = useTimeout(() => {
-    setError('');
+    setErrorMessage(error);
     clear();
   }, 2000);
 
@@ -83,8 +71,8 @@ const SigninPage = () => {
                       Signin
                     </Button>
                   }
-                  content={error}
-                  open={error !== ''}
+                  content={errorMessage}
+                  open={errorMessage !== ''}
                   onOpen={start}
                 />
               </Segment>
