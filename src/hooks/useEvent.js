@@ -20,9 +20,7 @@ const useEvent = eventId => {
     }
   };
 
-  const { data, response, error, isLoading, setData, fetch } = useAPI(
-    apiConfig
-  );
+  const { data, error, isLoading, fetch } = useAPI(apiConfig);
   const [currentUserGames] = useMyGames();
 
   const getUserGamePieces = () => {

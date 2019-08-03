@@ -16,7 +16,7 @@ const GameLibrary = props => {
     }
   };
 
-  const { data, error, isLoading } = useAPI(apiConfig);
+  const { data, isLoading } = useAPI(apiConfig);
 
   if (isLoading) {
     return (

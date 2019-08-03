@@ -1,14 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Menu, Dropdown, Divider } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import useToken from '../hooks/useToken';
 
-import useProfile from '../hooks/useProfile';
+import { ProfileContext } from '../lib/context';
 
 const Menubar = props => {
   const [token] = useToken();
   const [activeItem, setActiveItem] = useState('events');
-  const [profile] = useProfile(localStorage.getItem('token'));
+  const profile = useContext(ProfileContext);
+
+  if (profile.isLoading) return <div>Loading profile...</div>;
 
   const menu = (
     <>

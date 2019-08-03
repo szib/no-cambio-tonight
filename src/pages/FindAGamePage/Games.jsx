@@ -1,11 +1,20 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { MyGamesContext } from '../../lib/context';
 
 import { Container } from 'semantic-ui-react';
 import Game from './Game';
 import GamesTable from './GamesTable';
 
 const Games = props => {
-  const { games, findGamePieceIdByBgaId } = props;
+  const { games } = props;
+  const [myGames] = useContext(MyGamesContext);
+  console.log('myGames', myGames);
+
+  const findGamePieceIdByBgaId = bgaId => {
+    const gp = myGames.gamePieces.filter(myGame => myGame.game.bgaId === bgaId);
+    if (gp.length === 0) return null;
+    return gp[0].id;
+  };
 
   const gamePieces = games.map(game => {
     return {

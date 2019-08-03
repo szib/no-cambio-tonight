@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 
 import useAPI from '../hooks/useAPI';
-import useAuthentication from '../hooks/useAuthentication';
-import useProfile from '../hooks/useProfile';
+
+import { ProfileContext } from '../lib/context';
 
 import { Header, Container, Segment } from 'semantic-ui-react';
 
@@ -22,11 +22,9 @@ const apiConfig = {
 };
 
 const DashboardPage = props => {
-  useAuthentication();
-  const { data, error, isLoading } = useAPI(apiConfig);
-  const [profile] = useProfile(localStorage.getItem('token'));
+  const profile = useContext(ProfileContext);
+  const { data, isLoading } = useAPI(apiConfig);
   const { user } = profile;
-
   const { organisedEvents, attendedEvents } = data.user;
 
   if (isLoading) return <Loader />;

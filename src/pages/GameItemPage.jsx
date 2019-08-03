@@ -21,7 +21,7 @@ const GameItemPage = props => {
     }
   };
 
-  const { data, error, isLoading } = useAPI(apiConfig);
+  const { data, isLoading } = useAPI(apiConfig);
 
   const commentsFromAPI = useComments({
     path: '/gameitems',

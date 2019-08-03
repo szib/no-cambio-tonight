@@ -1,5 +1,4 @@
 import React from 'react';
-import useAuthentication from '../hooks/useAuthentication';
 import useAPI from '../hooks/useAPI';
 
 import { Container, Segment } from 'semantic-ui-react';
@@ -9,7 +8,6 @@ import UserInfo from '../components/UserInfo';
 import GameLibrary from '../components/GameLibrary';
 
 const ProfilePage = ({ match, history }) => {
-  useAuthentication();
   const id = match.params.id;
 
   const apiConfig = {

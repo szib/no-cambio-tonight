@@ -1,13 +1,8 @@
-import React, { Suspense, useEffect } from 'react';
-
-import { useSelector, useDispatch } from 'react-redux';
-import {
-  setToAuthenticated,
-  setToUnuthenticated,
-  setToError
-} from './redux/actions/authActions';
+import React, { Suspense } from 'react';
 
 import 'semantic-ui-css/semantic.min.css';
+
+import useAuthentication from './hooks/useAuthentication';
 
 import Loader from './components/LoaderWithDimmer';
 import Background from './components/Background';
@@ -16,48 +11,23 @@ const AuthenticatedApp = React.lazy(() => import('./AuthenticatedApp'));
 const UnauthenticatedApp = React.lazy(() => import('./UnauthenticatedApp'));
 
 function App() {
-  const authenticated = useSelector(state => state.auth);
-  const dispatch = useDispatch();
+  const authentication = useAuthentication();
+  const { status, isLoading } = authentication;
 
-  useEffect(() => {
-    if (authenticated.status === 'PENDING') {
-      fetch('http://localhost:3030/api/v1/validate', {
-        headers: {
-          Authorization: `Bearer ${localStorage.token}`
-        }
-      })
-        .then(resp => {
-          if (!resp.ok) throw resp;
-          return resp.json();
-        })
-        .then(json => {
-          if (json.error) {
-            dispatch(setToUnuthenticated());
-          } else {
-            dispatch(setToAuthenticated(json.token));
-          }
-        })
-        .catch(err => {
-          err.json().then(error => dispatch(setToError(error)));
-        });
-    }
-  }, [authenticated, authenticated.status, dispatch]);
-
-  if (authenticated.status === 'PENDING')
-    return <Loader content="Authenticating..." />;
+  if (isLoading) return <Loader content="Authenticating..." />;
   // if (authenticated.status === 'ERROR') return <Loader content={`ERR: ${authenticated.error}`}/>;
 
   return (
     <>
-      {authenticated.status === 'AUTHENTICATED' ? (
+      {status ? (
         <Suspense fallback={<Loader />}>
           <Background dynamic />
-          <AuthenticatedApp />
+          <AuthenticatedApp authentication={authentication} />
         </Suspense>
       ) : (
         <Suspense fallback={<Loader />}>
           <Background />
-          <UnauthenticatedApp />
+          <UnauthenticatedApp authentication={authentication} />
         </Suspense>
       )}
     </>
