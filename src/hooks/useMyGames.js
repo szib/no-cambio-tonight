@@ -99,7 +99,6 @@ const useMyGames = () => {
         if (json.error) {
           dispatch(fetchMyGamesFailure(json.error));
         } else {
-          console.log('haha');
           dispatch(fetchMyGamesSuccess(json.gamePieces));
         }
         return json;
