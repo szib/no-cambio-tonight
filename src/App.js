@@ -12,10 +12,9 @@ const UnauthenticatedApp = React.lazy(() => import('./UnauthenticatedApp'));
 
 function App() {
   const authentication = useAuthentication();
-  const { status, isLoading } = authentication;
+  const { status, isLoading, error } = authentication;
 
-  if (isLoading) return <Loader content="Authenticating..." />;
-  // if (authenticated.status === 'ERROR') return <Loader content={`ERR: ${authenticated.error}`}/>;
+  if (isLoading && !error) return <Loader content="Authenticating..." />;
 
   return (
     <>

@@ -8,6 +8,26 @@ const useAuthentication = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  const processApiResponse = json => {
+    const { error } = json;
+    if (error) {
+      setError(error.title);
+      localStorage.removeItem('token');
+      setIsLoading(false);
+    } else {
+      localStorage.setItem('token', json.token);
+      setAuthenticated(true);
+      setIsLoading(false);
+    }
+  };
+
+  const handleError = err => {
+    localStorage.removeItem('token');
+    setError('Network error. Try again later.');
+    setIsLoading(false);
+    setAuthenticated(false);
+  };
+
   useEffect(() => {
     if (token) {
       setIsLoading(true);
@@ -21,17 +41,7 @@ const useAuthentication = () => {
           if (!resp.ok) throw resp;
           return resp.json();
         })
-        .then(json => {
-          if (json.error) {
-            setError(json.error);
-            setIsLoading(false);
-            localStorage.removeItem('token');
-          } else {
-            localStorage.setItem('token', json.token);
-            setAuthenticated(true);
-            setIsLoading(false);
-          }
-        })
+        .then(processApiResponse)
         .catch(err => {
           err.json().then(error => {
             localStorage.removeItem('token');
@@ -55,20 +65,9 @@ const useAuthentication = () => {
       },
       body: JSON.stringify(userData)
     })
-      .then(resp => {
-        if (!resp.ok) throw resp;
-        return resp.json();
-      })
-      .then(json => {
-        if (json.error) {
-          setError(json.error);
-          setIsLoading(false);
-        } else {
-          setIsLoading(false);
-          localStorage.setItem('token', json.token);
-          setAuthenticated(true);
-        }
-      });
+      .then(resp => resp.json())
+      .then(processApiResponse)
+      .catch(handleError);
   };
 
   const signin = (username, password) => {
@@ -78,20 +77,9 @@ const useAuthentication = () => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ username, password })
     })
-      .then(resp => {
-        if (!resp.ok) throw resp;
-        return resp.json();
-      })
-      .then(json => {
-        if (json.error) {
-          setError(json.error);
-          setIsLoading(false);
-        } else {
-          setIsLoading(false);
-          localStorage.setItem('token', json.token);
-          setAuthenticated(true);
-        }
-      });
+      .then(resp => resp.json())
+      .then(processApiResponse)
+      .catch(handleError);
   };
 
   const signout = () => {

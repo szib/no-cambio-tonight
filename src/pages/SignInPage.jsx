@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import useTimeout from '@rooks/use-timeout';
 
 import {
   Button,
@@ -7,8 +6,7 @@ import {
   Grid,
   Header,
   Message,
-  Segment,
-  Popup
+  Segment
 } from 'semantic-ui-react';
 
 import { Link } from 'react-router-dom';
@@ -18,17 +16,11 @@ const SigninPage = ({ authentication }) => {
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
 
   const handleSubmit = e => {
     e.preventDefault();
     signin(username, password);
   };
-
-  const { start, clear } = useTimeout(() => {
-    setErrorMessage(error);
-    clear();
-  }, 2000);
 
   return (
     <>
@@ -65,21 +57,19 @@ const SigninPage = ({ authentication }) => {
                   value={password}
                   onChange={e => setPassword(e.target.value)}
                 />
-                <Popup
-                  trigger={
-                    <Button color="black" fluid size="large">
-                      Signin
-                    </Button>
-                  }
-                  content={errorMessage}
-                  open={errorMessage !== ''}
-                  onOpen={start}
-                />
+                <Button color="black" fluid size="large">
+                  Signin
+                </Button>
               </Segment>
             </Form>
             <Message>
               New to us? <Link to="/signup">Sign Up</Link>
             </Message>
+            {error && (
+              <Message negative>
+                <Message.Header>{error}</Message.Header>
+              </Message>
+            )}
           </Grid.Column>
         </Grid.Row>
       </Grid>
