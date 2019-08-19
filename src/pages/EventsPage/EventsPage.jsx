@@ -8,7 +8,7 @@ import EventTable from './EventsTable';
 import Loader from '../../components/LoaderWithDimmer';
 
 const apiConfig = {
-  url: `http://localhost:3030/api/v1/events/`,
+  url: `${process.env.REACT_APP_BACKEND_URL}/events/`,
   initialData: {
     events: []
   }

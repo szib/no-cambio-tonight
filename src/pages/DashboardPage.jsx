@@ -12,7 +12,7 @@ import GameLibrary from '../components/GameLibrary';
 import Loader from '../components/LoaderWithDimmer';
 
 const apiConfig = {
-  url: 'http://localhost:3030/api/v1/upcomingEvents',
+  url: `${process.env.REACT_APP_BACKEND_URL}/upcomingEvents`,
   initialData: {
     user: {
       attendedEvents: [],
