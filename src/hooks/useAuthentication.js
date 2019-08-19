@@ -32,7 +32,7 @@ const useAuthentication = () => {
     if (token) {
       setIsLoading(true);
       setError(null);
-      fetch('http://localhost:3030/api/v1/validate', {
+      fetch(`${process.env.REACT_APP_BACKEND_URL}/validate`, {
         headers: {
           Authorization: `Bearer ${localStorage.token}`
         }
@@ -58,7 +58,7 @@ const useAuthentication = () => {
   }, [token]);
 
   const signup = userData => {
-    fetch('http://localhost:3030/api/v1/users', {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/users`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -72,7 +72,7 @@ const useAuthentication = () => {
 
   const signin = (username, password) => {
     setIsLoading(true);
-    fetch('http://localhost:3030/api/v1/signin', {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/signin`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ username, password })

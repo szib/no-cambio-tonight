@@ -8,7 +8,7 @@ import UsersInfo from '../components/UsersInfo';
 import SearchBar from '../components/SearchBar';
 
 const apiConfig = {
-  url: `http://localhost:3030/api/v1/users/`,
+  url: `${process.env.REACT_APP_BACKEND_URL}/users/`,
   initialData: {
     users: []
   }

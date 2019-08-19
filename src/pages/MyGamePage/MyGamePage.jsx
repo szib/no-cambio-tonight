@@ -19,7 +19,7 @@ const initialData = {
 const MyGamesPage = props => {
   const gamePieceId = props.match.params.id;
   const apiConfig = {
-    url: `http://localhost:3030/api/v1/mygames/${gamePieceId}`,
+    url: `${process.env.REACT_APP_BACKEND_URL}/mygames/${gamePieceId}`,
     initialData
   };
 

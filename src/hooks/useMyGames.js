@@ -90,7 +90,7 @@ const useMyGames = () => {
 
   useEffect(() => {
     dispatch(fetchMyGamesBegin());
-    fetch('http://localhost:3030/api/v1/mygames', {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/mygames`, {
       headers: { Authorization: `Bearer ${localStorage.token}` }
     })
       .then(res => res.json())
@@ -109,7 +109,7 @@ const useMyGames = () => {
   }, []);
 
   const addGame = bgaId => {
-    return fetch(`http://localhost:3030/api/v1/mygames`, {
+    return fetch(`${process.env.REACT_APP_BACKEND_URL}/mygames`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -131,13 +131,16 @@ const useMyGames = () => {
   };
 
   const removeGame = gamePieceId => {
-    return fetch(`http://localhost:3030/api/v1/mygames/${gamePieceId}`, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${localStorage.token}`
+    return fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/mygames/${gamePieceId}`,
+      {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.token}`
+        }
       }
-    })
+    )
       .then(resp => resp.json())
       .then(convertToCamelCase)
       .then(json => {

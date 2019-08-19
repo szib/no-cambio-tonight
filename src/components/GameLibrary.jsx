@@ -10,7 +10,7 @@ const GameLibrary = props => {
   const { id: userId } = user;
 
   const apiConfig = {
-    url: `http://localhost:3030/api/v1/users/${userId}/gameitems`,
+    url: `${process.env.REACT_APP_BACKEND_URL}/users/${userId}/gameitems`,
     initialData: {
       gameitems: []
     }

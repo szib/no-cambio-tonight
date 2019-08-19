@@ -4,7 +4,7 @@ import convertToCamelCase from 'lodash-humps';
 // commentable: { path: '/events', id: 1 }
 const useComments = commentable => {
   const apiConfig = {
-    url: `http://localhost:3030/api/v1${commentable.path}/${commentable.id}/comments`,
+    url: `${process.env.REACT_APP_BACKEND_URL}${commentable.path}/${commentable.id}/comments`,
     initialData: {
       comments: []
     }

@@ -19,7 +19,7 @@ const useProfile = initialToken => {
 
   useEffect(() => {
     setIsLoading(true);
-    fetch('http://localhost:3030/api/v1/profile', {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/profile`, {
       headers: { Authorization: `Bearer ${localStorage.token}` }
     })
       .then(res => res.json())
