@@ -11,7 +11,7 @@ import {
 
 const useEvent = eventId => {
   const apiConfig = {
-    url: `http://localhost:3030/api/v1/events/${eventId}`,
+    url: `${process.env.REACT_APP_BACKEND_URL}/events/${eventId}`,
     initialData: {
       event: {
         attendees: [],

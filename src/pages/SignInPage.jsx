@@ -64,6 +64,14 @@ const SigninPage = ({ authentication }) => {
             </Form>
             <Message>
               New to us? <Link to="/signup">Sign Up</Link>
+              <br />
+              <hr />
+              Or login with demo users:
+              <br />
+              Username: 'user1' - 'user20'
+              <br />
+              Password: '123456'
+              <br />
             </Message>
             {error && (
               <Message negative>

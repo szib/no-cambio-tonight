@@ -1,6 +1,6 @@
 import convertToCamelCase from 'lodash-humps';
 
-export const BASE_URL = 'http://localhost:3030/api/v1';
+export const BASE_URL = process.env.REACT_APP_BACKEND_URL;
 
 export const processResponse = resp =>
   resp
