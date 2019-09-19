@@ -2,6 +2,8 @@
 
 A board games event organiser application. Users can maintain a game library, create events and bring their games to the events.
 
+[Live demo](https://no-cambio-tonight.netlify.com/)
+
 ## Installation
 
 - Install [backend](https://github.com/szib/no-cambio-tonight-backend) first.
